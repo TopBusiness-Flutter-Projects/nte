@@ -42,9 +42,9 @@ class _NTEState extends State<NTE> {
           BlocProvider(
             create: (_) => injector.serviceLocator<SignUpCubit>(),
           ),
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<HomeCubit>(),
-          // ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<OnboardingCubit>(),
+          ),
           // BlocProvider(
           //   create: (_) => injector.serviceLocator<PostsCubit>(),
           // ),
@@ -76,51 +76,5 @@ class _NTEState extends State<NTE> {
           title: AppStrings.appName,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         ));
-=======
-      providers: [
-        BlocProvider(
-          create: (_) => injector.serviceLocator<OnboardingCubit>(),
-        ),
-        BlocProvider(
-          create: (_) => injector.serviceLocator<LoginCubit>(),
-        ),
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<LoginCubit>(),
-        // ),
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<HomeCubit>(),
-        // ),
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<PostsCubit>(),
-        // ),
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<ProfileCubit>(),
-        // ),
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<FavoriteCubit>(),
-        // ),
-        //
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<PrivacyCubit>(),
-        // ),
-        //
-        //
-        // BlocProvider(
-        //   create: (_) => injector.serviceLocator<AddServiceCubit>(),
-        // ),
-      ],
-      child: GetMaterialApp(
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        theme: appTheme(),
-        themeMode: ThemeMode.light,
-        darkTheme: ThemeData.light(),
-        // standard dark theme
-        localizationsDelegates: context.localizationDelegates,
-        debugShowCheckedModeBanner: false,
-        title: AppStrings.appName,
-        onGenerateRoute: AppRoutes.onGenerateRoute,
-      ),
-    );
   }
 }
