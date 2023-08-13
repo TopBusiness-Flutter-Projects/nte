@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 
@@ -74,16 +75,22 @@ class OnBoarding1 extends StatelessWidget{
                       height: height*0.05,
                       child: const Text("التالى",style: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Cairo',),),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                        border: Border.all(width: 2,color: AppColors.blue1)
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, Routes.loginRoute);
+
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20),
+                          border: Border.all(width: 2,color: AppColors.blue1)
+                        ),
+                        alignment: Alignment.center,
+                        width: width* 0.3,
+                        height: height*0.05,
+                        child: Text("انهاء",style: TextStyle(color: AppColors.blue1,fontSize: 20,fontFamily: 'Cairo',),),
                       ),
-                      alignment: Alignment.center,
-                      width: width* 0.3,
-                      height: height*0.05,
-                      child: Text("انهاء",style: TextStyle(color: AppColors.blue1,fontSize: 20,fontFamily: 'Cairo',),),
                     ),
                   ],
                 ),
