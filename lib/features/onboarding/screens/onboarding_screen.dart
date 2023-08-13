@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
-import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
 import 'package:nte/features/onboarding/screens/onboarding1.dart';
 import 'package:nte/features/onboarding/screens/onboarding2.dart';
 
@@ -12,7 +11,6 @@ class OnBoardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<OnboardingCubit, OnboardingState>(
       listener: (context, state) {
-        // TODO: implement listener
       },
       builder: (context, state) {
         OnboardingCubit cubit = context.read<OnboardingCubit>();
@@ -21,9 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
           body: Stack(
             children: [
               PageView(
-
                 controller: cubit.pageController,
-
                 reverse: true,
                 onPageChanged: (int page) {
                   cubit.onPageChanged(page);

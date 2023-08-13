@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 
-class OnBoarding2 extends StatelessWidget{
+class OnBoarding2 extends StatelessWidget {
   const OnBoarding2({super.key});
 
   @override
@@ -14,28 +14,34 @@ class OnBoarding2 extends StatelessWidget{
         children: [
           Spacer(flex: 2),
           Center(
-            child: Image.asset(ImageAssets.onBoarding2Image,width: width/1.4,),
+            child: Image.asset(
+              ImageAssets.onBoarding2Image,
+              width: width / 1.4,
+            ),
           ),
-          Spacer(flex: 2,),
+          Spacer(
+            flex: 2,
+          ),
           Container(
-            height:height/2.3 ,
+            height: height / 2.3,
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft:Radius.circular(50) ,topRight: Radius.circular(50)),
-                color:    AppColors.yellow2,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    topRight: Radius.circular(50)),
+                color: AppColors.yellow2,
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
                       AppColors.yellow1,
                       AppColors.yellow2,
-
-                    ]
-                )
-            ),
-            child:  Column(
+                    ])),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Spacer(flex: 1,),
+                const Spacer(
+                  flex: 1,
+                ),
                 const Text(
                   'المناديب الشاحنات',
                   style: TextStyle(
@@ -45,10 +51,13 @@ class OnBoarding2 extends StatelessWidget{
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.5),
-                  child: Text("تقدم خدماتنا حلا شاملا لجميع احتياجات الشحن الخاص بك",
+                  child: Text(
+                    "تقدم خدماتنا حلا شاملا لجميع احتياجات الشحن الخاص بك",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -59,19 +68,29 @@ class OnBoarding2 extends StatelessWidget{
                     ),
                   ),
                 ),
-                const Spacer(flex: 1,),
+                const Spacer(
+                  flex: 1,
+                ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
                       color: AppColors.blue1,
-                      borderRadius: BorderRadius.circular(20)
-                  ),
+                      borderRadius: BorderRadius.circular(20)),
                   alignment: Alignment.center,
-                  width: width* 0.3,
-                  height: height*0.05,
-                  child: const Text("انضم الينا",style: TextStyle(color: Colors.white,fontSize: 20,fontFamily: 'Cairo',),),
+                  width: width * 0.3,
+                  height: height * 0.05,
+                  child: const Text(
+                    "انضم الينا",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Cairo',
+                    ),
+                  ),
                 ),
-                const Spacer(flex: 2,),
+                const Spacer(
+                  flex: 2,
+                ),
               ],
             ),
           )
