@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
+import 'features/login/cubit/cubit.dart';
 
 // import 'features/downloads_videos/cubit/downloads_videos_cubit.dart';
 
@@ -17,10 +18,9 @@ Future<void> setup() async {
 
   ///////////////////////// Blocs ////////////////////////
   //
-  // serviceLocator.registerFactory(
-  //   () => SplashCubit(
-  //       // serviceLocator(),
-  //       ),
+  serviceLocator.registerFactory(() => LoginCubit(
+        serviceLocator(),
+      ));
 
   // serviceLocator.registerFactory(
   //   () => LoginCubit(
@@ -96,7 +96,6 @@ Future<void> setup() async {
   //
   // );
 
-
   ///////////////////////////////////////////////////////////////////////////////
 
   //! External
@@ -134,5 +133,4 @@ Future<void> setup() async {
   );
 }
 
-class SplashCubit {
-}
+class SplashCubit {}
