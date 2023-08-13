@@ -52,6 +52,7 @@ dependencies:
   page_transition: ^2.0.9
 #  geocoding:
   flutter_linkify:
+  flutter_native_splash: ^2.3.1
   easy_localization: ^3.0.1
   get:
 
@@ -82,17 +83,20 @@ flutter:
     - assets/lang/
     - assets/images/
     - assets/icons/
+    - assets/fonts/
   #    - assets/lottie/
   #    - assets/fonts/
   #
   fonts:
-    - family: Hacen Tunisia
+    - family: Cairo
       fonts:
-        - asset: assets/fonts/Hacen Tunisia.ttf
-#        - asset: assets/fonts/Cairo-Bold.ttf
-#        - asset: assets/fonts/Cairo-ExtraBold.ttf
-#        - asset: assets/fonts/Cairo-ExtraLight.ttf
-#        - asset: assets/fonts/Cairo-Light.ttf
-#        - asset: assets/fonts/Cairo-Medium.ttf
-#        - asset: assets/fonts/Cairo-Regular.ttf
-#        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/Cairo-Black.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/Cairo-ExtraBold.ttf
+        - asset: assets/fonts/Cairo-ExtraLight.ttf
+        - asset: assets/fonts/Cairo-Light.ttf
+        - asset: assets/fonts/Cairo-Medium.ttf
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/font_bold.ttf
+        - asset: assets/fonts/font_normal.ttf

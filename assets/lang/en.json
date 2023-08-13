@@ -1,15 +1,16 @@
 {
-    "loginIn": "Sign In",
-    "log_to_driver_shipment": "Sign in to be able to deliver your shipment",
-    "driver": "driver",
-    "user": "user",
-    "email": "email",
-    "password": "password",
-    "email_msg": "please enter email",
-    "confirm_password": "confirm password",
-    "password_msg": "please enter password",
-    "forget_pass": "forget password",
-    "dont_have_account": "you don't have account?",
-    "create_account": "Sign Up",
-    "new_account": "Sign Up to be able to deliver your shipment"
+"loginIn":"Login In",
+"log_to_driver_shipment":"Log in to be able to deliver your shipment",
+"driver":"driver",
+
+"user":"user",
+"email":"email",
+"password":"password",
+
+"email_msg":"please enter email",
+"password_msg":"please enter password",
+"forget_pass":"forget password",
+"dont_have_account":"you don't have account?",
+"create_account":"create account"
+
 }

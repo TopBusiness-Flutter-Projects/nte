@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nte/core/remote/service.dart';
+import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,12 +23,22 @@ Future<void> setup() async {
   serviceLocator.registerFactory(() => LoginCubit(
         serviceLocator(),
       ));
-
   serviceLocator.registerFactory(
     () => SignUpCubit(
       serviceLocator(),
     ),
   );
+
+  serviceLocator.registerFactory(
+    () => OnboardingCubit(
+        // serviceLocator(),
+        ),
+  );
+  // serviceLocator.registerFactory(
+  //   () => LoginCubit(
+  //     serviceLocator(),
+  //   ),
+  // );
   // serviceLocator.registerFactory(
   //       () => GoogleMapsCubit(
   //    // serviceLocator(),
@@ -133,5 +144,3 @@ Future<void> setup() async {
     ),
   );
 }
-
-class SplashCubit {}

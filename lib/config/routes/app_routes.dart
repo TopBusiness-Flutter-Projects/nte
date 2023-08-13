@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
+import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../core/utils/app_strings.dart';
@@ -8,8 +9,10 @@ import '../../features/signup/screen/signupscreen.dart';
 
 class Routes {
   static const String initialRoute = '/';
+  static const String onBoardingRoute = '/onBoarding';
   static const String loginRoute = '/login';
-  static const String signUp = '/signUpScreen';
+
+  static const String signUp = '/signUp';
 }
 
 class AppRoutes {
@@ -29,6 +32,19 @@ class AppRoutes {
           duration: const Duration(milliseconds: 1300),
           child: const LoginScreen(),
         );
+      case Routes.onBoardingRoute:
+        return MaterialPageRoute(
+          builder: (context) => const OnBoardingScreen(),
+        );
+
+      // case Routes.detailsRoute:
+      //   final service = settings.arguments as ServicesModel;
+      //   return MaterialPageRoute(
+      //     // Extract the service model argument from the settings arguments map
+      //
+      //     builder: (context) => Details(service: service),
+      //   );
+      //
 
       case Routes.signUp:
         return PageTransition(
