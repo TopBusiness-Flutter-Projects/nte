@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 
@@ -94,18 +95,12 @@ class OnBoarding1 extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(width: 2, color: AppColors.blue1)),
-                      alignment: Alignment.center,
-                      width: width * 0.3,
-                      height: height * 0.05,
-                      child: Text(
-                        "انهاء",
-                        style: TextStyle(
-                          color: AppColors.blue1,
-                          fontSize: 20,
-                          fontFamily: 'Cairo',
-                        ),
+                        border: Border.all(width: 2,color: AppColors.blue1)
                       ),
+                      alignment: Alignment.center,
+                      width: width* 0.3,
+                      height: height*0.05,
+                      child: Text("انهاء",style: TextStyle(color: AppColors.blue1,fontSize: 20,fontFamily: 'Cairo',),),
                     ),
                   ],
                 ),
