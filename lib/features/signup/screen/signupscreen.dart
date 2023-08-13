@@ -1,31 +1,31 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
-import 'package:nte/core/widgets/custom_button.dart';
-import 'package:nte/features/login/cubit/cubit.dart';
-import 'package:nte/features/login/cubit/state.dart';
+import 'package:nte/features/signup/cubit/cubit.dart';
+import 'package:nte/features/signup/cubit/state.dart';
 
+import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/getsize.dart';
+import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_textfield.dart';
 import '../../../core/widgets/customloginstatusbutton.dart';
 import '../../../core/widgets/loginappbar.dart';
+import '../../login/cubit/cubit.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) {
-        var controller = BlocProvider.of<LoginCubit>(context);
+        var controller = BlocProvider.of<SignUpCubit>(context);
         return SafeArea(
           child: Scaffold(
             body: SizedBox(
@@ -34,9 +34,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     CustomLoginApBar(
-                      subTitle: 'log_to_driver_shipment'.tr(),
-                      title: 'loginIn'.tr(),
-                      isLogin: true,
+                      subTitle: 'new_account'.tr(),
+                      title: 'create_account'.tr(),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      isLogin: false,
                     ),
                     SizedBox(
                       height: getSize(context) / 5,
@@ -54,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                             },
                           ),
-                          SizedBox(width: getSize(context) / 8),
+                          SizedBox(width: getSize(context) / 12),
                           CustomLoginStatusWidget(
                             ButtonName: 'driver'.tr(),
                             isActive:
@@ -70,9 +73,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     CustomTextField(
                       title: 'email'.tr(),
+                      textInputType: TextInputType.name,
+                      backgroundColor: AppColors.white,
+                      prefixWidget: const Icon(Icons.person),
+                      validatorMessage: 'email_msg'.tr(),
+                      controller: controller.emailController,
+                    ),
+                    SizedBox(height: getSize(context) / 30),
+                    CustomTextField(
+                      title: 'email'.tr(),
+                      textInputType: TextInputType.phone,
+                      backgroundColor: AppColors.white,
+                      prefixWidget: const Icon(Icons.phone),
+                      validatorMessage: 'email_msg'.tr(),
+                      controller: controller.emailController,
+                    ),
+                    SizedBox(height: getSize(context) / 30),
+                    CustomTextField(
+                      title: 'email'.tr(),
                       textInputType: TextInputType.emailAddress,
                       backgroundColor: AppColors.white,
                       prefixWidget: const Icon(Icons.email_outlined),
+                      validatorMessage: 'email_msg'.tr(),
+                      controller: controller.emailController,
+                    ),
+                    SizedBox(height: getSize(context) / 30),
+                    CustomTextField(
+                      title: 'email'.tr(),
+                      textInputType: TextInputType.streetAddress,
+                      backgroundColor: AppColors.white,
+                      prefixWidget: const Icon(Icons.home_rounded),
                       validatorMessage: 'email_msg'.tr(),
                       controller: controller.emailController,
                     ),
@@ -94,59 +124,32 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ? Icons.visibility_off_rounded
                                   : Icons.visibility_rounded,
                             ))),
+                    SizedBox(height: getSize(context) / 30),
+                    CustomTextField(
+                        title: 'confirm_password'.tr(),
+                        textInputType: TextInputType.text,
+                        backgroundColor: AppColors.white,
+                        prefixWidget: const Icon(Icons.lock_outline),
+                        validatorMessage: 'password'.tr(),
+                        controller: controller.passwprdController,
+                        isPassword: controller.isPassword,
+                        suffixIcon: InkWell(
+                            onTap: () {
+                              controller.togglePassword();
+                            },
+                            child: Icon(
+                              controller.isPassword
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded,
+                            ))),
                     SizedBox(height: getSize(context) / 22),
                     CustomButton(
                         paddingHorizontal: getSize(context) / 22,
                         borderRadius: getSize(context) / 16,
-                        text: 'loginIn'.tr(),
+                        text: 'create_account'.tr(),
                         color: AppColors.buttonColor,
                         onClick: () {}),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: getSize(context) / 22,
-                          vertical: getSize(context) / 22),
-                      alignment: Alignment.centerLeft,
-                      width: double.infinity,
-                      child: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          'forget_pass'.tr(),
-                          style: TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w400,
-                              fontSize: getSize(context) / 22),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: getSize(context) / 8),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: getSize(context) / 22),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'dont_have_account'.tr(),
-                              style: TextStyle(
-                                  color: AppColors.black,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: getSize(context) / 22),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, Routes.signUp);
-                              },
-                              child: Text(
-                                'create_account'.tr(),
-                                style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: getSize(context) / 22),
-                              ),
-                            ),
-                            SizedBox(height: getSize(context) / 22),
-                          ]),
-                    )
+                    SizedBox(height: getSize(context) / 22),
                   ],
                 ),
               ),

@@ -9,6 +9,7 @@ import 'core/utils/app_strings.dart';
 import 'package:nte/injector.dart' as injector;
 
 import 'features/login/cubit/cubit.dart';
+import 'features/signup/cubit/cubit.dart';
 
 class NTE extends StatefulWidget {
   const NTE({Key? key}) : super(key: key);
@@ -37,9 +38,9 @@ class _NTEState extends State<NTE> {
           BlocProvider(
             create: (_) => injector.serviceLocator<LoginCubit>(),
           ),
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<LoginCubit>(),
-          // ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<SignUpCubit>(),
+          ),
           // BlocProvider(
           //   create: (_) => injector.serviceLocator<HomeCubit>(),
           // ),
