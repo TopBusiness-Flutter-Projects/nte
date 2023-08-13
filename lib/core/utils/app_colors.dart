@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'hex_color.dart';
 
 class AppColors {
+  static Color primary = HexColor('#E8B100');
+  static Color secondPrimary = HexColor('#E8B100');
+  static Color orangeThirdPrimary = HexColor('#FF9201');
+  static Color blueLiteColor = HexColor('#00B3DC');
+  static Color buttonColor = HexColor('#4C4C6D');
   static Color primary = HexColor('#FB2958');
   static Color secondPrimary = HexColor('#F4E07D');
   static Color orangeThirdPrimary = HexColor('#FF9201');
@@ -25,6 +30,7 @@ class AppColors {
   static Color gray1 = HexColor('#C4C4C4');
   static Color gray2 = HexColor('#BABABB');
   // static Color gray6 = HexColor('#A7A7A7');
+  static Color gray6 = HexColor('#A7A7A7');
   // static Color gray7 = HexColor('#A0A1A0');
   static Color red = HexColor('#FF0000');
   static Color blue3 = Color(0xff3646ff);
@@ -41,6 +47,8 @@ class AppColors {
   static Color opacityWhite = Colors.white.withOpacity(0.5);
   static Color transparent = Colors.transparent;
 
+  ///
+  ///
 
   Color darken(Color color, [double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
@@ -55,6 +63,13 @@ class AppColors {
     assert(amount >= 0 && amount <= 1);
 
     final hsl = HSLColor.fromColor(HexColor(color));
+    final hslLight =
+        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+
+    return hslLight.toColor();
+  }
+}
+
     final hslLight = hsl.withLightness(
         (hsl.lightness + amount).clamp(0.0, 1.0));
 

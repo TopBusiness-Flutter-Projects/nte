@@ -55,5 +55,18 @@
  "you_can_contact": "You can contact with the Department of Application Services to provide Support, assistance and suggestions through data the following contact:"
 
 
+"loginIn":"Login In",
+"log_to_driver_shipment":"Log in to be able to deliver your shipment",
+"driver":"driver",
+
+"user":"user",
+"email":"email",
+"password":"password",
+
+"email_msg":"please enter email",
+"password_msg":"please enter password",
+"forget_pass":"forget password",
+"dont_have_account":"you don't have account?",
+"create_account":"create account"
 
 }

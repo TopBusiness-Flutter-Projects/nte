@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../../core/utils/app_strings.dart';
+import '../../features/login/screen/loginscreen.dart';
 
 import '../../core/utils/app_strings.dart';
 
@@ -34,16 +38,13 @@ class AppRoutes {
           builder: (context) => const SplashScreen(),
         );
 
-
-      // case Routes.detailsRoute:
-      //   final service = settings.arguments as ServicesModel;
-      //   return MaterialPageRoute(
-      //     // Extract the service model argument from the settings arguments map
-      //
-      //     builder: (context) => Details(service: service),
-      //   );
-      //
-
+      case Routes.loginRoute:
+        return PageTransition(
+          type: PageTransitionType.leftToRight,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const LoginScreen(),
+        );
 
       default:
         return undefinedRoute();
