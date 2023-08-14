@@ -4,23 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/features/signup/cubit/cubit.dart';
 import 'package:nte/features/signup/cubit/state.dart';
-
-import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_textfield.dart';
 import '../../../core/widgets/customloginstatusbutton.dart';
 import '../../../core/widgets/loginappbar.dart';
-import '../../login/cubit/cubit.dart';
 
-class SignUpScreen extends StatefulWidget {
+
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
@@ -48,24 +41,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomLoginStatusWidget(
-                            ButtonName: 'user'.tr(),
+                            buttonName: 'user'.tr(),
                             isActive:
                                 controller.currentUser == 2 ? true : false,
                             onTap: () {
-                              setState(() {
-                                controller.currentUser = 2;
-                              });
+                              controller.toggleUserDriver(2);
+                             // controller.toggleUser();
+                              // setState(() {
+                              //   controller.currentUser = 2;
+                              // });
                             },
                           ),
                           SizedBox(width: getSize(context) / 12),
                           CustomLoginStatusWidget(
-                            ButtonName: 'driver'.tr(),
+                            buttonName: 'driver'.tr(),
                             isActive:
                                 controller.currentUser == 1 ? true : false,
                             onTap: () {
-                              setState(() {
-                                controller.currentUser = 1;
-                              });
+                              controller.toggleUserDriver(1);
+                             // controller.toggleDriver();
+                              // setState(() {
+                              //   controller.currentUser = 1;
+                              // });
                             },
                           )
                         ],

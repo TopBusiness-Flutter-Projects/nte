@@ -11,6 +11,14 @@
 "password_msg":"please enter password",
 "forget_pass":"forget password",
 "dont_have_account":"you don't have account?",
-"create_account":"create account"
+"create_account":"create account",
+
+
+  "our_app": "Our Application",
+  "only_app_connect": "The first application that connects between the shipment owner and transporters within and outside the country.",
+  "next": "Next",
+  "finish": "Finish",
+  "delegates_trucks": "Delegates and Truck drivers",
+  "we_provide solutions": "We provide comprehensive solutions to cater to all your shipping needs."
 
 }

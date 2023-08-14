@@ -9,8 +9,22 @@ class LoginCubit extends Cubit<LoginState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwprdController = TextEditingController();
+
   int currentUser = 0; //0 admin 1 driver  2  user
+
+  toggleDriver(){
+    currentUser = 1 ;
+    emit(DriverState());
+  }
+
+
+  toggleUser(){
+    currentUser = 2 ;
+    emit(UserState());
+  }
+
   bool isPassword = true;
+
   togglePassword() {
     isPassword = !isPassword;
     emit(ChangePasswordState());

@@ -13,14 +13,9 @@ import '../../../core/widgets/custom_textfield.dart';
 import '../../../core/widgets/customloginstatusbutton.dart';
 import '../../../core/widgets/loginappbar.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(
@@ -45,24 +40,26 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomLoginStatusWidget(
-                            ButtonName: 'user'.tr(),
+                            buttonName: 'user'.tr(),
                             isActive:
                                 controller.currentUser == 2 ? true : false,
                             onTap: () {
-                              setState(() {
-                                controller.currentUser = 2;
-                              });
+                              controller.toggleUser();
+                              // setState(() {
+                              //   controller.currentUser = 2;
+                              // });
                             },
                           ),
                           SizedBox(width: getSize(context) / 8),
                           CustomLoginStatusWidget(
-                            ButtonName: 'driver'.tr(),
+                            buttonName: 'driver'.tr(),
                             isActive:
                                 controller.currentUser == 1 ? true : false,
                             onTap: () {
-                              setState(() {
-                                controller.currentUser = 1;
-                              });
+                              controller.toggleDriver();
+                              // setState(() {
+                              //   controller.currentUser = 1;
+                              // });
                             },
                           )
                         ],

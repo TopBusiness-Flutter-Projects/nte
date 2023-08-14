@@ -9,6 +9,26 @@ class SignUpCubit extends Cubit<SignUpState> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwprdController = TextEditingController();
   int currentUser = 0; //0 admin 1 driver  2  user
+
+  // toggleDriver(){
+  //   currentUser = 1 ;
+  //   emit(DriverState());
+ // }
+
+   toggleUserDriver(int index){
+    if(index==1){
+      currentUser = 1 ;
+      emit(DriverState());
+    }
+    else{
+      currentUser = 2 ;
+      emit(UserState());
+    }
+    }
+  // toggleUser(){
+  //   currentUser = 2 ;
+  //   emit(UserState());
+  // }
   bool isPassword = true;
   togglePassword() {
     isPassword = !isPassword;

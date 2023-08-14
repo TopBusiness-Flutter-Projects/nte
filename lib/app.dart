@@ -70,6 +70,7 @@ class _NTEState extends State<NTE> {
           theme: appTheme(),
           themeMode: ThemeMode.light,
           darkTheme: ThemeData.light(),
+
           // standard dark theme
           localizationsDelegates: context.localizationDelegates,
           debugShowCheckedModeBanner: false,

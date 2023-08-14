@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 
@@ -12,17 +14,18 @@ class OnBoarding2 extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Spacer(flex: 2),
+          const Spacer(flex: 2),
           Center(
             child: Image.asset(
               ImageAssets.onBoarding2Image,
               width: width / 1.4,
             ),
           ),
-          Spacer(
+          const Spacer(
             flex: 2,
           ),
           Container(
+            width: double.infinity,
             height: height / 2.3,
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
@@ -42,9 +45,9 @@ class OnBoarding2 extends StatelessWidget {
                 const Spacer(
                   flex: 1,
                 ),
-                const Text(
-                  'المناديب الشاحنات',
-                  style: TextStyle(
+                 Text(
+                  'delegates_trucks'.tr(),
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontFamily: 'Cairo',
@@ -54,12 +57,12 @@ class OnBoarding2 extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.5),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.5),
                   child: Text(
-                    "تقدم خدماتنا حلا شاملا لجميع احتياجات الشحن الخاص بك",
+                    "we_provide solutions".tr(),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 17,
                       fontFamily: 'Cairo',
@@ -71,20 +74,25 @@ class OnBoarding2 extends StatelessWidget {
                 const Spacer(
                   flex: 1,
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  decoration: BoxDecoration(
-                      color: AppColors.blue1,
-                      borderRadius: BorderRadius.circular(20)),
-                  alignment: Alignment.center,
-                  width: width * 0.3,
-                  height: height * 0.05,
-                  child: const Text(
-                    "انضم الينا",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'Cairo',
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, Routes.loginRoute);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                        color: AppColors.blue1,
+                        borderRadius: BorderRadius.circular(20)),
+                    alignment: Alignment.center,
+                    width: width * 0.3,
+                    height: height * 0.05,
+                    child: const Text(
+                      "انضم الينا",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: 'Cairo',
+                      ),
                     ),
                   ),
                 ),

@@ -3,28 +3,22 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import '../utils/getsize.dart';
 
-class CustomLoginStatusWidget extends StatefulWidget {
+class CustomLoginStatusWidget extends StatelessWidget {
   CustomLoginStatusWidget(
-      {required this.ButtonName, this.onTap, this.isActive = false, super.key});
-  String ButtonName;
+      {required this.buttonName, this.onTap, this.isActive = false, super.key});
+ final String buttonName;
   bool isActive;
   void Function()? onTap;
   @override
-  State<CustomLoginStatusWidget> createState() =>
-      _CustomLoginStatusWidgetState();
-}
-
-class _CustomLoginStatusWidgetState extends State<CustomLoginStatusWidget> {
-  @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onTap,
+      onTap: onTap,
       child: Container(
         alignment: Alignment.center,
         width: getSize(context) / 4,
         height: getSize(context) / 8,
         decoration: ShapeDecoration(
-          color: widget.isActive ? AppColors.primary : AppColors.white,
+          color: isActive ? AppColors.primary : AppColors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -38,10 +32,10 @@ class _CustomLoginStatusWidgetState extends State<CustomLoginStatusWidget> {
           ],
         ),
         child: Text(
-          widget.ButtonName,
+          buttonName,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: widget.isActive ? AppColors.white : AppColors.black,
+            color: isActive ? AppColors.white : AppColors.black,
             fontSize: 18,
             fontWeight: FontWeight.w400,
           ),
