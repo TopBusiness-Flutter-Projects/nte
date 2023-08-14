@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nte/features/firgetpassword/screen/forget_password.dart';
 import 'package:nte/features/firgetpassword/screen/otp.dart';
 import 'package:nte/features/firgetpassword/screen/reset_password.dart';
+import 'package:nte/features/homescreen/screen/homescreen.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
 import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -18,6 +19,7 @@ class Routes {
   static const String forgetPassword = '/forgetPassword';
   static const String resetPassword = '/resetPassword';
   static const String otpScreen = '/otpScreen';
+  static const String homeScreen = '/homeScreen';
 }
 
 class AppRoutes {
@@ -61,7 +63,13 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => const OnBoardingScreen(),
         );
-
+      case Routes.homeScreen:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const HomeScreen(),
+        );
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;
       //   return MaterialPageRoute(

@@ -97,7 +97,10 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: getSize(context) / 22,
                         text: 'loginIn'.tr(),
                         color: AppColors.buttonColor,
-                        onClick: () {}),
+                        onClick: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.homeScreen);
+                        }),
                     Container(
                       padding: EdgeInsets.symmetric(
                           horizontal: getSize(context) / 22,

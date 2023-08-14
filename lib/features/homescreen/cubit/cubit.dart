@@ -5,4 +5,11 @@ import 'package:nte/features/homescreen/cubit/state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.api) : super(InitHomeState());
   ServiceApi api;
+
+  int selectedIndex = 0;
+
+  onChangeBottomNav(int index) {
+    selectedIndex = index;
+    emit(ChangeBottomNavHomeState());
+  }
 }
