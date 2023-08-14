@@ -21,9 +21,8 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
+          builder: (context) =>const SplashScreen(),
         );
-
       case Routes.loginRoute:
         return PageTransition(
           type: PageTransitionType.fade,
