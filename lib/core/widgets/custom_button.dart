@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nte/core/utils/getsize.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton(
@@ -20,21 +21,24 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
-      child: ElevatedButton(
-        onPressed: onClick,
-        style: ElevatedButton.styleFrom(
-          maximumSize: Size.infinite,
-          shape: RoundedRectangleBorder(
+      padding: EdgeInsets.symmetric(
+        horizontal: paddingHorizontal,
+      ),
+      child: InkWell(
+        onTap: onClick,
+        child: Container(
+          width: getSize(context) / 1.5,
+          height: getSize(context) / 8.5,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color,
             borderRadius: BorderRadius.circular(borderRadius!),
           ),
-          minimumSize: const Size(double.infinity, 60),
-          backgroundColor: color,
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-              color: textcolor, fontSize: 20, fontWeight: FontWeight.bold),
+          child: Text(
+            text,
+            style: TextStyle(
+                color: textcolor, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );

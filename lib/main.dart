@@ -9,7 +9,6 @@ import 'package:nte/injector.dart' as injector;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
   await injector.setup();
   Bloc.observer = AppBlocObserver();
 

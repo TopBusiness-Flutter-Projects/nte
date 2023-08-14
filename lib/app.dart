@@ -9,6 +9,7 @@ import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:nte/injector.dart' as injector;
 
+import 'features/firgetpassword/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 
@@ -45,9 +46,9 @@ class _NTEState extends State<NTE> {
           BlocProvider(
             create: (_) => injector.serviceLocator<OnboardingCubit>(),
           ),
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<PostsCubit>(),
-          // ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<ForgetPasswordCubit>(),
+          ),
           // BlocProvider(
           //   create: (_) => injector.serviceLocator<ProfileCubit>(),
           // ),

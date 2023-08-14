@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nte/features/firgetpassword/screen/forget_password.dart';
+import 'package:nte/features/firgetpassword/screen/otp.dart';
+import 'package:nte/features/firgetpassword/screen/reset_password.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
 import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -12,6 +15,9 @@ class Routes {
   static const String onBoardingRoute = '/onBoarding';
   static const String loginRoute = '/login';
   static const String signUp = '/signUp';
+  static const String forgetPassword = '/forgetPassword';
+  static const String resetPassword = '/resetPassword';
+  static const String otpScreen = '/otpScreen';
 }
 
 class AppRoutes {
@@ -21,7 +27,7 @@ class AppRoutes {
     switch (settings.name) {
       case Routes.initialRoute:
         return MaterialPageRoute(
-          builder: (context) =>const SplashScreen(),
+          builder: (context) => const SplashScreen(),
         );
       case Routes.loginRoute:
         return PageTransition(
@@ -29,6 +35,27 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
           child: const LoginScreen(),
+        );
+      case Routes.forgetPassword:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const ForgetPassword(),
+        );
+      case Routes.resetPassword:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const ResetPassword(),
+        );
+      case Routes.otpScreen:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const OTPScreen(),
         );
       case Routes.onBoardingRoute:
         return MaterialPageRoute(

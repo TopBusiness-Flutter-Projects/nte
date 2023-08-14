@@ -6,8 +6,16 @@ import 'package:nte/features/signup/cubit/state.dart';
 class SignUpCubit extends Cubit<SignUpState> {
   SignUpCubit(this.api) : super(InitSignUpState());
   ServiceApi api;
+
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController accountController = TextEditingController();
+
   TextEditingController passwprdController = TextEditingController();
+  TextEditingController confirmPasswprdController = TextEditingController();
   int currentUser = 0; //0 admin 1 driver  2  user
 
   // toggleDriver(){

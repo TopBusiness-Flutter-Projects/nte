@@ -8,12 +8,10 @@ class CustomLoginApBar extends StatefulWidget {
       {this.isLogin = false,
       required this.subTitle,
       required this.title,
-      this.onTap,
       super.key});
   bool isLogin;
   String title;
   String subTitle;
-  void Function()? onTap;
   @override
   State<CustomLoginApBar> createState() => _CustomLoginApBarState();
 }
@@ -68,7 +66,9 @@ class _CustomLoginApBarState extends State<CustomLoginApBar> {
                         child: widget.isLogin
                             ? Container()
                             : IconButton(
-                                onPressed: widget.onTap,
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
                                 icon: Icon(
                                   Icons.arrow_forward,
                                   color: AppColors.white,

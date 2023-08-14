@@ -4,7 +4,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -17,26 +16,28 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
-
         children: [
           Positioned(
             //alignment: Alignment.topRight,
             right: 0,
-                left: width/3,
-                top: 0,
-                child: Image.asset(ImageAssets.topSplashImage),
+            left: width / 3,
+            top: 0,
+            child: Image.asset(ImageAssets.topSplashImage),
           ),
-          Align(alignment: Alignment.center,
-          child: Image.asset(ImageAssets.centerSplashImage,width: width/1.5,)),
-
+          Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                ImageAssets.centerSplashImage,
+                width: width / 1.5,
+              )),
           Positioned(
             left: 0,
-          bottom: 0,
-          right: width/3,
-          //  alignment: Alignment.bottomLeft,
+            bottom: 0,
+            right: width / 3,
+            //  alignment: Alignment.bottomLeft,
             child: Image.asset(ImageAssets.bottomSplashImage),
           ),
         ],
@@ -44,9 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-@override
+  @override
   void initState() {
-
     super.initState();
     initialization();
   }
@@ -63,4 +63,3 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
   }
 }
-

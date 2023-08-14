@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
+import 'features/firgetpassword/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 
@@ -34,11 +35,11 @@ Future<void> setup() async {
         // serviceLocator(),
         ),
   );
-  // serviceLocator.registerFactory(
-  //   () => LoginCubit(
-  //     serviceLocator(),
-  //   ),
-  // );
+  serviceLocator.registerFactory(
+    () => ForgetPasswordCubit(
+      serviceLocator(),
+    ),
+  );
   // serviceLocator.registerFactory(
   //       () => GoogleMapsCubit(
   //    // serviceLocator(),

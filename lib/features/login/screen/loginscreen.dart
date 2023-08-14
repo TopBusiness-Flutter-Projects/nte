@@ -93,8 +93,8 @@ class LoginScreen extends StatelessWidget {
                             ))),
                     SizedBox(height: getSize(context) / 22),
                     CustomButton(
-                        paddingHorizontal: getSize(context) / 22,
-                        borderRadius: getSize(context) / 16,
+                        paddingHorizontal: getSize(context) / 8,
+                        borderRadius: getSize(context) / 22,
                         text: 'loginIn'.tr(),
                         color: AppColors.buttonColor,
                         onClick: () {}),
@@ -105,7 +105,9 @@ class LoginScreen extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       width: double.infinity,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, Routes.forgetPassword);
+                        },
                         child: Text(
                           'forget_pass'.tr(),
                           style: TextStyle(
