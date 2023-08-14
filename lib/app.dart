@@ -10,6 +10,7 @@ import 'core/utils/app_strings.dart';
 import 'package:nte/injector.dart' as injector;
 
 import 'features/firgetpassword/cubit/cubit.dart';
+import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 
@@ -49,9 +50,9 @@ class _NTEState extends State<NTE> {
           BlocProvider(
             create: (_) => injector.serviceLocator<ForgetPasswordCubit>(),
           ),
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<ProfileCubit>(),
-          // ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<HomeCubit>(),
+          ),
           // BlocProvider(
           //   create: (_) => injector.serviceLocator<FavoriteCubit>(),
           // ),
