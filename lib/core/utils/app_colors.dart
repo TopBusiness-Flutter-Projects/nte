@@ -49,6 +49,7 @@ class AppColors {
   static Color orangelight = HexColor('#FFEAD7');
   static Color opacityWhite = Colors.white.withOpacity(0.5);
   static Color transparent = Colors.transparent;
+  static Color dividerColor = HexColor('#C2C2C2');
 
   ///
   ///
