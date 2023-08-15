@@ -84,6 +84,8 @@ flutter:
     - assets/lang/
     - assets/images/
     - assets/fonts/
+    - assets/icons/
+    
   #    - assets/lottie/
   #    - assets/fonts/
   #

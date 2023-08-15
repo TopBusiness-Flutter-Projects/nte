@@ -9,9 +9,10 @@ class ImageAssets {
   static const String topSplashImage = '$imagePath/top_splash.png';
   static const String onBoarding1Image = '$imagePath/onboarding1.png';
   static const String onBoarding2Image = '$imagePath/onboarding_2.png';
+  static const String filterImage = '$imagePath/filter.png';
 
   // icons
-  // static const String phoneIcon = '$iconsPath/phone.svg';
+  static const String filterIcon = '$iconsPath/filter.svg';
 
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';
