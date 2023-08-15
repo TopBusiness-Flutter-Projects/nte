@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/widgets/custom_button.dart';
 import 'package:nte/core/widgets/my_svg_widget.dart';
+import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/orderdetails/cubit/cubit.dart';
+import 'package:nte/features/orderdetails/cubit/state.dart';
 import 'package:nte/features/orderdetails/widget/orderdetailswidgetdescription.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/customappbar.dart';
-import '../cubit/state.dart';
+import '../../homescreen/cubit/state.dart';
 import '../widget/orderdetailswidget.dart';
 import '../widget/orderdetailswidgetinfo.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   const OrderDetailsScreen({super.key});
-  void _showBottomSheet(BuildContext context, String msg) {
+  void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       // isScrollControlled: true,
       shape: RoundedRectangleBorder(
@@ -24,69 +26,81 @@ class OrderDetailsScreen extends StatelessWidget {
       ),
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-              left: getSize(context) / 22,
-              right: getSize(context) / 22,
-              top: getSize(context) / 22),
-          decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(
-                  getSize(context) / 22), // Adjust the radius as needed
-            ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: MySvgWidget(
-                        path: ImageAssets.closeIcon,
-                        imageColor: AppColors.red,
-                        size: getSize(context) / 16),
+        return BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+          builder: (context, state) {
+            return BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                var cubit = context.read<OrderDetailsCubit>();
+                var controller = context.read<HomeCubit>();
+                return Container(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                      left: getSize(context) / 22,
+                      right: getSize(context) / 22,
+                      top: getSize(context) / 22),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(
+                          getSize(context) / 22), // Adjust the radius as needed
+                    ),
                   ),
-                ),
-                Text(
-                  'send_offer'.tr(),
-                  style: TextStyle(
-                    fontSize: getSize(context) / 18,
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.w700,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: MySvgWidget(
+                                path: ImageAssets.closeIcon,
+                                imageColor: AppColors.red,
+                                size: getSize(context) / 16),
+                          ),
+                        ),
+                        Text(
+                          'send_offer'.tr(),
+                          style: TextStyle(
+                            fontSize: getSize(context) / 18,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: getSize(context) / 12),
+                        TextFormField(
+                          controller: cubit.sendOrderController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'enter_offer'.tr();
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      getSize(context) / 22))),
+                        ),
+                        SizedBox(height: getSize(context) / 12),
+                        CustomButton(
+                            borderRadius: getSize(context) / 12,
+                            text: 'send'.tr(),
+                            color: AppColors.buttonColor,
+                            onClick: () {
+                              controller.navToOrders(context);
+                              ///Nav to offers
+                            }),
+                        SizedBox(height: getSize(context) / 12),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: getSize(context) / 12),
-                TextFormField(
-                  controller:
-                      context.read<OrderDetailsCubit>().sendOrderController,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'please send offer';
-                    } else {
-                      return null;
-                    }
-                  },
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(getSize(context) / 22))),
-                ),
-                SizedBox(height: getSize(context) / 12),
-                CustomButton(
-                    borderRadius: getSize(context) / 12,
-                    text: 'send'.tr(),
-                    color: AppColors.buttonColor,
-                    onClick: () {}),
-                SizedBox(height: getSize(context) / 12),
-              ],
-            ),
-          ),
+                );
+              },
+            );
+          },
         );
       },
     );
@@ -94,9 +108,9 @@ class OrderDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderDetailsCubit, OrderDetailsState>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        var cubit = context.read<OrderDetailsCubit>();
+        var cubit = context.read<HomeCubit>();
         return SafeArea(
           child: Scaffold(
               backgroundColor: AppColors.buttonColor,
@@ -148,7 +162,8 @@ class OrderDetailsScreen extends StatelessWidget {
                                       color: AppColors.buttonColor,
                                       onClick: () {
                                         _showBottomSheet(
-                                            context, 'enter your offer');
+                                          context,
+                                        );
                                         //show botton sheet
                                       }),
 

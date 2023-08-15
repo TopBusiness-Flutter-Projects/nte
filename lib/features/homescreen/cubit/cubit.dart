@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/remote/service.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
@@ -11,5 +12,12 @@ class HomeCubit extends Cubit<HomeState> {
   onChangeBottomNav(int index) {
     selectedIndex = index;
     emit(ChangeBottomNavHomeState());
+  }
+
+  navToOrders(BuildContext context) {
+    selectedIndex = 1;
+    Navigator.pop(context);
+    Navigator.pop(context);
+    emit(NavToOrdersHomeState());
   }
 }
