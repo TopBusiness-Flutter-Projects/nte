@@ -49,5 +49,6 @@
   "description": "description",
   "send_offer": "Submit your offer now",
   "welcome": "welcome",
-  "enter_offer": "please enter offer"
+  "enter_offer": "please enter offer",
+  "truck":"truck"
 }

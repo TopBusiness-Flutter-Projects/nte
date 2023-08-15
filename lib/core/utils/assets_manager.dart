@@ -25,6 +25,7 @@ class ImageAssets {
   static const String closeIcon = '$iconsPath/close.svg';
 
   static const String avatarIcon = '$iconsPath/avatar.svg';
+  static const String truckdetailsIcon = '$iconsPath/truckdetails.svg';
   //wallet
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';

@@ -1,7 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/utils/app_colors.dart';
-
+import 'package:nte/core/widgets/my_svg_widget.dart';
+import '../../../core/utils/assets_manager.dart';
+import '../../../core/utils/getsize.dart';
+import '../../../core/widgets/customappbar.dart';
 import '../../homescreen/cubit/cubit.dart';
 import '../../homescreen/cubit/state.dart';
 
@@ -12,127 +16,143 @@ class MyTrunckScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
+        var cubit = context.read<HomeCubit>();
         return SafeArea(
           child: Scaffold(
-              body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(color: AppColors.white),
-            child: Stack(
-              children: [
-                Positioned(
-                  left: -56,
-                  top: -100,
-                  child: SizedBox(
-                    width: 496,
-                    height: 366,
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: AppColors.primary,
+                onPressed: () {},
+                child: Icon(Icons.add, color: AppColors.white),
+              ),
+              backgroundColor: AppColors.buttonColor,
+              body: Column(
+                children: [
+                  Container(
+                    height: getSize(context) / 3.2,
+                    width: double.infinity,
+                    color: AppColors.blue1,
+                    child: CustomAppBar(isHome: true),
+                  ),
+                  Flexible(
                     child: Stack(
+                      alignment: Alignment.topCenter,
                       children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          child: SizedBox(
-                            width: 496,
-                            height: 290,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 56,
-                                  top: 100,
-                                  child: Container(
-                                    width: 430,
-                                    height: 190,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.buttonColor),
-                                  ),
-                                ),
-                                //the left yellow oval
-                                Positioned(
-                                  left: 0,
-                                  top: 52,
-                                  child: Container(
-                                    width: 150,
-                                    height: 150,
-                                    decoration: ShapeDecoration(
-                                      color: AppColors.primary,
-                                      shape: const OvalBorder(),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 296,
-                                  top: 0,
-                                  child: SizedBox(
-                                    width: 200,
-                                    height: 188,
-                                    child: Stack(
-                                      children: [
-                                        Positioned(
-                                          left: 0,
-                                          top: 0,
-                                          child: Container(
-                                            width: 200,
-                                            height: 188,
-                                            decoration: const ShapeDecoration(
-                                              color: Color(0x19E8B100),
-                                              shape: OvalBorder(),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          left: 40,
-                                          top: 34,
-                                          child: Container(
-                                            width: 120,
-                                            height: 120,
-                                            decoration: const ShapeDecoration(
-                                              color: Color(0x33E8B100),
-                                              shape: OvalBorder(),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          left: 88,
-                                          top: 65,
-                                          child: Container(
-                                            width: 70,
-                                            height: 70,
-                                            decoration: ShapeDecoration(
-                                              color: AppColors.primary,
-                                              shape: const OvalBorder(),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 56,
-                          top: 265,
+                        Flexible(
                           child: Container(
-                            width: 430,
-                            height: 101,
-                            decoration: ShapeDecoration(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ),
+                              margin:
+                                  EdgeInsets.only(top: getSize(context) / 12),
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(
+                                          getSize(context) / 22),
+                                      topRight: Radius.circular(
+                                          getSize(context) / 22))),
+                              child: GridView.builder(
+                                itemCount: 50,
+                                physics: const BouncingScrollPhysics(),
+                                padding: EdgeInsets.all(getSize(context) / 22),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: 1 / 1),
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        flex: 6,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              getSize(context) / 22),
+                                          child:
+                                              Image.asset(ImageAssets.carImage),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 0,
+                                              horizontal:
+                                                  getSize(context) / 22),
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            'شاحنة طويلة',
+                                            textAlign: TextAlign.right,
+                                            style: TextStyle(
+                                              color: AppColors.buttonColor,
+                                              fontSize: getSize(context) / 24,
+                                              fontFamily: 'Cairo',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 0,
+                                              horizontal:
+                                                  getSize(context) / 22),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                fit: FlexFit.tight,
+                                                child: Text(
+                                                  'رموك',
+                                                  textAlign: TextAlign.right,
+                                                  style: TextStyle(
+                                                    color: AppColors.primary,
+                                                    fontSize:
+                                                        getSize(context) / 24,
+                                                    fontFamily: 'Cairo',
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                              IconButton(
+                                                  onPressed: () {},
+                                                  icon: MySvgWidget(
+                                                      path: ImageAssets
+                                                          .truckdetailsIcon,
+                                                      imageColor:
+                                                          AppColors.primary,
+                                                      size: getSize(context) /
+                                                          24))
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(child: Container())
+                                    ],
+                                  );
+                                },
+                              )),
                         ),
+                        Positioned(
+                          top: -10,
+                          child: Container(
+                              padding: EdgeInsets.all(getSize(context) / 66),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'truck'.tr(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: getSize(context) / 24,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                        )
                       ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          )),
+                ],
+              )),
         );
       },
     );
