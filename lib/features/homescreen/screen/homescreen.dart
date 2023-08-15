@@ -23,8 +23,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> screens = const [
     MainScreen(),
-    MyTrunckScreen(),
     OffersScreen(),
+    MyTrunckScreen(),
     ProfileScreen()
   ];
   @override

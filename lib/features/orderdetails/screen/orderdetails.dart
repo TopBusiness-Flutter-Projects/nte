@@ -91,6 +91,7 @@ class OrderDetailsScreen extends StatelessWidget {
                             color: AppColors.buttonColor,
                             onClick: () {
                               controller.navToOrders(context);
+
                               ///Nav to offers
                             }),
                         SizedBox(height: getSize(context) / 12),
