@@ -1,13 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/widgets/custom_button.dart';
 import 'package:nte/features/login/cubit/cubit.dart';
 import 'package:nte/features/login/cubit/state.dart';
-
 import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/custom_textfield.dart';
 import '../../../core/widgets/customloginstatusbutton.dart';
@@ -98,8 +96,7 @@ class LoginScreen extends StatelessWidget {
                         text: 'loginIn'.tr(),
                         color: AppColors.buttonColor,
                         onClick: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.homeScreen);
+                          Navigator.pushNamed(context, Routes.homeScreen);
                         }),
                     Container(
                       padding: EdgeInsets.symmetric(

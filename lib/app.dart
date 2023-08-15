@@ -9,9 +9,10 @@ import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:nte/injector.dart' as injector;
 
-import 'features/firgetpassword/cubit/cubit.dart';
+import 'features/forgetpassword/cubit/cubit.dart';
 import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
+import 'features/orderdetails/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 
 class NTE extends StatefulWidget {
@@ -53,9 +54,9 @@ class _NTEState extends State<NTE> {
           BlocProvider(
             create: (_) => injector.serviceLocator<HomeCubit>(),
           ),
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<FavoriteCubit>(),
-          // ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<OrderDetailsCubit>(),
+          ),
           //
           // BlocProvider(
           //   create: (_) => injector.serviceLocator<PrivacyCubit>(),

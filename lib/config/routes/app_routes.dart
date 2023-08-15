@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nte/features/firgetpassword/screen/forget_password.dart';
-import 'package:nte/features/firgetpassword/screen/otp.dart';
-import 'package:nte/features/firgetpassword/screen/reset_password.dart';
+import 'package:nte/features/forgetpassword/screen/forget_password.dart';
+import 'package:nte/features/forgetpassword/screen/otp.dart';
+import 'package:nte/features/forgetpassword/screen/reset_password.dart';
 import 'package:nte/features/homescreen/screen/homescreen.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
 import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
@@ -9,6 +9,8 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../core/utils/app_strings.dart';
 import '../../features/login/screen/loginscreen.dart';
+import '../../features/orderdetails/screen/orderdetails.dart';
+import '../../features/profile/screen/profilescreen.dart';
 import '../../features/signup/screen/signupscreen.dart';
 
 class Routes {
@@ -20,6 +22,8 @@ class Routes {
   static const String resetPassword = '/resetPassword';
   static const String otpScreen = '/otpScreen';
   static const String homeScreen = '/homeScreen';
+  static const String orderDetailsScreen = '/orderDetailsScreen';
+  static const String profileScreen = '/profileScreen';
 }
 
 class AppRoutes {
@@ -69,6 +73,21 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
           child: const HomeScreen(),
+        );
+      case Routes.orderDetailsScreen:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const OrderDetailsScreen(),
+        );
+      //ProfileScreen
+      case Routes.profileScreen:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const ProfileScreen(),
         );
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;

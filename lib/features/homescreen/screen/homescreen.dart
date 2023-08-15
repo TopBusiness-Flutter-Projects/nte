@@ -9,6 +9,8 @@ import 'package:nte/features/mytruck/screens/mytrunckscreen.dart';
 import 'package:nte/features/offers/screen/offersscreen.dart';
 import 'package:nte/features/profile/screen/profilescreen.dart';
 
+import '../../../core/utils/assets_manager.dart';
+import '../../../core/widgets/my_svg_widget.dart';
 import '../../mainscreen/screen/mainscreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,21 +42,41 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: AppColors.white,
             showUnselectedLabels: false,
             showSelectedLabels: false,
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
+                icon: MySvgWidget(
+                    path: ImageAssets.ordersIcon,
+                    imageColor: cubit.selectedIndex == 0
+                        ? AppColors.primary
+                        : AppColors.buttonColor,
+                    size: getSize(context) / 18),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.chat_bubble_text),
+                icon: MySvgWidget(
+                    path: ImageAssets.qouteIcon,
+                    imageColor: cubit.selectedIndex == 1
+                        ? AppColors.primary
+                        : AppColors.buttonColor,
+                    size: getSize(context) / 18),
                 label: 'offers',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.fire_truck_outlined),
+                icon: MySvgWidget(
+                    path: ImageAssets.trunckIcon,
+                    imageColor: cubit.selectedIndex == 2
+                        ? AppColors.primary
+                        : AppColors.buttonColor,
+                    size: getSize(context) / 18),
                 label: 'my trunck',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: MySvgWidget(
+                    path: ImageAssets.profileIcon,
+                    imageColor: cubit.selectedIndex == 3
+                        ? AppColors.primary
+                        : AppColors.buttonColor,
+                    size: getSize(context) / 18),
                 label: 'profile',
               ),
             ],

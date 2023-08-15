@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/remote/service.dart';
-import 'package:nte/features/firgetpassword/cubit/state.dart';
+import 'package:nte/features/forgetpassword/cubit/state.dart';
 import 'package:otp_text_field/otp_field.dart';
 
 class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {

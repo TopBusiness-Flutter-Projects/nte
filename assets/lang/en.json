@@ -34,5 +34,19 @@
   "finish": "Finish",
   "delegates_trucks": "Delegates and Truck drivers",
   "we_provide solutions": "We provide comprehensive solutions to cater to all your shipping needs.",
-  "order_list":"order list"
+  "order_list": "order list",
+  "wallet": "wallet",
+  "charage": "charage",
+  "add_charage": "add charage",
+  "order_details": "order details",
+  "submit_offer": "submit offer",
+  "price": "price",
+  "transfer_day": "transfer day",
+  "transfer_date": "transfer date",
+  "souurce": "source",
+  "destination": "destination",
+  "truck_info": "truck info",
+  "description": "description",
+  "send_offer": "Submit your offer now",
+"welcome":"welcome"
 }

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'hex_color.dart';
 
 class AppColors {
-  static Color yellow1 = Color(0xffE8B100);
-  static Color yellow2 = Color(0xffFFE799);
-  static Color blue1 = Color(0xff4C4C6D);
-  static Color grey1 = Color(0xffDCDCDC);
+  static Color yellow1 = const Color(0xffE8B100);
+  static Color yellow2 = const Color(0xffFFE799);
+  static Color blue1 = const Color(0xff4C4C6D);
+  static Color grey1 = const Color(0xffDCDCDC);
 
   static Color primary = HexColor('#E8B100');
   static Color secondPrimary = HexColor('#E8B100');
   static Color orangeThirdPrimary = HexColor('#FF9201');
   static Color blueLiteColor = HexColor('#00B3DC');
   static Color buttonColor = HexColor('#4C4C6D');
-
+  static Color greyColor = HexColor('#E9EAEB');
   static Color blueTextColor = HexColor('#5663FF');
   static Color grayTextColor = HexColor('#6E7FAA');
   static Color goldStarColor = HexColor('#FFCC00');
@@ -36,14 +36,14 @@ class AppColors {
   static Color gray6 = HexColor('#A7A7A7');
   // static Color gray7 = HexColor('#A0A1A0');
   static Color red = HexColor('#FF0000');
-  static Color blue3 = Color(0xff3646ff);
+  static Color blue3 = const Color(0xff3646ff);
   static Color bink = HexColor('#FF9F9F');
   static Color purple1 = HexColor('#854AA4');
   static Color purple1light = HexColor('#E3D2FE');
   static Color blue = HexColor('#143A7B');
   //static Color blue1 = HexColor('#CBDFF8');
   static Color blue2 = HexColor('#8290F8');
-  static Color blue4 = Color(0xff3E3F68);
+  static Color blue4 = const Color(0xff3E3F68);
   static Color bluelight = HexColor('#D7EAF9');
   static Color orange = HexColor('#FE7C04');
   static Color orangelight = HexColor('#FFEAD7');

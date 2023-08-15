@@ -5,8 +5,8 @@ import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/core/widgets/loginappbar.dart';
-import 'package:nte/features/firgetpassword/cubit/cubit.dart';
-import 'package:nte/features/firgetpassword/cubit/state.dart';
+import 'package:nte/features/forgetpassword/cubit/cubit.dart';
+import 'package:nte/features/forgetpassword/cubit/state.dart';
 
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/custom_textfield.dart';
