@@ -20,6 +20,7 @@ class AppColors {
   static Color unStarColor = HexColor('#E9E9EE');
   static Color scaffoldColor = HexColor('#F5F5F5');
   static Color avatarColor = HexColor('#96B2B5');
+  static Color redColor = HexColor('#E80000');
 
   static Color hint = Colors.grey;
   static Color blackLite = Colors.black54;
@@ -32,6 +33,7 @@ class AppColors {
   static Color gray1 = HexColor('#C4C4C4');
   static Color gray2 = HexColor('#BABABB');
   static Color gray3 = HexColor('#DCDCDC');
+  static Color gray4 = HexColor('#EEEEEE');
   // static Color gray6 = HexColor('#A7A7A7');
   static Color gray6 = HexColor('#A7A7A7');
   // static Color gray7 = HexColor('#A0A1A0');

@@ -50,5 +50,11 @@
   "send_offer": "قدم عرضك الان",
   "welcome": "مرحبا",
   "enter_offer": "من فضلك ادخل عرض",
+  "wait_payment": "فى انتظار الدفع",
+  "pending": "معلقة",
+  "my_offers": "عروضى",
+  "pending_offers": "العروض المعلقة",
+  "completed_offers": "العروض المكتملة"
+  "enter_offer": "من فضلك ادخل عرض",
   "truck":"شاحنتى"
 }

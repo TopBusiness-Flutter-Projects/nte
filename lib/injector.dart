@@ -13,6 +13,7 @@ import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
 import 'features/orderdetails/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
+import 'features/tabcontrol/cubit/tab_control_cubit.dart';
 
 // import 'features/downloads_videos/cubit/downloads_videos_cubit.dart';
 
@@ -34,6 +35,11 @@ Future<void> setup() async {
 
   serviceLocator.registerFactory(
     () => OnboardingCubit(
+        // serviceLocator(),
+        ),
+  );
+  serviceLocator.registerFactory(
+    () => TabControlCubit(
         // serviceLocator(),
         ),
   );

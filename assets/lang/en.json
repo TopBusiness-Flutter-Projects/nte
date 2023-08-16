@@ -51,4 +51,9 @@
   "welcome": "welcome",
   "enter_offer": "please enter offer",
   "truck":"truck"
+  "enter_offer": "please enter offer",
+  "wait_payment": "Awaiting payment",
+  "pending_offers": "Pending Offers",
+  "completed_offers": "Completed Offers"
+
 }
