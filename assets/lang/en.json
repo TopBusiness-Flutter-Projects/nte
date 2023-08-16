@@ -45,15 +45,27 @@
   "transfer_date": "transfer date",
   "souurce": "source",
   "destination": "destination",
-  "truck_info": "truck info",
+  "truck_info": "Truck info",
   "description": "description",
   "send_offer": "Submit your offer now",
   "welcome": "welcome",
   "enter_offer": "please enter offer",
-  "truck":"truck"
-  "enter_offer": "please enter offer",
+  "truck": "Truck",
+  "add_truck": "New Truck",
+  "truck_type": "Truck type",
+  "select_type": "Please select type.",
+  "model": "Model",
+  "cabin_type": "Cabin type",
+  "truck_image": "Truck Image",
+  "truck_gray_card": "Truck gray card",
+  "please_add_images": "Please upload two photos, front and back",
+  "add_new_truck": "Add New Truck",
+  "cabin_gray_card": "Cabin gray card",
   "wait_payment": "Awaiting payment",
   "pending_offers": "Pending Offers",
-  "completed_offers": "Completed Offers"
-
+  "completed_offers": "Completed Offers",
+  "pending": "wating",
+  "my_offers": "offers",
+  "no_truck":"You don't have trucks",
+  "truck_details":"Truck Details"
 }

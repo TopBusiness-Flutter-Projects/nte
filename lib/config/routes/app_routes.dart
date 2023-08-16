@@ -8,10 +8,12 @@ import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../core/utils/app_strings.dart';
+import '../../features/addnewtruck/screen/addnewtruck.dart';
 import '../../features/login/screen/loginscreen.dart';
 import '../../features/orderdetails/screen/orderdetails.dart';
 import '../../features/profile/screen/profilescreen.dart';
 import '../../features/signup/screen/signupscreen.dart';
+import '../../features/truckdetails/screen/truckdetails.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -24,6 +26,8 @@ class Routes {
   static const String homeScreen = '/homeScreen';
   static const String orderDetailsScreen = '/orderDetailsScreen';
   static const String profileScreen = '/profileScreen';
+  static const String addNewTruck = '/addNewTruckScreen';
+  static const String truckDetailsScreen = '/truckDetailsScreen';
 }
 
 class AppRoutes {
@@ -81,13 +85,27 @@ class AppRoutes {
           duration: const Duration(milliseconds: 1300),
           child: const OrderDetailsScreen(),
         );
-      //ProfileScreen
       case Routes.profileScreen:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
           child: const ProfileScreen(),
+        );
+      case Routes.addNewTruck:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const AddNewTruckScreen(),
+        );
+      //TruckDetailsScreen
+      case Routes.truckDetailsScreen:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const TruckDetailsScreen(),
         );
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;

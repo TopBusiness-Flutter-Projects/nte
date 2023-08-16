@@ -8,9 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
+import 'features/addnewtruck/cubit/cubit.dart';
 import 'features/forgetpassword/cubit/cubit.dart';
 import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
+import 'features/mytruck/cubit/cubit.dart';
 import 'features/orderdetails/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 import 'features/tabcontrol/cubit/tab_control_cubit.dart';
@@ -58,16 +60,16 @@ Future<void> setup() async {
       serviceLocator(),
     ),
   );
-  // serviceLocator.registerFactory(
-  //   () => ProfileCubit(
-  //      serviceLocator(),
-  //   ),
-  // );
-  // serviceLocator.registerFactory(
-  //   () => FavoriteCubit(
-  //     serviceLocator(),
-  //   ),
-  // );
+  serviceLocator.registerFactory(
+    () => AddNewTruckCubit(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => TruckCubit(
+      serviceLocator(),
+    ),
+  );
   // serviceLocator.registerFactory(
   //   () => HomeCubit(
   //     serviceLocator(),

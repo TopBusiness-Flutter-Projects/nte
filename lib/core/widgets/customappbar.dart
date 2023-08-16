@@ -7,11 +7,13 @@ import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
 
 import '../../config/routes/app_routes.dart';
+import '../../features/addnewtruck/cubit/cubit.dart';
 
 class CustomAppBar extends StatelessWidget {
   //case screen from home screen set isHome true
-  CustomAppBar({this.isHome = false, super.key});
+  CustomAppBar({this.isHome = false, this.isAddTruck = false, super.key});
   bool isHome;
+  bool isAddTruck;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -139,6 +141,7 @@ class CustomAppBar extends StatelessWidget {
                 width: double.infinity,
                 child: Row(
                   children: [
+                    SizedBox(width: getSize(context) / 66),
                     InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, Routes.profileScreen);
@@ -179,6 +182,22 @@ class CustomAppBar extends StatelessWidget {
                         ? Container()
                         : IconButton(
                             onPressed: () {
+                              if (isAddTruck) {
+                                context.read<AddNewTruckCubit>().selectedValue =
+                                    null;
+                                context
+                                    .read<AddNewTruckCubit>()
+                                    .cabinSelectedValue = null;
+                                context.read<AddNewTruckCubit>().isVisiable =
+                                    false;
+                                context
+                                    .read<AddNewTruckCubit>()
+                                    .cabinIsVisiable = false;
+                                context
+                                    .read<AddNewTruckCubit>()
+                                    .modelController
+                                    .clear();
+                              }
                               Navigator.pop(context);
                             },
                             icon: Icon(

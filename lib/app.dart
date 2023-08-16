@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:nte/features/mytruck/cubit/cubit.dart';
 import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
 
 import 'config/routes/app_routes.dart';
@@ -9,6 +10,7 @@ import 'config/themes/app_theme.dart';
 import 'core/utils/app_strings.dart';
 import 'package:nte/injector.dart' as injector;
 
+import 'features/addnewtruck/cubit/cubit.dart';
 import 'features/forgetpassword/cubit/cubit.dart';
 import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
@@ -60,6 +62,12 @@ class _NTEState extends State<NTE> {
           ),
           BlocProvider(
             create: (_) => injector.serviceLocator<TabControlCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<AddNewTruckCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<TruckCubit>(),
           ),
           //
           // BlocProvider(

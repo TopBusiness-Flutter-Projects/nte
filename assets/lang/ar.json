@@ -49,12 +49,23 @@
   "description": "الوصف",
   "send_offer": "قدم عرضك الان",
   "welcome": "مرحبا",
-  "enter_offer": "من فضلك ادخل عرض",
   "wait_payment": "فى انتظار الدفع",
   "pending": "معلقة",
   "my_offers": "عروضى",
   "pending_offers": "العروض المعلقة",
-  "completed_offers": "العروض المكتملة"
+  "completed_offers": "العروض المكتملة",
   "enter_offer": "من فضلك ادخل عرض",
-  "truck":"شاحنتى"
+  "truck": "شاحنتى",
+  "add_truck": "شاحنة جديدة",
+  "truck_type": "نوع الشاحنة",
+  "select_type": "الرجاء تحديد النوع.",
+  "model": "موديل",
+  "cabin_type": "نوع المقصورة",
+  "truck_image": "صورة الشاحنة",
+  "truck_gray_card": "البطاقة الرمادية للشاحنة",
+  "please_add_images": "نرجو تحميل صورتين الامام والخلف",
+  "add_new_truck": "اضافة شاحنة جديدة",
+  "cabin_gray_card": "البطاقة الرمادية للمقصورة",
+  "no_truck":"لا يوجد لديك شاحنات",
+  "truck_details":"تفاصيل الشاحنه"
 }

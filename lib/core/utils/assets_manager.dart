@@ -11,6 +11,8 @@ class ImageAssets {
   static const String onBoarding2Image = '$imagePath/onboarding_2.png';
   static const String filterImage = '$imagePath/filter.png';
   static const String carImage = '$imagePath/car.png';
+
+  static const String truckEmptyImage = '$imagePath/truckempty.png';
   // icons
   static const String filterIcon = '$iconsPath/filter.svg';
   static const String walletIcon = '$iconsPath/wallet.svg';
@@ -23,9 +25,13 @@ class ImageAssets {
   static const String dateIcon = '$iconsPath/date.svg';
   static const String plusIcon = '$iconsPath/plus-round.svg';
   static const String closeIcon = '$iconsPath/close.svg';
-
   static const String avatarIcon = '$iconsPath/avatar.svg';
   static const String truckdetailsIcon = '$iconsPath/truckdetails.svg';
+  static const String downIcon = '$iconsPath/down.svg';
+  static const String addIcon = '$iconsPath/add.svg';
+  static const String editIcon = '$iconsPath/edit.svg';
+  static const String deleteIcon = '$iconsPath/delete.svg';
+
   //wallet
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';
