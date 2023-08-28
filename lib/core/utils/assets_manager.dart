@@ -12,7 +12,23 @@ class ImageAssets {
   static const String filterImage = '$imagePath/filter.png';
   static const String carImage = '$imagePath/car.png';
 
+  //
+  static const String logo = '$imagePath/logo.png';
+  static const String code = '$imagePath/code.png';
+  static const String newPass = '$imagePath/newpass.png';
+  static const String onbording1 = '$imagePath/onbording1.png';
+  static const String onbording2 = '$imagePath/onbording2.png';
+  static const String resetPass = '$imagePath/resetpass.png';
+  static const String splash = '$imagePath/splash.png';
+  static const String copyRight = '$imagePath/copy_right.png';
+  static const String copyRight2 = '$imagePath/cr2.png';
+
+  static const String vector1 = '$imagePath/vector1.png';
+  static const String vector2 = '$imagePath/vector2.png';
+
   static const String truckEmptyImage = '$imagePath/truckempty.png';
+
+  ///
   // icons
   static const String filterIcon = '$iconsPath/filter.svg';
   static const String walletIcon = '$iconsPath/wallet.svg';
@@ -31,7 +47,7 @@ class ImageAssets {
   static const String addIcon = '$iconsPath/add.svg';
   static const String editIcon = '$iconsPath/edit.svg';
   static const String deleteIcon = '$iconsPath/delete.svg';
-
+  static const String arrowIcon = '$iconsPath/arrowicon.svg';
   //wallet
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';

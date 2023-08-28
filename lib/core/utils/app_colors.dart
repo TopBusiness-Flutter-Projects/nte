@@ -8,7 +8,7 @@ class AppColors {
   static Color blue1 = const Color(0xff4C4C6D);
   static Color grey1 = const Color(0xffDCDCDC);
 
-  static Color primary = HexColor('#E8B100');
+  static Color primary = HexColor('#FF9700');
   static Color secondPrimary = HexColor('#E8B100');
   static Color orangeThirdPrimary = HexColor('#FF9201');
   static Color blueLiteColor = HexColor('#00B3DC');

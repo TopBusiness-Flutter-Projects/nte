@@ -4,143 +4,164 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
+import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../core/widgets/my_svg_widget.dart';
 
 class OnBoarding1 extends StatelessWidget {
   const OnBoarding1({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return BlocConsumer<OnboardingCubit, OnboardingState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         OnboardingCubit cubit = context.read<OnboardingCubit>();
-        return Scaffold(
-          body: Column(
-            children: [
-              const Spacer(flex: 2),
-              Center(
-                child: Image.asset(
-                  ImageAssets.onBoarding1Image,
-                  width: width / 1.4,
-                ),
-              ),
-              const Spacer(
-                flex: 2,
-              ),
-              Container(
-                height: height / 2.3,
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50)),
-                    color: AppColors.yellow2,
-                    gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          AppColors.yellow1,
-                          AppColors.yellow2,
-                        ])),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Spacer(
-                      flex: 1,
-                    ),
-                     Text(
-                      'our_app'.tr(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontFamily: 'Cairo',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.5),
-                      child: Text(
-                        'only_app_connect'.tr(),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontFamily: 'Cairo',
-                          fontWeight: FontWeight.w400,
-                          height: 1.52,
-                        ),
-                      ),
-                    ),
-                    const Spacer(
-                      flex: 1,
-                    ),
-                    //2 buttons
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            cubit.pageController.animateToPage(2,
-                                duration: const Duration(milliseconds: 1000),
-                                curve: Curves.slowMiddle);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.blue1,
-                                borderRadius: BorderRadius.circular(20)),
-                            alignment: Alignment.center,
-                            width: width * 0.3,
-                            height: height * 0.05,
-                            child:  Text(
-                              "next".tr(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Cairo',
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
+        return SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                SizedBox(height: getSize(context) / 44),
+                SizedBox(
+                  height: getSize(context) / 8,
+                  child: Row(
+                    children: [
+                      InkWell(
                           onTap: () {
                             Navigator.pushReplacementNamed(
                                 context, Routes.loginRoute);
                           },
                           child: Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: getSize(context) / 100,
+                                horizontal: getSize(context) / 44),
+                            padding: EdgeInsets.symmetric(
+                                vertical: getSize(context) / 100,
+                                horizontal: getSize(context) / 32),
                             decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    width: 2, color: AppColors.blue1)),
-                            alignment: Alignment.center,
-                            width: width * 0.3,
-                            height: height * 0.05,
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(
+                                    getSize(context) / 44)),
                             child: Text(
-                              "finish".tr(),
+                              'finish'.tr(),
                               style: TextStyle(
-                                color: AppColors.blue1,
-                                fontSize: 20,
+                                  fontFamily: 'Cairo',
+                                  color: AppColors.white,
+                                  fontSize: getSize(context) / 22),
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: getSize(context) / 22,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(getSize(context) / 22),
+                  child: Image.asset(
+                    ImageAssets.onbording1,
+                    width: getSize(context) / 1.1,
+                  ),
+                ),
+                const Flexible(fit: FlexFit.tight, child: SizedBox()),
+                Positioned(
+                  bottom: 0,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Image.asset(
+                        ImageAssets.vector1,
+                        width: double.infinity,
+                      ),
+                      Image.asset(
+                        ImageAssets.vector2,
+                        width: double.infinity,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(height: getSize(context) / 4),
+                          Container(
+                            padding: EdgeInsets.all(getSize(context) / 22),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'our_app'.tr(),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: getSize(context) / 18,
                                 fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
+                            //only_app_connect
                           ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(
-                      flex: 2,
-                    ),
-                  ],
-                ),
-              )
-            ],
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getSize(context) / 22),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'only_app_connect'.tr(),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: getSize(context) / 22,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                                height: 1.52,
+                              ),
+                            ),
+                            //only_app_connect
+                          ),
+                          SizedBox(height: getSize(context) / 12),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getSize(context) / 22),
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    cubit.pageController.animateToPage(2,
+                                        duration:
+                                            const Duration(milliseconds: 1000),
+                                        curve: Curves.slowMiddle);
+                                  },
+                                  child: CircleAvatar(
+                                      backgroundColor: AppColors.white,
+                                      radius: getSize(context) / 12,
+                                      child: MySvgWidget(
+                                          path: ImageAssets.arrowIcon,
+                                          imageColor: AppColors.primary,
+                                          size: getSize(context) / 12)),
+                                ),
+                                const Spacer(),
+                                SmoothPageIndicator(
+                                  controller: cubit.pageController,
+                                  count: cubit.numPages,
+                                  effect: WormEffect(
+                                    activeDotColor: AppColors.gray,
+                                    dotColor: AppColors.white,
+                                    dotHeight: getSize(context) / 44,
+                                    dotWidth: getSize(context) / 44,
+                                    type: WormType.underground,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getSize(context) / 22),
+                            child: Image.asset(
+                              ImageAssets.copyRight2,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         );
       },

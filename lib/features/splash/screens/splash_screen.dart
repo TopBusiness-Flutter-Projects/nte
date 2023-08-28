@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nte/config/routes/app_routes.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/assets_manager.dart';
+import 'package:nte/core/utils/getsize.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,31 +13,44 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Positioned(
-            //alignment: Alignment.topRight,
-            right: 0,
-            left: width / 3,
-            top: 0,
-            child: Image.asset(ImageAssets.topSplashImage),
-          ),
+          // Positioned(
+          //   //alignment: Alignment.topRight,
+          //   right: 0,
+          //   left: width / 3,
+          //   top: 0,
+          //   child: Image.asset(ImageAssets.topSplashImage),
+          // ),
           Align(
               alignment: Alignment.center,
               child: Image.asset(
-                ImageAssets.centerSplashImage,
-                width: width / 1.5,
+                ImageAssets.logo,
+                width: getSize(context) / 2,
               )),
           Positioned(
-            left: 0,
+            left: getSize(context) / 44,
             bottom: 0,
-            right: width / 3,
-            //  alignment: Alignment.bottomLeft,
-            child: Image.asset(ImageAssets.bottomSplashImage),
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Opacity(
+                  opacity: 0.20,
+                  child: Image.asset(
+                    ImageAssets.splash,
+                    width: getSize(context) / 1.2,
+                  ),
+                ),
+                Container(
+                  child: Image.asset(
+                    ImageAssets.copyRight,
+                    width: getSize(context) / 1.2,
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),
@@ -52,14 +64,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void initialization() async {
-    print('ready in 3...');
+    debugPrint('ready in 3...');
     await Future.delayed(const Duration(seconds: 1));
-    print('ready in 2...');
+    debugPrint('ready in 2...');
     await Future.delayed(const Duration(seconds: 1));
-    print('ready in 1...');
+    debugPrint('ready in 1...');
     await Future.delayed(const Duration(seconds: 1));
-    print('go!');
-    FlutterNativeSplash.remove();
+    debugPrint('go!');
     Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
   }
 }

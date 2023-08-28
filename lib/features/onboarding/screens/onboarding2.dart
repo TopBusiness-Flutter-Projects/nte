@@ -1,109 +1,168 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
+import 'package:nte/core/utils/getsize.dart';
+import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../core/widgets/my_svg_widget.dart';
 
 class OnBoarding2 extends StatelessWidget {
   const OnBoarding2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Column(
-        children: [
-          const Spacer(flex: 2),
-          Center(
-            child: Image.asset(
-              ImageAssets.onBoarding2Image,
-              width: width / 1.4,
-            ),
-          ),
-          const Spacer(
-            flex: 2,
-          ),
-          Container(
-            width: double.infinity,
-            height: height / 2.3,
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50)),
-                color: AppColors.yellow2,
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      AppColors.yellow1,
-                      AppColors.yellow2,
-                    ])),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+    return BlocConsumer<OnboardingCubit, OnboardingState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        OnboardingCubit cubit = context.read<OnboardingCubit>();
+        return SafeArea(
+          child: Scaffold(
+            body: Column(
               children: [
-                const Spacer(
-                  flex: 1,
-                ),
-                 Text(
-                  'delegates_trucks'.tr(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontFamily: 'Cairo',
-                    fontWeight: FontWeight.w600,
+                SizedBox(height: getSize(context) / 44),
+                SizedBox(
+                  height: getSize(context) / 8,
+                  child: Row(
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.loginRoute);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: getSize(context) / 100,
+                                horizontal: getSize(context) / 44),
+                            padding: EdgeInsets.symmetric(
+                                vertical: getSize(context) / 100,
+                                horizontal: getSize(context) / 32),
+                            decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(
+                                    getSize(context) / 44)),
+                            child: Text(
+                              'finish'.tr(),
+                              style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  color: AppColors.white,
+                                  fontSize: getSize(context) / 22),
+                            ),
+                          ))
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: getSize(context) / 22,
                 ),
-                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.5),
-                  child: Text(
-                    "we_provide solutions".tr(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                      fontFamily: 'Cairo',
-                      fontWeight: FontWeight.w400,
-                      height: 1.52,
-                    ),
+                Container(
+                  padding: EdgeInsets.all(getSize(context) / 22),
+                  child: Image.asset(
+                    ImageAssets.onbording2,
+                    width: getSize(context) / 1.1,
                   ),
                 ),
-                const Spacer(
-                  flex: 1,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, Routes.loginRoute);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 5),
-                    decoration: BoxDecoration(
-                        color: AppColors.blue1,
-                        borderRadius: BorderRadius.circular(20)),
-                    alignment: Alignment.center,
-                    width: width * 0.3,
-                    height: height * 0.05,
-                    child: const Text(
-                      "انضم الينا",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'Cairo',
+                const Flexible(fit: FlexFit.tight, child: SizedBox()),
+                Positioned(
+                  bottom: 0,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Image.asset(
+                        ImageAssets.vector1,
+                        width: double.infinity,
                       ),
-                    ),
+                      Image.asset(
+                        ImageAssets.vector2,
+                        width: double.infinity,
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(height: getSize(context) / 4),
+                          Container(
+                            padding: EdgeInsets.all(getSize(context) / 22),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'delegates_trucks'.tr(),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: getSize(context) / 18,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            //only_app_connect
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getSize(context) / 22),
+                            alignment: Alignment.centerRight,
+                            child: Text(
+                              'we_provide_solutions'.tr(),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: getSize(context) / 22,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                                height: 1.52,
+                              ),
+                            ),
+                            //only_app_connect
+                          ),
+                          SizedBox(height: getSize(context) / 12),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getSize(context) / 22),
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, Routes.loginRoute);
+                                  },
+                                  child: CircleAvatar(
+                                      backgroundColor: AppColors.white,
+                                      radius: getSize(context) / 12,
+                                      child: MySvgWidget(
+                                          path: ImageAssets.arrowIcon,
+                                          imageColor: AppColors.primary,
+                                          size: getSize(context) / 12)),
+                                ),
+                                const Spacer(),
+                                SmoothPageIndicator(
+                                  controller: cubit.pageController,
+                                  count: cubit.numPages,
+                                  effect: WormEffect(
+                                    activeDotColor: AppColors.gray,
+                                    dotColor: AppColors.white,
+                                    dotHeight: getSize(context) / 44,
+                                    dotWidth: getSize(context) / 44,
+                                    type: WormType.underground,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getSize(context) / 22),
+                            child: Image.asset(
+                              ImageAssets.copyRight2,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                ),
-                const Spacer(
-                  flex: 2,
-                ),
+                )
               ],
             ),
-          )
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 }
