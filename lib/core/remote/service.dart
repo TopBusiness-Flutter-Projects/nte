@@ -1,13 +1,87 @@
-
 // import 'package:http/http.dart' as http;
 
-import '../api/base_api_consumer.dart';
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:nte/core/api/end_points.dart';
+import 'package:nte/core/models/city_model.dart';
 
+import '../api/base_api_consumer.dart';
+import '../error/exceptions.dart';
+import '../error/failures.dart';
+import '../models/login_model.dart';
+import '../preferences/preferences.dart';
 
 class ServiceApi {
   final BaseApiConsumer dio;
 
   ServiceApi(this.dio);
+  Future<Either<Failure, LoginModel>> loginAuth({
+    required String email,
+    required String password,
+    required String type,
+  }) async {
+    String lan = await Preferences.instance.getSavedLang();
+
+    try {
+      var response = await dio.post(
+        EndPoints.loginUrl,
+        body: {"email": email, "password": password, "type": type},
+        options: Options(
+          headers: {'Accept-Language': lan},
+        ),
+      );
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, LoginModel>> registerAuth({
+    required String name,
+    required String email,
+    required String password,
+    required String password_confirmation,
+    required int national_id,
+    required int phone,
+    required int city_id,
+    required String user_type,
+  }) async {
+    String lan = await Preferences.instance.getSavedLang();
+
+    try {
+      var response = await dio.post(
+        EndPoints.registerUrl,
+        body: {
+          "name": name,
+          "email": email,
+          "password": password,
+          "password_confirmation": password_confirmation,
+          "national_id": national_id,
+          "phone": phone,
+          "city_id": city_id,
+          "type": "user",
+          "user_type": user_type,
+        },
+        options: Options(
+          headers: {'Accept-Language': lan},
+        ),
+      );
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, Cities>> getCities() async {
+    try {
+      var response = await dio.get(
+        EndPoints.citiesUrl,
+      );
+      return Right(Cities.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
 //
 //   Future<Either<Failure, LoginModel>> postRegister(
@@ -445,12 +519,4 @@ class ServiceApi {
   //     return Left(ServerFailure());
   //   }
   // }
-
 }
-
-
-
-
-
-
-

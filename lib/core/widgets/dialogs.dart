@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nte/core/utils/app_colors.dart';
 
-
 /*----------------------------------------------------------------------------*/
 /*------------------------------  Error Get Bar  -----------------------------*/
 /*----------------------------------------------------------------------------*/
-errorGetBar(String message) {
+errorGetBar(String? message) {
   Get.showSnackbar(
     GetSnackBar(
       messageText: Text(
@@ -83,11 +82,6 @@ loadingDialog() {
   Get.dialog(
     Dialog(
       backgroundColor: Colors.white,
-      insetAnimationCurve: Curves.bounceInOut,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 25),
         child: Row(
@@ -105,6 +99,11 @@ loadingDialog() {
             CircularProgressIndicator(color: Get.theme.colorScheme.secondary),
           ],
         ),
+      ),
+      insetAnimationCurve: Curves.bounceInOut,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
     ),
     barrierDismissible: false,

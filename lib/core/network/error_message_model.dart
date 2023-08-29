@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ErrorMessageModel extends Equatable{
-
+class ErrorMessageModel extends Equatable {
   dynamic data;
   String? message;
   int? code;
@@ -10,7 +9,7 @@ class ErrorMessageModel extends Equatable{
 
   @override
   // TODO: implement props
-  List<Object?> get props => [data,message,code];
+  List<Object?> get props => [data, message, code];
 
   factory ErrorMessageModel.fromJson(Map<String, dynamic> json) {
     return ErrorMessageModel(

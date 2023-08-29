@@ -44,7 +44,7 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: const LoginScreen(),
+          child: LoginScreen(),
         );
       case Routes.forgetPassword:
         return PageTransition(
@@ -121,7 +121,7 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: const SignUpScreen(),
+          child: SignUpScreen(),
         );
       default:
         return undefinedRoute();

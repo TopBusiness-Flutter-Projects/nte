@@ -10,6 +10,7 @@ import 'package:otp_text_field/style.dart';
 
 import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/app_colors.dart';
+import '../../../core/utils/assets_manager.dart';
 import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/loginappbar.dart';
 
@@ -26,51 +27,103 @@ class _OTPScreenState extends State<OTPScreen> {
     return BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
       builder: (context, state) {
         var controller = context.read<ForgetPasswordCubit>();
-        return SafeArea(
-            child: Scaffold(
-                body: ListView(
-          children: [
-            CustomLoginApBar(
-              subTitle: 'otp_subtitle'.tr(),
-              title: 'otp'.tr(),
-              isLogin: false,
+        return Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.buttonColor,
+                  )),
+              actions: [
+                Container(
+                  alignment: Alignment.center,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: getSize(context) / 22),
+                  child: Text(
+                    'forget_pass'.tr(),
+                    style: TextStyle(
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w700,
+                        fontSize: getSize(context) / 22,
+                        color: AppColors.buttonColor),
+                  ),
+                )
+              ],
             ),
-            SizedBox(height: getSize(context) / 8),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: getSize(context) / 16),
-              child: OTPTextField(
-                otpFieldStyle: OtpFieldStyle(
-                  borderColor: AppColors.buttonColor,
-                  enabledBorderColor: AppColors.buttonColor,
-                  disabledBorderColor: AppColors.buttonColor,
+            body: Column(
+              children: [
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: ListView(
+                    children: [
+                      SizedBox(height: getSize(context) / 8),
+
+                      Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: getSize(context) / 16),
+                          child: Image.asset(ImageAssets.code)),
+                      Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(getSize(context) / 22),
+                        child: Text(
+                          'otp_subtitle'.tr(),
+                          style: TextStyle(
+                              fontFamily: 'Cairo',
+                              fontWeight: FontWeight.w400,
+                              fontSize: getSize(context) / 22,
+                              color: AppColors.buttonColor),
+                        ),
+                      ),
+                      //otp_subtitle
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getSize(context) / 16),
+                        child: OTPTextField(
+                          otpFieldStyle: OtpFieldStyle(
+                            borderColor: AppColors.buttonColor,
+                            enabledBorderColor: AppColors.buttonColor,
+                            disabledBorderColor: AppColors.buttonColor,
+                          ),
+                          length: 6,
+                          controller: controller.otpFieldController,
+                          width: MediaQuery.of(context).size.width,
+                          fieldWidth: getSize(context) / 10,
+                          style: TextStyle(
+                              fontSize: getSize(context) / 22,
+                              color: AppColors.buttonColor),
+                          textFieldAlignment: MainAxisAlignment.spaceAround,
+                          fieldStyle: FieldStyle.underline,
+                          outlineBorderRadius: 10,
+                          onCompleted: (pin) {
+                            // widget.con.OTP = pin;
+                          },
+                        ),
+                      ),
+                      SizedBox(height: getSize(context) / 8),
+                      CustomButton(
+                          paddingHorizontal: getSize(context) / 8,
+                          borderRadius: getSize(context) / 22,
+                          text: 'next'.tr(),
+                          color: AppColors.primary,
+                          onClick: () {
+                            //vslidate
+                            Navigator.pushNamed(context, Routes.resetPassword);
+                          }),
+                    ],
+                  ),
                 ),
-                length: 6,
-                controller: controller.otpFieldController,
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: getSize(context) / 10,
-                style: TextStyle(
-                    fontSize: getSize(context) / 22,
-                    color: AppColors.buttonColor),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.underline,
-                outlineBorderRadius: 10,
-                onCompleted: (pin) {
-                  // widget.con.OTP = pin;
-                },
-              ),
-            ),
-            SizedBox(height: getSize(context) / 8),
-            CustomButton(
-                paddingHorizontal: getSize(context) / 8,
-                borderRadius: getSize(context) / 22,
-                text: 'next'.tr(),
-                color: AppColors.buttonColor,
-                onClick: () {
-                  //vslidate
-                  Navigator.pushNamed(context, Routes.resetPassword);
-                }),
-          ],
-        )));
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: getSize(context) / 22),
+                  child: Image.asset(ImageAssets.copyRight),
+                ),
+              ],
+            ));
       },
     );
   }

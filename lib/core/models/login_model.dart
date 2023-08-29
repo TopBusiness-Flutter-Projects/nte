@@ -1,22 +1,7 @@
-// To parse this JSON data, do
-//
-//     final loginModel = loginModelFromJson(jsonString);
-
-import 'dart:convert';
-
-LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str));
-
-String loginModelToJson(LoginModel data) => json.encode(data.toJson());
-
 class LoginModel {
-  final Data? data;
-  final String? message;
-  final int? code;
-
-  @override
-  String toString() {
-    return 'LoginModel{data: $data, message: $message, code: $code}';
-  }
+  Data? data;
+  String? message;
+  int? code;
 
   LoginModel({
     this.data,
@@ -25,86 +10,104 @@ class LoginModel {
   });
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-    data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    message: json["code"]==422?'':json["message"],
-    code: json["code"],
-  );
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        message: json["message"],
+        code: json["code"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "data": data?.toJson(),
-    "message": message,
-    "code": code,
-  };
+        "data": data!.toJson(),
+        "message": message,
+        "code": code,
+      };
 }
 
 class Data {
-  final User? user;
-  final String? accessToken;
-  final String? tokenType;
+  int id;
+  String name;
+  String image;
+  String email;
+  dynamic phone;
+  int nationalId;
+  City city;
+  String type;
+  String userType;
+  String status;
+  String token;
+  DateTime createdAt;
+  DateTime updatedAt;
 
   Data({
-    this.user,
-    this.accessToken,
-    this.tokenType,
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.email,
+    required this.phone,
+    required this.nationalId,
+    required this.city,
+    required this.type,
+    required this.userType,
+    required this.status,
+    required this.token,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-    user: json["user"] == null ? null : User.fromJson(json["user"]),
-    accessToken: json["access_token"],
-    tokenType: json["token_type"],
-  );
+        id: json["id"],
+        name: json["name"],
+        image: json["image"],
+        email: json["email"],
+        phone: json["phone"],
+        nationalId: json["national_id"],
+        city: City.fromJson(json["city"]),
+        type: json["type"],
+        userType: json["user_type"],
+        status: json["status"],
+        token: json["token"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "user": user?.toJson(),
-    "access_token": accessToken,
-    "token_type": tokenType,
-  };
+        "id": id,
+        "name": name,
+        "image": image,
+        "email": email,
+        "phone": phone,
+        "national_id": nationalId,
+        "city": city.toJson(),
+        "type": type,
+        "user_type": userType,
+        "status": status,
+        "token": token,
+        "created_at":
+            "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
+        "updated_at":
+            "${updatedAt.year.toString().padLeft(4, '0')}-${updatedAt.month.toString().padLeft(2, '0')}-${updatedAt.day.toString().padLeft(2, '0')}",
+      };
 }
 
-class User {
-  final int? id;
-    String? name;
-  final dynamic phoneCode;
-  final String? phone;
-  final String? email;
-  final dynamic location;
-  final int? status;
-  final String? image;
-  final int? userType;
+class City {
+  int id;
+  String nameAr;
+  String nameEn;
 
-  User({
-    this.id,
-    this.name,
-    this.phoneCode,
-    this.phone,
-    this.email,
-    this.location,
-    this.status,
-    this.image,
-    this.userType,
+  City({
+    required this.id,
+    required this.nameAr,
+    required this.nameEn,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json["id"],
-    name: json["name"],
-    phoneCode: json["phone_code"],
-    phone: json["phone"],
-    email: json["email"],
-    location: json["location"],
-    status: json["status"],
-    image: json["image"],
-    userType: json["user_type"],
-  );
+  factory City.fromJson(Map<String, dynamic> json) => City(
+        id: json["id"],
+        nameAr: json["name_ar"],
+        nameEn: json["name_en"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "phone_code": phoneCode,
-    "phone": phone,
-    "email": email,
-    "location": location,
-    "status": status,
-    "image": image,
-    "user_type": userType,
-  };
+        "id": id,
+        "name_ar": nameAr,
+        "name_en": nameEn,
+      };
 }

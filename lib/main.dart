@@ -12,7 +12,6 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await injector.setup();
   Bloc.observer = AppBlocObserver();
-
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('ar', ''), Locale('en', '')],

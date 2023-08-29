@@ -45,6 +45,10 @@ class CustomTextField extends StatelessWidget {
         obscureText: isPassword,
         enabled: isEnable,
         textAlign: TextAlign.start,
+        style: const TextStyle(
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Cairo',
+        ),
         decoration: InputDecoration(
           contentPadding: contentPadding,
           hintStyle: TextStyle(
@@ -53,21 +57,21 @@ class CustomTextField extends StatelessWidget {
           ),
           hintText: title,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(getSize(context) / 24),
-            borderSide: BorderSide(color: AppColors.gray6),
+            borderRadius: BorderRadius.circular(getSize(context) / 8),
+            borderSide: BorderSide(color: AppColors.buttonColor),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(getSize(context) / 24),
-            borderSide: BorderSide(color: AppColors.gray6),
+            borderRadius: BorderRadius.circular(getSize(context) / 8),
+            borderSide: BorderSide(color: AppColors.buttonColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(getSize(context) / 24),
-            borderSide: BorderSide(color: AppColors.gray6),
+            borderRadius: BorderRadius.circular(getSize(context) / 8),
+            borderSide: BorderSide(color: AppColors.buttonColor),
           ),
           prefixIcon: prefixWidget,
           suffixIcon: suffixIcon,
-          suffixIconColor: AppColors.gray6,
-          prefixIconColor: AppColors.gray6,
+          suffixIconColor: AppColors.buttonColor,
+          prefixIconColor: AppColors.buttonColor,
           fillColor: backgroundColor,
           filled: true,
         ),

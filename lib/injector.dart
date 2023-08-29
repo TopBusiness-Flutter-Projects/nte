@@ -36,14 +36,10 @@ Future<void> setup() async {
   );
 
   serviceLocator.registerFactory(
-    () => OnboardingCubit(
-        // serviceLocator(),
-        ),
+    () => OnboardingCubit(),
   );
   serviceLocator.registerFactory(
-    () => TabControlCubit(
-        // serviceLocator(),
-        ),
+    () => TabControlCubit(),
   );
   serviceLocator.registerFactory(
     () => ForgetPasswordCubit(

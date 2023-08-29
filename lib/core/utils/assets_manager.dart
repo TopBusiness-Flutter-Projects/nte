@@ -25,7 +25,7 @@ class ImageAssets {
 
   static const String vector1 = '$imagePath/vector1.png';
   static const String vector2 = '$imagePath/vector2.png';
-
+  static const String identity2 = '$imagePath/identity2.png';
   static const String truckEmptyImage = '$imagePath/truckempty.png';
 
   ///
@@ -48,6 +48,8 @@ class ImageAssets {
   static const String editIcon = '$iconsPath/edit.svg';
   static const String deleteIcon = '$iconsPath/delete.svg';
   static const String arrowIcon = '$iconsPath/arrowicon.svg';
+
+  static const String identityIcon = '$iconsPath/identity.svg';
   //wallet
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';

@@ -9,7 +9,7 @@ class AppColors {
   static Color grey1 = const Color(0xffDCDCDC);
 
   static Color primary = HexColor('#FF9700');
-  static Color secondPrimary = HexColor('#E8B100');
+  static Color secondPrimary = HexColor('#CC0220');
   static Color orangeThirdPrimary = HexColor('#FF9201');
   static Color blueLiteColor = HexColor('#00B3DC');
   static Color buttonColor = HexColor('#4C4C6D');
@@ -34,7 +34,7 @@ class AppColors {
   static Color gray2 = HexColor('#BABABB');
   static Color gray3 = HexColor('#DCDCDC');
   static Color gray4 = HexColor('#EEEEEE');
-  // static Color gray6 = HexColor('#A7A7A7');
+  static Color gray7 = HexColor('##E3E3E3');
   static Color gray6 = HexColor('#A7A7A7');
   // static Color gray7 = HexColor('#A0A1A0');
   static Color red = HexColor('#FF0000');

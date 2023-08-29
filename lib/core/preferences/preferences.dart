@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/login_model.dart';
+import '../utils/app_strings.dart';
 
 class Preferences {
   static final Preferences instance = Preferences._internal();
@@ -11,7 +11,6 @@ class Preferences {
   Preferences._internal();
 
   factory Preferences() => instance;
-
 
   // Future<void> setFirstInstall() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -30,10 +29,12 @@ class Preferences {
         'user', jsonEncode(LoginModel.fromJson(loginModel.toJson())));
     print(await getUserModel());
   }
- Future<void> clearShared()async{
-   SharedPreferences preferences = await SharedPreferences.getInstance();
-   preferences.clear();
- }
+
+  Future<void> clearShared() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+  }
+
   Future<LoginModel> getUserModel() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String? jsonData = preferences.getString('user');
@@ -46,4 +47,18 @@ class Preferences {
     return userModel;
   }
 
+  Future<bool> clearAllData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.clear();
+  }
+
+  Future<String> getSavedLang() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(AppStrings.locale) ?? 'ar';
+  }
+
+  Future<void> savedLang(String local) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setString(AppStrings.locale, local);
+  }
 }

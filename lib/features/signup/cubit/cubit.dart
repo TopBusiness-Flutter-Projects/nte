@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nte/config/routes/app_routes.dart';
+import 'package:nte/core/models/city_model.dart';
+import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/remote/service.dart';
+import '../../../core/widgets/dialogs.dart';
+
 import 'package:nte/features/signup/cubit/state.dart';
 
+import '../../../core/models/login_model.dart';
+
 class SignUpCubit extends Cubit<SignUpState> {
-  SignUpCubit(this.api) : super(InitSignUpState());
+  SignUpCubit(this.api) : super(InitSignUpState()) {
+    getCities();
+  }
   ServiceApi api;
 
   TextEditingController fullNameController = TextEditingController();
@@ -12,34 +21,66 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController cityController = TextEditingController();
-  TextEditingController accountController = TextEditingController();
+  TextEditingController identityController = TextEditingController();
 
-  TextEditingController passwprdController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswprdController = TextEditingController();
-  int currentUser = 0; //0 admin 1 driver  2  user
+  int selectedRadio = 0; //case 0 send person 1 send company
 
-  // toggleDriver(){
-  //   currentUser = 1 ;
-  //   emit(DriverState());
- // }
+  toggleUserClient(int index) {
+    selectedRadio = index;
+    emit(ClientOrUserState());
+  }
 
-   toggleUserDriver(int index){
-    if(index==1){
-      currentUser = 1 ;
-      emit(DriverState());
-    }
-    else{
-      currentUser = 2 ;
-      emit(UserState());
-    }
-    }
-  // toggleUser(){
-  //   currentUser = 2 ;
-  //   emit(UserState());
-  // }
   bool isPassword = true;
   togglePassword() {
     isPassword = !isPassword;
-    emit(ChangePasswordState());
+    emit(ChangePasswordModeState());
+  }
+
+  bool isCofirmPassword = true;
+  toggleCofirmPassword() {
+    isCofirmPassword = !isCofirmPassword;
+    emit(ChangeConfirmPasswordState());
+  }
+
+  int? selectedValue;
+
+  List<CityData> cities = [];
+  var formKey = GlobalKey<FormState>();
+  LoginModel? userModel;
+  registerAuth(BuildContext context) async {
+    emit(LoadingSighUpAuth());
+    var response = await api.registerAuth(
+        name: fullNameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        password_confirmation: confirmPasswprdController.text,
+        national_id: int.parse(identityController.text),
+        phone: int.parse(phoneNumberController.text),
+        city_id: selectedValue!,
+        user_type: selectedRadio == 0 ? "person" : "company");
+
+    response.fold((l) => emit(ErrorSighUpAuth()), (r) {
+      if (r.code == 200) {
+        userModel = r;
+        Preferences.instance.setUser(r).then((value) {
+          Navigator.pushReplacementNamed(context, Routes.homeScreen);
+          successGetBar(r.message);
+        });
+      } else {
+        errorGetBar(r.message);
+      }
+    });
+  }
+
+  getCities() async {
+    emit(LoadingGetCities());
+    final response = await api.getCities();
+
+    response.fold((l) => emit(ErrorGetCities()), (r) {
+      cities = r.data;
+      emit(LoadedGetCities());
+    });
   }
 }
