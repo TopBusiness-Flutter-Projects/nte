@@ -124,6 +124,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     response.fold((l) => emit(ErrorResetPassword()), (r) {
       if (r.code == 200) {
         successGetBar(r.message);
+        ///here a problem resetPassword
         Navigator.pushReplacementNamed(context, Routes.loginRoute);
       } else {
         errorGetBar(r.message);
