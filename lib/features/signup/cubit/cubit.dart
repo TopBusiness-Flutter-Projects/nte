@@ -77,7 +77,6 @@ class SignUpCubit extends Cubit<SignUpState> {
   getCities() async {
     emit(LoadingGetCities());
     final response = await api.getCities();
-
     response.fold((l) => emit(ErrorGetCities()), (r) {
       cities = r.data;
       emit(LoadedGetCities());

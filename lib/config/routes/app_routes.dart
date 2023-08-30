@@ -51,7 +51,7 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: const ForgetPassword(),
+          child: ForgetPassword(),
         );
       case Routes.resetPassword:
         return PageTransition(
@@ -60,12 +60,13 @@ class AppRoutes {
           duration: const Duration(milliseconds: 1300),
           child: const ResetPassword(),
         );
+
       case Routes.otpScreen:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: const OTPScreen(),
+          child: OTPScreen(),
         );
       case Routes.onBoardingRoute:
         return MaterialPageRoute(

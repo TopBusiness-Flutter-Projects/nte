@@ -71,5 +71,6 @@
   "pending": "wating",
   "my_offers": "offers",
   "no_truck":"You don't have trucks",
-  "truck_details":"Truck Details"
+  "truck_details":"Truck Details",
+  "search":"search"
 }

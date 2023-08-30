@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "331121986086",
+    "project_id": "ntexpress0",
+    "storage_bucket": "ntexpress0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331121986086:android:aa2615b303484b0570b4e7",
+        "android_client_info": {
+          "package_name": "com.topbusiness.nte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331121986086-s1k6gpcuhcbnc40psgud0fo3enldv3mr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCWlOZm-QowL2mq2XxNb5EACPO1dFk_9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331121986086-s1k6gpcuhcbnc40psgud0fo3enldv3mr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

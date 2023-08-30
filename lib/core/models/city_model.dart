@@ -25,24 +25,20 @@ class Cities {
 
 class CityData {
   int id;
-  String nameAr;
-  String nameEn;
+  String name;
 
   CityData({
     required this.id,
-    required this.nameAr,
-    required this.nameEn,
+    required this.name,
   });
 
   factory CityData.fromJson(Map<String, dynamic> json) => CityData(
         id: json["id"],
-        nameAr: json["name_ar"],
-        nameEn: json["name_en"],
+        name: json["name"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name_ar": nameAr,
-        "name_en": nameEn,
+        "name": name,
       };
 }

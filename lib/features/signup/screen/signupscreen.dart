@@ -215,7 +215,7 @@ class SignUpScreen extends StatelessWidget {
                             .map((item) => DropdownMenuItem<CityData>(
                                   value: item,
                                   child: Text(
-                                    item.nameAr,
+                                    item.name,
                                     style: TextStyle(
                                         fontFamily: 'Cairo',
                                         // color: AppColors.black,

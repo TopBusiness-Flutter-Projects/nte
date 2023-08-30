@@ -9,6 +9,7 @@ import '../api/base_api_consumer.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
 import '../models/login_model.dart';
+import '../models/nullmodel.dart';
 import '../preferences/preferences.dart';
 
 class ServiceApi {
@@ -73,17 +74,45 @@ class ServiceApi {
   }
 
   Future<Either<Failure, Cities>> getCities() async {
+    String lan = await Preferences.instance.getSavedLang();
+
     try {
-      var response = await dio.get(
-        EndPoints.citiesUrl,
-      );
+      var response = await dio.get(EndPoints.citiesUrl,
+          options: Options(headers: {'Accept-Language': lan}));
       return Right(Cities.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }
   }
 
-//
+  Future<Either<Failure, NullModel>> phoneCheck({required String phone}) async {
+    try {
+      var response =
+          await dio.post(EndPoints.checkPhone, body: {"phone": phone});
+      return Right(NullModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, NullModel>> resetPassword({
+    required String phone,
+    required String password,
+    required String passwordConfirmation,
+  }) async {
+    try {
+      var response = await dio.post(EndPoints.resetPassword, body: {
+        "phone": phone,
+        "password": password,
+        "password_confirmation": passwordConfirmation
+      });
+      return Right(NullModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  //
 //   Future<Either<Failure, LoginModel>> postRegister(
 //       String phone, String phoneCode,String name) async {
 //     try {
