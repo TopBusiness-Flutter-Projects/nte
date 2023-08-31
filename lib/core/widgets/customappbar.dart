@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: AppColors.buttonColor),
+          decoration: BoxDecoration(color: AppColors.secondPrimary2),
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -50,7 +50,7 @@ class CustomAppBar extends StatelessWidget {
                                   width: 430,
                                   height: 190,
                                   decoration: BoxDecoration(
-                                      color: AppColors.buttonColor),
+                                      color: AppColors.secondPrimary2),
                                 ),
                               ),
                               //the left yellow oval
@@ -125,7 +125,7 @@ class CustomAppBar extends StatelessWidget {
                           width: 430,
                           height: 101,
                           decoration: ShapeDecoration(
-                            color: AppColors.buttonColor,
+                            color: AppColors.secondPrimary2,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),

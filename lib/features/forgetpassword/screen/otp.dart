@@ -58,106 +58,98 @@ class _OTPScreenState extends State<OTPScreen> {
             ),
             body: Form(
               key: key,
-              child: Column(
+              child: ListView(
                 children: [
-                  Flexible(
-                    fit: FlexFit.tight,
-                    child: ListView(
-                      children: [
-                        SizedBox(height: getSize(context) / 8),
+                  SizedBox(height: getSize(context) / 8),
 
-                        Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: getSize(context) / 16),
-                            child: Image.asset(ImageAssets.code)),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(getSize(context) / 22),
-                          child: Text(
-                            'otp_subtitle'.tr(),
-                            style: TextStyle(
-                                fontFamily: 'Cairo',
-                                fontWeight: FontWeight.w400,
-                                fontSize: getSize(context) / 22,
-                                color: AppColors.buttonColor),
-                          ),
-                        ),
-                        //otp_subtitle
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getSize(context) / 16),
-                          child: PinCodeTextField(
-                            backgroundColor: AppColors.white,
-                            hintCharacter: '-',
-                            textStyle: TextStyle(color: AppColors.primary),
-                            hintStyle: TextStyle(color: AppColors.primary),
-                            pastedTextStyle: TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            appContext: context,
-                            length: 6,
-                            animationType: AnimationType.fade,
-                            validator: (v) {
-                              if (v!.length < 5) {
-                                return "";
-                              } else {
-                                return null;
-                              }
-                            },
-                            pinTheme: PinTheme(
-                              inactiveColor: AppColors.transparent,
-                              activeColor: AppColors.transparent,
-                              shape: PinCodeFieldShape.box,
-                              selectedColor: AppColors.transparent,
-                            ),
-                            cursorColor: AppColors.black,
-                            animationDuration:
-                                const Duration(milliseconds: 300),
-                            errorAnimationController: errorController,
-                            keyboardType: TextInputType.number,
-                            onChanged: (value) {
-                              print(value);
-                              setState(() {
-                                currentText = value;
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(height: getSize(context) / 8),
-                        CustomButton(
-                            paddingHorizontal: getSize(context) / 8,
-                            borderRadius: getSize(context) / 22,
-                            text: 'next'.tr(),
-                            color: AppColors.primary,
-                            onClick: () {
-                              if (key.currentState!.validate()) {
-                                if (currentText.length != 6) {
-                                  errorController!.add(
-                                    ErrorAnimationType.shake,
-                                  );
-                                  setState(() => hasError = true);
-                                } else {
-                                  setState(
-                                    () {
-                                      hasError = false;
-                                      controller.verifySmsCode(
-                                          currentText, context);
-                                    },
-                                  );
-                                }
-                              }
-                              //validate
-                            }),
-                      ],
+                  Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: getSize(context) / 16),
+                      child: Image.asset(ImageAssets.code)),
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(getSize(context) / 22),
+                    child: Text(
+                      'otp_subtitle'.tr(),
+                      style: TextStyle(
+                          fontFamily: 'Cairo',
+                          fontWeight: FontWeight.w400,
+                          fontSize: getSize(context) / 22,
+                          color: AppColors.buttonColor),
                     ),
                   ),
-                  Padding(
+                  //otp_subtitle
+                  Container(
                     padding:
-                        EdgeInsets.symmetric(vertical: getSize(context) / 22),
-                    child: Image.asset(ImageAssets.copyRight),
+                        EdgeInsets.symmetric(horizontal: getSize(context) / 16),
+                    child: PinCodeTextField(
+                      backgroundColor: AppColors.white,
+                      hintCharacter: '-',
+                      textStyle: TextStyle(color: AppColors.primary),
+                      hintStyle: TextStyle(color: AppColors.primary),
+                      pastedTextStyle: TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      appContext: context,
+                      length: 6,
+                      animationType: AnimationType.fade,
+                      validator: (v) {
+                        if (v!.length < 5) {
+                          return "";
+                        } else {
+                          return null;
+                        }
+                      },
+                      pinTheme: PinTheme(
+                        inactiveColor: AppColors.transparent,
+                        activeColor: AppColors.transparent,
+                        shape: PinCodeFieldShape.box,
+                        selectedColor: AppColors.transparent,
+                      ),
+                      cursorColor: AppColors.black,
+                      animationDuration: const Duration(milliseconds: 300),
+                      errorAnimationController: errorController,
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        setState(() {
+                          currentText = value;
+                        });
+                      },
+                    ),
                   ),
+                  SizedBox(height: getSize(context) / 8),
+                  CustomButton(
+                      paddingHorizontal: getSize(context) / 8,
+                      borderRadius: getSize(context) / 22,
+                      text: 'next'.tr(),
+                      color: AppColors.primary,
+                      onClick: () {
+                        if (key.currentState!.validate()) {
+                          if (currentText.length != 6) {
+                            errorController!.add(
+                              ErrorAnimationType.shake,
+                            );
+                            setState(() => hasError = true);
+                          } else {
+                            setState(
+                              () {
+                                hasError = false;
+                                controller.verifySmsCode(currentText, context);
+                              },
+                            );
+                          }
+                        }
+                        //validate
+                      }),
+
+                  Padding(
+                    padding: EdgeInsets.all(getSize(context) / 4),
+                    child: Image.asset(ImageAssets.copyRight,
+                        width: getSize(context) / 5),
+                  ),
+                  const SizedBox(height: 10),
                 ],
               ),
             ));

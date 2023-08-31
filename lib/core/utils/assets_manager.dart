@@ -48,8 +48,10 @@ class ImageAssets {
   static const String editIcon = '$iconsPath/edit.svg';
   static const String deleteIcon = '$iconsPath/delete.svg';
   static const String arrowIcon = '$iconsPath/arrowicon.svg';
-
   static const String identityIcon = '$iconsPath/identity.svg';
+  static const String qantityIcon = '$iconsPath/qantity.svg';
+  static const String weightIcon = '$iconsPath/weight.svg';
+  static const String moneyIcon = '$iconsPath/money.svg';
   //wallet
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';

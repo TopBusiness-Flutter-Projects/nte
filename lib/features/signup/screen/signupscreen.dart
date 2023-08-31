@@ -318,7 +318,8 @@ class SignUpScreen extends StatelessWidget {
                     Padding(
                       padding:
                           EdgeInsets.symmetric(vertical: getSize(context) / 22),
-                      child: Image.asset(ImageAssets.copyRight),
+                      child: Image.asset(ImageAssets.copyRight,
+                          width: getSize(context) / 2.5),
                     ),
                   ],
                 ),

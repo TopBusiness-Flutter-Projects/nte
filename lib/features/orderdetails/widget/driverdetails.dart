@@ -7,19 +7,15 @@ import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/my_svg_widget.dart';
 import 'package:dotted_line/dotted_line.dart';
 
-class OrdersDetailsWidgetInfo extends StatelessWidget {
-  OrdersDetailsWidgetInfo(
-      {required this.title,
-      required this.source,
-      required this.destination,
-      required this.qantity,
-      required this.weight,
+class DriverInfo extends StatelessWidget {
+  DriverInfo(
+      {required this.driverName,
+      required this.title,
+      required this.date,
       super.key});
+  String driverName;
+  DateTime date;
   String title;
-  String source;
-  String destination;
-  String weight;
-  String qantity;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +60,7 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                           SizedBox(
                             width: getSize(context) / 100,
                           ),
-                          Expanded(
+                          Flexible(
                             flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,14 +69,14 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       MySvgWidget(
-                                          path: ImageAssets.homeIcon,
+                                          path: ImageAssets.identityIcon,
                                           imageColor: AppColors.primary,
                                           size: getSize(context) / 22),
                                       SizedBox(
                                         width: getSize(context) / 66,
                                       ),
                                       Text(
-                                        'souurce'.tr(),
+                                        'driver_name'.tr(),
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,
@@ -93,49 +89,7 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  source,
-                                  textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontFamily: 'Cairo',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(child: Container()),
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                  child: Row(
-                                    children: [
-                                      MySvgWidget(
-                                          path: ImageAssets.mapIcon,
-                                          imageColor: AppColors.primary,
-                                          size: getSize(context) / 22),
-                                      SizedBox(
-                                        width: getSize(context) / 66,
-                                      ),
-                                      Text(
-                                        'destination'.tr(),
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: AppColors.primary,
-                                          fontSize: 16,
-                                          fontFamily: 'Cairo',
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  destination,
+                                  driverName,
                                   textAlign: TextAlign.right,
                                   style: const TextStyle(
                                     color: Colors.black,
@@ -156,7 +110,7 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                     ),
 
                     ////2
-                    Expanded(
+                    Flexible(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -173,14 +127,14 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       MySvgWidget(
-                                          path: ImageAssets.weightIcon,
+                                          path: ImageAssets.dateIcon,
                                           imageColor: AppColors.primary,
                                           size: getSize(context) / 22),
                                       SizedBox(
                                         width: getSize(context) / 66,
                                       ),
                                       Text(
-                                        'weight'.tr(),
+                                        'trasfer_date'.tr(),
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,
@@ -193,49 +147,7 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weight,
-                                  textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontFamily: 'Cairo',
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(child: Container()),
-                          Expanded(
-                            flex: 2,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                  child: Row(
-                                    children: [
-                                      MySvgWidget(
-                                          path: ImageAssets.qantityIcon,
-                                          imageColor: AppColors.primary,
-                                          size: getSize(context) / 22),
-                                      SizedBox(
-                                        width: getSize(context) / 66,
-                                      ),
-                                      Text(
-                                        'qantity'.tr(),
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: AppColors.primary,
-                                          fontSize: 16,
-                                          fontFamily: 'Cairo',
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  qantity,
+                                  DateFormat('yyyy-MM-dd hh:mm').format(date),
                                   textAlign: TextAlign.right,
                                   style: const TextStyle(
                                     color: Colors.black,

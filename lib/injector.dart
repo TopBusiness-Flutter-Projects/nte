@@ -12,7 +12,9 @@ import 'features/addnewtruck/cubit/cubit.dart';
 import 'features/forgetpassword/cubit/cubit.dart';
 import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
+import 'features/mainscreen/cubit/cubit.dart';
 import 'features/mytruck/cubit/cubit.dart';
+import 'features/addorders/cubit/cubit.dart';
 import 'features/orderdetails/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 import 'features/tabcontrol/cubit/tab_control_cubit.dart';
@@ -66,16 +68,16 @@ Future<void> setup() async {
       serviceLocator(),
     ),
   );
-  // serviceLocator.registerFactory(
-  //   () => HomeCubit(
-  //     serviceLocator(),
-  //   ),
-  // );
-  // serviceLocator.registerFactory(
-  //   () => PostsCubit(
-  //     serviceLocator(),
-  //   ),
-  // );
+  serviceLocator.registerFactory(
+    () => AddNewOrderCubit(
+      serviceLocator(),
+    ),
+  );
+  serviceLocator.registerFactory(
+    () => MainCubit(
+      serviceLocator(),
+    ),
+  );
   // serviceLocator.registerFactory(
   //       () => EditProfileCubit(
   //     serviceLocator(),

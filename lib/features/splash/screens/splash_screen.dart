@@ -17,40 +17,37 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // Positioned(
-          //   //alignment: Alignment.topRight,
-          //   right: 0,
-          //   left: width / 3,
-          //   top: 0,
-          //   child: Image.asset(ImageAssets.topSplashImage),
-          // ),
           Align(
               alignment: Alignment.center,
               child: Image.asset(
                 ImageAssets.logo,
                 width: getSize(context) / 2,
               )),
-          Positioned(
-            left: getSize(context) / 44,
-            bottom: 0,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Opacity(
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                left: getSize(context) / 44,
+                bottom: 0,
+                child: Opacity(
                   opacity: 0.20,
                   child: Image.asset(
                     ImageAssets.splash,
                     width: getSize(context) / 1.2,
                   ),
                 ),
-                Container(
+              ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  alignment: Alignment.center,
                   child: Image.asset(
                     ImageAssets.copyRight,
-                    width: getSize(context) / 1.2,
+                    width: getSize(context) / 2.5,
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ],
       ),

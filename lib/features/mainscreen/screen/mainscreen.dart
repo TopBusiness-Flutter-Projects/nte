@@ -2,26 +2,39 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/utils/app_colors.dart';
-import 'package:nte/core/utils/assets_manager.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/core/widgets/customappbar.dart';
-import 'package:nte/core/widgets/my_svg_widget.dart';
+import 'package:nte/features/mainscreen/cubit/cubit.dart';
+import 'package:nte/features/mainscreen/cubit/state.dart';
 
-import '../../../config/routes/app_routes.dart';
-import '../../homescreen/cubit/cubit.dart';
-import '../../homescreen/cubit/state.dart';
-import '../widgets/customitemwidget.dart';
+import '../subscreens/completeoffers.dart';
+import '../subscreens/pendingoffers.dart';
+import '../../tabcontrol/Screen/tabsScreen.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    context.read<MainCubit>().ordersCompleted();
+    context.read<MainCubit>().ordersNotCompleted();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
+        var controller = context.read<MainCubit>();
+
         return SafeArea(
           child: Scaffold(
-              backgroundColor: AppColors.buttonColor,
+              backgroundColor: AppColors.secondPrimary2,
               body: Column(
                 children: [
                   Container(
@@ -39,7 +52,6 @@ class MainScreen extends StatelessWidget {
                               margin:
                                   EdgeInsets.only(top: getSize(context) / 12),
                               alignment: Alignment.center,
-                              // color: AppColors.white,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                   color: AppColors.white,
@@ -50,158 +62,54 @@ class MainScreen extends StatelessWidget {
                                           getSize(context) / 22))),
                               child: Column(
                                 children: [
-                                  Container(
-                                    margin:
-                                        EdgeInsets.all(getSize(context) / 88),
-                                    height: getSize(context) / 4.5,
-                                    decoration: BoxDecoration(
-                                        color: AppColors.white,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(
-                                                getSize(context) / 22),
-                                            topRight: Radius.circular(
-                                                getSize(context) / 22))),
-                                    alignment: Alignment.bottomCenter,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'order_list'.tr(),
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: AppColors.buttonColor,
-                                            fontSize: getSize(context) / 22,
-                                            fontFamily: 'Cairo',
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        IconButton(
-                                            onPressed: () {},
-                                            icon: Image.asset(
-                                              ImageAssets.filterImage,
-                                            ))
-                                      ],
-                                    ),
-                                  ),
                                   Flexible(
                                     child: Container(
-                                      decoration: BoxDecoration(
+                                        margin: EdgeInsets.only(
+                                            top: getSize(context) / 32),
+                                        alignment: Alignment.center,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
                                           color: AppColors.white,
-                                          borderRadius: BorderRadius.circular(
-                                              getSize(context) / 22)),
-                                      child: ListView.builder(
-                                        itemCount: 50,
-                                        physics: const BouncingScrollPhysics(),
-                                        shrinkWrap: true,
-                                        itemBuilder: (context, index) {
-                                          return InkWell(
-                                              onTap: () {
-                                                Navigator.pushNamed(context,
-                                                    Routes.orderDetailsScreen);
-                                              },
-                                              child: const OrdersWidget());
-                                        },
-                                      ),
-                                    ),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(
+                                                  getSize(context) / 22),
+                                              topRight: Radius.circular(
+                                                  getSize(context) / 22)),
+                                        ),
+                                        child: RefreshIndicator(
+                                          onRefresh: () async {
+                                            controller.ordersCompleted();
+                                            controller.ordersNotCompleted();
+                                          },
+                                          child: TabScreen(
+                                            titles: [
+                                              'completed_offers'.tr(),
+                                              'pending_offers'.tr()
+                                            ],
+                                            Screens: const [
+                                              CompletedOffers(),
+                                              PendingOffers()
+                                            ],
+                                          ),
+                                        )),
                                   ),
                                 ],
                               )),
                         ),
                         Positioned(
+                          top: -10,
                           child: Container(
-                            padding: EdgeInsets.all(getSize(context) / 66),
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(getSize(context) / 22)),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Color(0x3F000000),
-                                  blurRadius: 4,
-                                  offset: Offset(0, 4),
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
-                            alignment: Alignment.center,
-                            width: getSize(context) / 1.5,
-                            height: getSize(context) / 5.8,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                    child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      'wallet'.tr(),
-                                      style: TextStyle(
-                                        color: AppColors.buttonColor,
-                                        fontSize: getSize(context) / 24,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Cairo',
-                                      ),
-                                    )),
-                                    Expanded(
-                                      child: MySvgWidget(
-                                          path: ImageAssets.walletIcon,
-                                          imageColor: AppColors.primary,
-                                          size: getSize(context) / 16),
-                                    )
-                                  ],
-                                )),
-                                Expanded(
-                                    child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      'charage'.tr(),
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        color: AppColors.buttonColor,
-                                        fontSize: getSize(context) / 24,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Cairo',
-                                      ),
-                                    )),
-                                    Expanded(
-                                        child: Text(
-                                      '100',
-                                      textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        fontFamily: 'Cairo',
-                                        color: AppColors.buttonColor,
-                                        fontSize: getSize(context) / 24,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ))
-                                  ],
-                                )),
-                                Expanded(
-                                    child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: Text(
-                                      'add_charage'.tr(),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.fade,
-                                      style: TextStyle(
-                                        fontFamily: 'Cairo',
-                                        color: AppColors.buttonColor,
-                                        fontSize: getSize(context) / 24,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    )),
-                                    Expanded(
-                                      child: MySvgWidget(
-                                          path: ImageAssets.plusIcon,
-                                          imageColor: AppColors.primary,
-                                          size: getSize(context) / 16),
-                                    )
-                                  ],
-                                )),
-                              ],
-                            ),
-                          ),
+                              padding: EdgeInsets.all(getSize(context) / 66),
+                              alignment: Alignment.center,
+                              child: Text(
+                                'order_list'.tr(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: getSize(context) / 24,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
                         )
                       ],
                     ),

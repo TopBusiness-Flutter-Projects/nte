@@ -5,11 +5,14 @@ import 'package:dio/dio.dart';
 import 'package:nte/core/api/end_points.dart';
 import 'package:nte/core/models/city_model.dart';
 
+import '../../features/mainscreen/cubit/cubit.dart';
 import '../api/base_api_consumer.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
 import '../models/login_model.dart';
 import '../models/nullmodel.dart';
+import '../models/orderdetails.dart';
+import '../models/ordersmodel.dart';
 import '../preferences/preferences.dart';
 
 class ServiceApi {
@@ -112,6 +115,68 @@ class ServiceApi {
     }
   }
 
+  Future<Either<Failure, OrderModel>> ordersCompleted() async {
+    String lan = await Preferences.instance.getSavedLang();
+
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.ordersCompleted,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(OrderModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, OrderModel>> ordersNotCompleted() async {
+    String lan = await Preferences.instance.getSavedLang();
+
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.ordersNotCompleted,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(OrderModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, OrderDetailsModel>> orderDetails(
+      String orderId) async {
+    String lan = await Preferences.instance.getSavedLang();
+
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.orderDetails + orderId,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(OrderDetailsModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  ///orderDetails
   //
 //   Future<Either<Failure, LoginModel>> postRegister(
 //       String phone, String phoneCode,String name) async {

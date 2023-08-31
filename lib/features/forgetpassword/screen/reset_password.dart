@@ -122,12 +122,14 @@ class _ResetPasswordState extends State<ResetPassword> {
                           controller.resetPassword(context);
                         } else {}
                       }),
-                  SizedBox(height: getSize(context) / 12),
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: getSize(context) / 22),
-                    child: Image.asset(ImageAssets.copyRight),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getSize(context) / 4,
+                        vertical: getSize(context) / 12),
+                    child: Image.asset(ImageAssets.copyRight,
+                        width: getSize(context) / 5),
                   ),
+                  const SizedBox(height: 10),
                 ],
               ),
             ));

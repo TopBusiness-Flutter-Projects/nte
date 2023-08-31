@@ -1,27 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nte/features/offers/screen/subscreens/completeoffers.dart';
-import 'package:nte/features/offers/screen/subscreens/pendingoffers.dart';
-import 'package:nte/features/offers/widget/offer_row.dart';
 
 import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/getsize.dart';
-import '../../../core/widgets/custom_button.dart';
 import '../../../core/widgets/customappbar.dart';
 import '../../homescreen/cubit/cubit.dart';
 import '../../homescreen/cubit/state.dart';
-import '../../tabcontrol/Screen/tabsScreen.dart';
 
-class OffersScreen extends StatefulWidget {
-  const OffersScreen({super.key});
+class AddOrdersScreen extends StatefulWidget {
+  const AddOrdersScreen({super.key});
 
   @override
-  State<OffersScreen> createState() => _OffersScreenState();
+  State<AddOrdersScreen> createState() => _AddOrdersScreenState();
 }
 
-class _OffersScreenState extends State<OffersScreen> {
+class _AddOrdersScreenState extends State<AddOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -45,7 +39,7 @@ class _OffersScreenState extends State<OffersScreen> {
                         Flexible(
                           child: Container(
                               margin:
-                              EdgeInsets.only(top: getSize(context) / 12),
+                                  EdgeInsets.only(top: getSize(context) / 12),
                               alignment: Alignment.center,
                               width: double.infinity,
                               decoration: BoxDecoration(
@@ -55,10 +49,11 @@ class _OffersScreenState extends State<OffersScreen> {
                                           getSize(context) / 22),
                                       topRight: Radius.circular(
                                           getSize(context) / 22))),
-                              child: TabScreen(titles: ['completed_offers'.tr(),'pending_offers'.tr()], Screens: [CompletedOffers(),PendingOffers()],)
-                             ),
+                              child: Container(
+                                  //map
+                                  )),
                         ),
-                    //title
+                        //title
 
                         Positioned(
                           top: -10,

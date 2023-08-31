@@ -90,7 +90,6 @@ class OnBoarding1 extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          //only_app_connect
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(
@@ -145,12 +144,15 @@ class OnBoarding1 extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getSize(context) / 22),
-                          child: Image.asset(
-                            ImageAssets.copyRight2,
-                          ),
-                        ),
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: Image.asset(
+                                ImageAssets.copyRight2,
+                                width: getSize(context) / 2.5,
+                              ),
+                            )),
                       ],
                     )
                   ],

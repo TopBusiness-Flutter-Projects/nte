@@ -1,86 +1,69 @@
-class LoginModel {
-  Data? data;
-  String? message;
-  int? code;
+class OrderModel {
+  List<OrderModelData>? data;
+  String message;
+  int code;
 
-  LoginModel({
-    this.data,
-    this.message,
-    this.code,
+  OrderModel({
+    required this.data,
+    required this.message,
+    required this.code,
   });
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+  factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
+        data: json["data"] == null
+            ? null
+            : List<OrderModelData>.from(
+                json["data"].map((x) => OrderModelData.fromJson(x))),
         message: json["message"],
         code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data!.toJson(),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
         "message": message,
         "code": code,
       };
 }
 
-class Data {
+class OrderModelData {
   int id;
-  String name;
   String image;
-  String email;
-  dynamic phone;
-  int nationalId;
-  City city;
   String type;
-  String userType;
+  Warehouse fromWarehouse;
+  Warehouse toWarehouse;
   String status;
-  String token;
   DateTime createdAt;
   DateTime updatedAt;
 
-  Data({
+  OrderModelData({
     required this.id,
-    required this.name,
     required this.image,
-    required this.email,
-    required this.phone,
-    required this.nationalId,
-    required this.city,
     required this.type,
-    required this.userType,
+    required this.fromWarehouse,
+    required this.toWarehouse,
     required this.status,
-    required this.token,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory OrderModelData.fromJson(Map<String, dynamic> json) => OrderModelData(
         id: json["id"],
-        name: json["name"],
         image: json["image"],
-        email: json["email"],
-        phone: json["phone"],
-        nationalId: json["national_id"],
-        city: City.fromJson(json["city"]),
         type: json["type"],
-        userType: json["user_type"],
+        fromWarehouse: Warehouse.fromJson(json["from_warehouse"]),
+        toWarehouse: Warehouse.fromJson(json["to_warehouse"]),
         status: json["status"],
-        token: json["token"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name,
         "image": image,
-        "email": email,
-        "phone": phone,
-        "national_id": nationalId,
-        "city": city.toJson(),
         "type": type,
-        "user_type": userType,
+        "from_warehouse": fromWarehouse.toJson(),
+        "to_warehouse": toWarehouse.toJson(),
         "status": status,
-        "token": token,
         "created_at":
             "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
         "updated_at":
@@ -88,22 +71,30 @@ class Data {
       };
 }
 
-class City {
+class Warehouse {
   int id;
   String name;
+  String lat;
+  String lang;
 
-  City({
+  Warehouse({
     required this.id,
     required this.name,
+    required this.lat,
+    required this.lang,
   });
 
-  factory City.fromJson(Map<String, dynamic> json) => City(
+  factory Warehouse.fromJson(Map<String, dynamic> json) => Warehouse(
         id: json["id"],
         name: json["name"],
+        lat: json["lat"],
+        lang: json["lang"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+        "lat": lat,
+        "lang": lang,
       };
 }

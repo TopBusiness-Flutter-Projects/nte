@@ -35,22 +35,26 @@ class _TabScreenState extends State<TabScreen> with TickerProviderStateMixin {
       body: BlocBuilder<TabControlCubit, TabControlState>(
         builder: (context, state) {
           TabControlCubit cubit = context.read<TabControlCubit>();
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: getSize(context) / 16,
-              ),
-              Center(
-                child: Container(
+          return Container(
+            decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(getSize(context) / 12)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: getSize(context) / 16,
+                ),
+                Center(
                   child: TabBar(
                     controller: _tabController,
-                    indicator: BoxDecoration(),
+                    indicator: const BoxDecoration(),
                     tabs: List.generate(widget.titles.length, (index) {
                       return Container(
+                        width: getSize(context) / 1.6,
                         padding: EdgeInsets.symmetric(
-                          horizontal: getSize(context) / 16,
-                          vertical: getSize(context) / 32,
+                          horizontal: getSize(context) / 44,
+                          vertical: getSize(context) / 44,
                         ),
                         decoration: BoxDecoration(
                           color: cubit.currentIndex == index
@@ -60,40 +64,39 @@ class _TabScreenState extends State<TabScreen> with TickerProviderStateMixin {
                             getSize(context) / 20,
                           ),
                         ),
-                        child: Center(
-                          child: Text(
-                            titles[index],
-                            style: TextStyle(
-                              fontSize: getSize(context) / 24,
-                              color: cubit.currentIndex == index
-                                  ? AppColors.white
-                                  : AppColors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        child: Text(
+                          titles[index],
+                          maxLines: 1,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: getSize(context) / 26,
+                            color: cubit.currentIndex == index
+                                ? AppColors.white
+                                : AppColors.black,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       );
                     }),
                     onTap: (value) {
                       cubit.selectTap(value);
-                      print(cubit.currentIndex);
                       _tabController.animateTo(value);
                     },
                   ),
                 ),
-              ),
-              SizedBox(
-                height: getSize(context) / 22,
-              ),
-              Expanded(
-                child: TabBarView(
-
-                  controller: _tabController,
-                  physics: NeverScrollableScrollPhysics(),
-                  children: widget.Screens,
+                SizedBox(
+                  height: getSize(context) / 22,
                 ),
-              )
-            ],
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: widget.Screens,
+                  ),
+                )
+              ],
+            ),
           );
         },
       ),

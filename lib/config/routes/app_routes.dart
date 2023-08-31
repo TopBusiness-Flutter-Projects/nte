@@ -3,14 +3,13 @@ import 'package:nte/features/forgetpassword/screen/forget_password.dart';
 import 'package:nte/features/forgetpassword/screen/otp.dart';
 import 'package:nte/features/forgetpassword/screen/reset_password.dart';
 import 'package:nte/features/homescreen/screen/homescreen.dart';
+import 'package:nte/features/orderdetails/screen/orderdetails.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
 import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../../core/utils/app_strings.dart';
 import '../../features/addnewtruck/screen/addnewtruck.dart';
 import '../../features/login/screen/loginscreen.dart';
-import '../../features/orderdetails/screen/orderdetails.dart';
 import '../../features/profile/screen/profilescreen.dart';
 import '../../features/signup/screen/signupscreen.dart';
 import '../../features/truckdetails/screen/truckdetails.dart';
@@ -24,7 +23,7 @@ class Routes {
   static const String resetPassword = '/resetPassword';
   static const String otpScreen = '/otpScreen';
   static const String homeScreen = '/homeScreen';
-  static const String orderDetailsScreen = '/orderDetailsScreen';
+  // static const String orderDetailsScreen = '/orderDetailsScreeen';
   static const String profileScreen = '/profileScreen';
   static const String addNewTruck = '/addNewTruckScreen';
   static const String truckDetailsScreen = '/truckDetailsScreen';
@@ -51,7 +50,7 @@ class AppRoutes {
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: ForgetPassword(),
+          child: const ForgetPassword(),
         );
       case Routes.resetPassword:
         return PageTransition(
@@ -79,13 +78,7 @@ class AppRoutes {
           duration: const Duration(milliseconds: 1300),
           child: const HomeScreen(),
         );
-      case Routes.orderDetailsScreen:
-        return PageTransition(
-          type: PageTransitionType.fade,
-          alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
-          child: const OrderDetailsScreen(),
-        );
+
       case Routes.profileScreen:
         return PageTransition(
           type: PageTransitionType.fade,
@@ -93,6 +86,13 @@ class AppRoutes {
           duration: const Duration(milliseconds: 1300),
           child: const ProfileScreen(),
         );
+      // case Routes.orderDetailsScreen:
+      //   return PageTransition(
+      //     type: PageTransitionType.fade,
+      //     alignment: Alignment.center,
+      //     duration: const Duration(milliseconds: 1300),
+      //     child:  OrderDetailsScreen(),
+      //   );
       case Routes.addNewTruck:
         return PageTransition(
           type: PageTransitionType.fade,

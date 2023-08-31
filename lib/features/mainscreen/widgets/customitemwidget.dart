@@ -1,19 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/models/ordersmodel.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/my_svg_widget.dart';
 
 class OrdersWidget extends StatelessWidget {
-  const OrdersWidget({super.key});
-
+  OrdersWidget({required this.orderModelData, super.key});
+  OrderModelData orderModelData;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(getSize(context) / 44),
-      height: getSize(context) / 2.7,
+      height: getSize(context) / 2.6,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -36,7 +37,8 @@ class OrdersWidget extends StatelessWidget {
               padding: EdgeInsets.all(getSize(context) / 44),
               child: Row(
                 children: [
-                  Expanded(child: Image.asset('assets/images/onboarding1.png')),
+                  Expanded(child: Image.network(orderModelData.image)),
+                  SizedBox(width: getSize(context) / 44),
                   Expanded(
                       flex: 3,
                       child: Column(
@@ -47,14 +49,14 @@ class OrdersWidget extends StatelessWidget {
                             child: Row(
                               children: [
                                 MySvgWidget(
-                                    path: ImageAssets.dateIcon,
+                                    path: ImageAssets.trunckIcon,
                                     imageColor: AppColors.primary,
                                     size: getSize(context) / 22),
                                 SizedBox(
                                   width: getSize(context) / 66,
                                 ),
                                 Text(
-                                  'transfer_day'.tr(),
+                                  'transfer_type'.tr(),
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     color: AppColors.primary,
@@ -62,18 +64,44 @@ class OrdersWidget extends StatelessWidget {
                                     fontFamily: 'Cairo',
                                     fontWeight: FontWeight.w400,
                                   ),
-                                )
+                                ),
+                                Flexible(
+                                    fit: FlexFit.tight, child: Container()),
+                                orderModelData.status == 'complete'
+                                    ? Container()
+                                    : Container(
+                                        height: getSize(context) / 16,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: getSize(context) / 32,
+                                            vertical: 0),
+                                        alignment: Alignment.center,
+                                        decoration: ShapeDecoration(
+                                          color: const Color(0x66FF9700),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          orderModelData.status,
+                                          style: TextStyle(
+                                              fontSize: getSize(context) / 28,
+                                              fontFamily: 'Cairo',
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.primary),
+                                        ),
+                                      )
                               ],
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
-                              '8/3/2023',
+                              orderModelData.type,
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
+                                color: AppColors.black,
+                                fontSize: getSize(context) / 24,
                                 fontFamily: 'Cairo',
                                 fontWeight: FontWeight.w400,
                               ),
@@ -89,7 +117,7 @@ class OrdersWidget extends StatelessWidget {
               child: Row(
             children: [
               SizedBox(
-                width: getSize(context) / 100,
+                width: getSize(context) / 22,
               ),
               Expanded(
                 flex: 2,
@@ -119,12 +147,12 @@ class OrdersWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Text(
-                      'الدار البيضاء',
+                    Text(
+                      orderModelData.fromWarehouse.name,
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
+                        color: AppColors.black,
+                        fontSize: getSize(context) / 24,
                         fontFamily: 'Cairo',
                         fontWeight: FontWeight.w400,
                       ),
@@ -166,12 +194,12 @@ class OrdersWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Text(
-                      'الدار البيضاء',
+                    Text(
+                      orderModelData.toWarehouse.name,
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
+                        color: AppColors.black,
+                        fontSize: getSize(context) / 24,
                         fontFamily: 'Cairo',
                         fontWeight: FontWeight.w400,
                       ),
@@ -181,7 +209,7 @@ class OrdersWidget extends StatelessWidget {
               ),
             ],
           )),
-          SizedBox(height: getSize(context) / 66),
+          SizedBox(height: getSize(context) / 44),
         ],
       ),
     );

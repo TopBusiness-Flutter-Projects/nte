@@ -36,7 +36,7 @@ class OrdersDetailsWidgetDesc extends StatelessWidget {
               alignment: Alignment.centerRight,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: AppColors.greyColor,
+                  color: AppColors.primary2,
                   borderRadius: BorderRadius.circular(getSize(context) / 100)),
               child: Text(
                 description,

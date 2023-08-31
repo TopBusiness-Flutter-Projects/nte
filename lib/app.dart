@@ -14,6 +14,8 @@ import 'features/addnewtruck/cubit/cubit.dart';
 import 'features/forgetpassword/cubit/cubit.dart';
 import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
+import 'features/addorders/cubit/cubit.dart';
+import 'features/mainscreen/cubit/cubit.dart';
 import 'features/orderdetails/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 import 'features/tabcontrol/cubit/tab_control_cubit.dart';
@@ -70,13 +72,17 @@ class _NTEState extends State<NTE> {
             create: (_) => injector.serviceLocator<TruckCubit>(),
           ),
           //
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<PrivacyCubit>(),
-          // ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<AddNewOrderCubit>(),
+          ),
           //
           //
-          // BlocProvider(
-          //   create: (_) => injector.serviceLocator<AddServiceCubit>(),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<MainCubit>(),
+          ),
+
+          //BlocProvider(
+          // create: (_) => injector.serviceLocator<MainCubit>(),
           // ),
         ],
         child: GetMaterialApp(

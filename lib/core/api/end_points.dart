@@ -5,4 +5,9 @@ class EndPoints {
   static const String citiesUrl = '${baseUrl}cities';
   static const String checkPhone = '${baseUrl}checkPhone';
   static const String resetPassword = '${baseUrl}resetPassword';
+  static const String ordersCompleted = '${baseUrl}orders/ordersCompleted';
+  static const String ordersNotCompleted =
+      '${baseUrl}orders/ordersNotCompleted';
+
+  static const String orderDetails = '${baseUrl}orders/orderDetail/';
 }

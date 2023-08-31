@@ -50,6 +50,8 @@ class LoginCubit extends Cubit<LoginState> {
           Navigator.pushNamed(context, Routes.homeScreen);
           successGetBar(r.message);
         });
+        emailController.clear();
+        passwprdController.clear();
         emit(LoadedLoginAuth());
       } else {
         errorGetBar(r.message);

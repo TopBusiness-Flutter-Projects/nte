@@ -104,23 +104,21 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           child: InternationalPhoneNumberInput(
                             countries: const ['SA', 'EG'],
                             inputDecoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(getSize(context) / 8),
-                                borderSide:
-                                    BorderSide(color: AppColors.buttonColor),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.black, strokeAlign: 2),
                               ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(getSize(context) / 8),
-                                borderSide:
-                                    BorderSide(color: AppColors.buttonColor),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.black, strokeAlign: 2),
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.circular(getSize(context) / 8),
-                                borderSide:
-                                    BorderSide(color: AppColors.buttonColor),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.black, strokeAlign: 2),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: AppColors.black, strokeAlign: 2),
                               ),
                               fillColor: AppColors.white,
                               filled: true,
@@ -151,7 +149,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               color: AppColors.black,
                               fontSize: getSize(context) / 22,
                             ),
-                            hintText: 'search',
+                            hintText: 'search'.tr(),
                             textStyle: TextStyle(
                               color: AppColors.black,
                               fontSize: getSize(context) / 22,
@@ -167,11 +165,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             textFieldController: controller.phoneController,
                             keyboardType: TextInputType.phone,
                             keyboardAction: TextInputAction.go,
-                            inputBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: AppColors.buttonColor,
-                              strokeAlign: 1,
-                            )),
+                            inputBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppColors.black,
+                                  width: 1,
+                                  strokeAlign: 1),
+                            ),
                           ),
                         ),
                         SizedBox(height: getSize(context) / 8),
@@ -186,14 +185,16 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 controller.phoneCheck(context);
                               }
                             }),
+                        SizedBox(height: getSize(context) / 22),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: getSize(context) / 22),
+                          child: Image.asset(ImageAssets.copyRight,
+                              width: getSize(context) / 2.5),
+                        ),
                       ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: getSize(context) / 22),
-                  child: Image.asset(ImageAssets.copyRight),
                 ),
               ],
             ),

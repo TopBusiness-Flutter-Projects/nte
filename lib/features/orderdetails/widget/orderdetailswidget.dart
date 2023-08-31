@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:nte/core/utils/app_colors.dart';
+import 'package:nte/core/utils/assets_manager.dart';
+import 'package:nte/core/widgets/my_svg_widget.dart';
 
-import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/getsize.dart';
 
 class OrdersDetailsWidget extends StatelessWidget {
-  OrdersDetailsWidget({required this.title, required this.price, super.key});
+  OrdersDetailsWidget(
+      {required this.title,
+      required this.price,
+      required this.pathImage,
+      super.key});
   String title;
   String price;
+  String pathImage;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,18 +40,33 @@ class OrdersDetailsWidget extends StatelessWidget {
                   horizontal: getSize(context) / 18),
               alignment: Alignment.centerRight,
               width: double.infinity,
-              decoration: BoxDecoration(
-                  color: AppColors.greyColor,
-                  borderRadius: BorderRadius.circular(getSize(context) / 100)),
-              child: Text(
-                price,
-                maxLines: 1,
-                overflow: TextOverflow.clip,
-                style: TextStyle(
-                  fontSize: getSize(context) / 22,
-                  fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w400,
+              decoration: ShapeDecoration(
+                color: const Color(0x19FF9700),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
+              ),
+              child: Row(
+                children: [
+                  MySvgWidget(
+                      path: pathImage,
+                      imageColor: AppColors.primary,
+                      size: getSize(context) / 22),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: getSize(context) / 32),
+                    child: Text(
+                      price,
+                      maxLines: 1,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontSize: getSize(context) / 22,
+                        fontFamily: 'Cairo',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ],
               ))
         ],
       ),
