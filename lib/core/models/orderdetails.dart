@@ -1,5 +1,5 @@
 class OrderDetailsModel {
-  OrderDetailsModelData data;
+  OrderDetailsModelData? data;
   String message;
   int code;
 
@@ -11,13 +11,15 @@ class OrderDetailsModel {
 
   factory OrderDetailsModel.fromJson(Map<String, dynamic> json) =>
       OrderDetailsModel(
-        data: OrderDetailsModelData.fromJson(json["data"]),
+        data: json["data"] == null
+            ? null
+            : OrderDetailsModelData.fromJson(json["data"]),
         message: json["message"],
         code: json["code"],
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data.toJson(),
+        "data": data!.toJson(),
         "message": message,
         "code": code,
       };
@@ -33,8 +35,8 @@ class OrderDetailsModelData {
   int quantity;
   int value;
   String type;
-  int price;
-  Driver driver;
+  int? price;
+  Driver? driver;
   String description;
   DateTime createdAt;
   DateTime updatedAt;
@@ -68,7 +70,7 @@ class OrderDetailsModelData {
         value: json["value"],
         type: json["type"],
         price: json["price"],
-        driver: Driver.fromJson(json["driver"]),
+        driver: json["driver"] == null ? null : Driver.fromJson(json["driver"]),
         description: json["description"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -85,7 +87,7 @@ class OrderDetailsModelData {
         "value": value,
         "type": type,
         "price": price,
-        "driver": driver.toJson(),
+        "driver": driver!.toJson(),
         "description": description,
         "created_at":
             "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",

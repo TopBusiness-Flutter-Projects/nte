@@ -30,41 +30,51 @@ class _PendingOffersState extends State<PendingOffers> {
       },
       builder: (context, state) {
         var controller = context.read<MainCubit>();
-        return RefreshIndicator(
-          onRefresh: () async {
-            controller.ordersNotCompleted();
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(getSize(context) / 22)),
-            child: isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primary,
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: controller.pendingOrder.length,
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                          onTap: () {
-                            print(controller.pendingOrder[index].type);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => OrderDetailsScreen(
-                                        orderid: controller
-                                            .pendingOrder[index].id)));
-                          },
-                          child: OrdersWidget(
-                            orderModelData: controller.pendingOrder[index],
-                          ));
-                    },
+        return Container(
+          decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(getSize(context) / 22)),
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
                   ),
-          ),
+                )
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    controller.ordersNotCompleted();
+                  },
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      ListView.builder(
+                        itemCount: controller.pendingOrder.length,
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            OrderDetailsScreen(
+                                                orderid: controller
+                                                    .pendingOrder[index].id)));
+                              },
+                              child: OrdersWidget(
+                                orderModelData: controller.pendingOrder[index],
+                              ));
+                        },
+                      ),
+                      Container(
+                        height: controller.pendingOrder.length < 2
+                            ? getSize(context)
+                            : getSize(context) / 2,
+                      )
+                    ],
+                  )),
         );
       },
     );

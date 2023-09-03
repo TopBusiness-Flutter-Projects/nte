@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nte/features/mytruck/cubit/cubit.dart';
 import 'package:nte/features/onboarding/cubit/onboarding_cubit.dart';
+import 'package:nte/features/profile/cubit/cubit.dart';
 
 import 'config/routes/app_routes.dart';
 import 'config/themes/app_theme.dart';
@@ -79,6 +80,9 @@ class _NTEState extends State<NTE> {
           //
           BlocProvider(
             create: (_) => injector.serviceLocator<MainCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => injector.serviceLocator<ProfileCubit>(),
           ),
 
           //BlocProvider(

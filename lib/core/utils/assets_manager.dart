@@ -52,6 +52,8 @@ class ImageAssets {
   static const String qantityIcon = '$iconsPath/qantity.svg';
   static const String weightIcon = '$iconsPath/weight.svg';
   static const String moneyIcon = '$iconsPath/money.svg';
+  static const String lockIcon = '$iconsPath/lock.svg';
+
   //wallet
   //Lottie
   // static const String noItems = '$lottiePath/no_item.json';

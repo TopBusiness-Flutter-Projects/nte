@@ -1,19 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nte/core/models/login_model.dart';
+import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
-
 import '../../config/routes/app_routes.dart';
-import '../../features/addnewtruck/cubit/cubit.dart';
 
 class CustomAppBar extends StatelessWidget {
-  //case screen from home screen set isHome true
-  CustomAppBar({this.isHome = false, this.isAddTruck = false, super.key});
+  CustomAppBar({this.isHome = false, this.isProfile = false, super.key});
   bool isHome;
-  bool isAddTruck;
+  bool isProfile;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -136,77 +136,64 @@ class CustomAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: getSize(context) / 7,
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    SizedBox(width: getSize(context) / 66),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, Routes.profileScreen);
-                      },
-                      child: CircleAvatar(
-                          backgroundColor: AppColors.greyColor,
-                          child: Icon(
-                            Icons.person,
-                            color: AppColors.grayTextColor,
-                            size: getSize(context) / 16,
-                          )),
-                    ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, Routes.profileScreen);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getSize(context) / 44),
-                          child: Text(
-                            '${'welcome'.tr()} , محمد',
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: getSize(context) / 22,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
+              isProfile
+                  ? Container()
+                  : SizedBox(
+                      height: getSize(context) / 7,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          SizedBox(width: getSize(context) / 66),
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, Routes.profileScreen);
+                            },
+                            child: CircleAvatar(
+                                backgroundColor: AppColors.greyColor,
+                                child: Icon(
+                                  Icons.person,
+                                  color: AppColors.grayTextColor,
+                                  size: getSize(context) / 16,
+                                )),
+                          ),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: InkWell(
+                              onTap: () {
+                                cubit.navToProfile(context);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: getSize(context) / 44),
+                                child: Text(
+                                  '${'welcome'.tr()} , ${cubit.profile == null ? '' : cubit.profile!.data!.name}',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: getSize(context) / 22,
+                                    fontFamily: 'Cairo',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          const Spacer(),
+                          isHome
+                              ? Container()
+                              : IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(
+                                    Icons.arrow_forward,
+                                    color: AppColors.white,
+                                  ))
+                        ],
                       ),
-                    ),
-                    const Spacer(),
-                    isHome
-                        ? Container()
-                        : IconButton(
-                            onPressed: () {
-                              if (isAddTruck) {
-                                context.read<AddNewTruckCubit>().selectedValue =
-                                    null;
-                                context
-                                    .read<AddNewTruckCubit>()
-                                    .cabinSelectedValue = null;
-                                context.read<AddNewTruckCubit>().isVisiable =
-                                    false;
-                                context
-                                    .read<AddNewTruckCubit>()
-                                    .cabinIsVisiable = false;
-                                context
-                                    .read<AddNewTruckCubit>()
-                                    .modelController
-                                    .clear();
-                              }
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.white,
-                            ))
-                  ],
-                ),
-              )
+                    )
             ],
           ),
         );

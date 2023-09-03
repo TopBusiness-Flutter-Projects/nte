@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/widgets/custom_button.dart';
@@ -13,6 +14,8 @@ import '../../../core/utils/assets_manager.dart';
 import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/customappbar.dart';
 import '../../homescreen/cubit/state.dart';
+import '../widget/drive_hanging.dart';
+import '../widget/drive_waiting.dart';
 import '../widget/driverdetails.dart';
 import '../widget/orderdetailswidget.dart';
 import '../widget/orderdetailswidgetinfo.dart';
@@ -118,6 +121,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   void initState() {
+    context.read<OrderDetailsCubit>().orderdetails = null;
     context.read<OrderDetailsCubit>().orderDetails(widget.orderid.toString());
     super.initState();
   }
@@ -176,20 +180,85 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                           physics:
                                               const BouncingScrollPhysics(),
                                           children: [
-                                            Container(
-                                              margin: EdgeInsets.all(
-                                                  getSize(context) / 16),
-                                              height: getSize(context) / 2,
-                                              width: getSize(context) / 2,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
+                                            Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          getSize(context) / 6,
+                                                      vertical:
                                                           getSize(context) /
-                                                              22)),
-                                              child: Image.asset(
-                                                ImageAssets.carImage,
-                                                fit: BoxFit.contain,
-                                              ),
+                                                              12),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              getSize(context) /
+                                                                  22)),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            getSize(context) /
+                                                                22),
+                                                    child: Image.network(
+                                                      cubit.orderdetails!.image,
+                                                      fit: BoxFit.fitWidth,
+                                                      height: getSize(context) /
+                                                          1.8,
+                                                      width: getSize(context) /
+                                                          1.2,
+                                                    ),
+                                                  ),
+                                                ),
+                                                cubit.orderdetails!.status ==
+                                                        'hanging'
+                                                    ? Positioned(
+                                                        right:
+                                                            getSize(context) /
+                                                                24,
+                                                        top: getSize(context) /
+                                                            12,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              cubit.deleteOrder(
+                                                                  context,
+                                                                  cubit
+                                                                      .orderdetails!
+                                                                      .id);
+
+                                                              ///delete
+                                                              ///Navigator.pop(context);
+                                                            },
+                                                            icon: Icon(
+                                                              CupertinoIcons
+                                                                  .delete,
+                                                              color: AppColors
+                                                                  .primary,
+                                                            )))
+                                                    : Container(),
+                                                cubit.orderdetails!.status ==
+                                                        'hanging'
+                                                    ? Positioned(
+                                                        right:
+                                                            getSize(context) /
+                                                                24,
+                                                        top: getSize(context) /
+                                                            5,
+                                                        child: IconButton(
+                                                            onPressed: () {
+                                                              ///Navigator.Edit screen;
+                                                            },
+                                                            icon: MySvgWidget(
+                                                                path: ImageAssets
+                                                                    .editIcon,
+                                                                imageColor:
+                                                                    AppColors
+                                                                        .primary,
+                                                                size: getSize(
+                                                                        context) /
+                                                                    16)))
+                                                    : Container()
+                                              ],
                                             ),
                                             // CustomButton(
                                             //     paddingHorizontal: getSize(context) / 8,
@@ -217,14 +286,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                               source: cubit.orderdetails!
                                                   .fromWarehouse.name,
                                             ),
-
                                             OrdersDetailsWidget(
-                                              pathImage: ImageAssets.dateIcon,
-                                              title: 'transfer_date'.tr(),
-                                              price: cubit
-                                                  .orderdetails!.createdAt
+                                              pathImage: ImageAssets.moneyIcon,
+                                              title: 'price'.tr(),
+                                              price: cubit.orderdetails!.value
                                                   .toString(),
                                             ),
+
                                             OrdersDetailsWidget(
                                               pathImage: ImageAssets.trunckIcon,
                                               title: 'qantity_type'.tr(),
@@ -235,18 +303,35 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                                 title: 'description'.tr(),
                                                 description: cubit
                                                     .orderdetails!.description),
-                                            OrdersDetailsWidget(
-                                              pathImage: ImageAssets.moneyIcon,
-                                              title: 'price'.tr(),
-                                              price: cubit.orderdetails!.price
-                                                  .toString(),
-                                            ),
-                                            DriverInfo(
-                                                title: 'driver_info'.tr(),
-                                                driverName: cubit
-                                                    .orderdetails!.driver.name,
-                                                date: cubit.orderdetails!.driver
-                                                    .dateArrival),
+                                            cubit.orderdetails!.price == null
+                                                ? Container()
+                                                : OrdersDetailsWidget(
+                                                    pathImage:
+                                                        ImageAssets.dateIcon,
+                                                    title: 'price_2'.tr(),
+                                                    price: cubit
+                                                        .orderdetails!.price
+                                                        .toString(),
+                                                  ),
+                                            cubit.orderdetails!.status ==
+                                                    'complete'
+                                                ? DriverInfo(
+                                                    title: 'driver_info'.tr(),
+                                                    driverName: cubit
+                                                        .orderdetails!
+                                                        .driver!
+                                                        .name,
+                                                    date: cubit.orderdetails!
+                                                        .driver!.dateArrival)
+                                                : cubit.orderdetails!.status ==
+                                                        'hanging'
+                                                    ? DriverInfoHanging(
+                                                        title:
+                                                            'driver_info'.tr())
+                                                    : DriverInfoWaiting(
+                                                        title:
+                                                            'driver_info'.tr()),
+
                                             SizedBox(
                                               height: getSize(context) / 8,
                                             )

@@ -60,8 +60,10 @@ class SignUpCubit extends Cubit<SignUpState> {
         phone: int.parse(phoneNumberController.text),
         city_id: selectedValue!,
         user_type: selectedRadio == 0 ? "person" : "company");
-
-    response.fold((l) => emit(ErrorSighUpAuth()), (r) {
+    response.fold(
+        (l) => emit(
+              ErrorSighUpAuth(),
+            ), (r) {
       if (r.code == 200) {
         userModel = r;
         Preferences.instance.setUser(r).then((value) {
@@ -70,6 +72,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         });
       } else {
         errorGetBar(r.message);
+        emit(ErrorSighUpAuth());
       }
     });
   }

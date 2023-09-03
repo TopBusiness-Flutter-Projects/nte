@@ -7,6 +7,7 @@ import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/getsize.dart';
 
+import '../../orderdetails/cubit/cubit.dart';
 import '../../orderdetails/screen/orderdetails.dart';
 import '../widgets/customitemwidget.dart';
 
@@ -31,41 +32,51 @@ class _CompletedOffersState extends State<CompletedOffers> {
       },
       builder: (context, state) {
         var controller = context.read<MainCubit>();
-        return RefreshIndicator(
-          onRefresh: () async {
-            controller.ordersCompleted();
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(getSize(context) / 22)),
-            child: isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primary,
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: controller.completedOrder.length,
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => OrderDetailsScreen(
-                                          orderid: controller
-                                              .completedOrder[index].id,
-                                        )));
-                          },
-                          child: OrdersWidget(
-                            orderModelData: controller.completedOrder[index],
-                          ));
-                    },
+        return Container(
+          decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(getSize(context) / 22)),
+          child: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.primary,
                   ),
-          ),
+                )
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    controller.ordersCompleted();
+                  },
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      ListView.builder(
+                        itemCount: controller.completedOrder.length,
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            OrderDetailsScreen(
+                                              orderid: controller
+                                                  .completedOrder[index].id,
+                                            )));
+                              },
+                              child: OrdersWidget(
+                                orderModelData:
+                                    controller.completedOrder[index],
+                              ));
+                        },
+                      ),
+                      Container(
+                        height: getSize(context) / 2,
+                      )
+                    ],
+                  )),
         );
       },
     );

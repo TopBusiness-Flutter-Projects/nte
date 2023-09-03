@@ -16,6 +16,7 @@ import 'features/mainscreen/cubit/cubit.dart';
 import 'features/mytruck/cubit/cubit.dart';
 import 'features/addorders/cubit/cubit.dart';
 import 'features/orderdetails/cubit/cubit.dart';
+import 'features/profile/cubit/cubit.dart';
 import 'features/signup/cubit/cubit.dart';
 import 'features/tabcontrol/cubit/tab_control_cubit.dart';
 
@@ -78,12 +79,9 @@ Future<void> setup() async {
       serviceLocator(),
     ),
   );
-  // serviceLocator.registerFactory(
-  //       () => EditProfileCubit(
-  //     serviceLocator(),
-  //   ),
-  //
-  // );
+  serviceLocator.registerFactory(() => ProfileCubit(
+        serviceLocator(),
+      ));
   // serviceLocator.registerFactory(
   //       () => MyPostsCubit(
   //     serviceLocator(),

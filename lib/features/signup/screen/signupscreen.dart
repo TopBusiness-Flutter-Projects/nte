@@ -25,6 +25,8 @@ class SignUpScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is LoadingSighUpAuth) {
           isLoading = true;
+        } else if (state is ErrorSighUpAuth) {
+          isLoading = false;
         } else {
           isLoading = false;
         }

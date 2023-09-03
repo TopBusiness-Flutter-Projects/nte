@@ -8,10 +8,15 @@ import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/my_svg_widget.dart';
 
 class OrdersWidget extends StatelessWidget {
+//////
   OrdersWidget({required this.orderModelData, super.key});
   OrderModelData orderModelData;
+
   @override
   Widget build(BuildContext context) {
+    bool isAr =
+        EasyLocalization.of(context)!.currentLocale!.languageCode == 'ar';
+
     return Container(
       margin: EdgeInsets.all(getSize(context) / 44),
       height: getSize(context) / 2.6,
@@ -83,7 +88,15 @@ class OrdersWidget extends StatelessWidget {
                                           ),
                                         ),
                                         child: Text(
-                                          orderModelData.status,
+                                          isAr
+                                              ? orderModelData.status ==
+                                                      'waiting'
+                                                  ? 'فى انتظار الدفع'
+                                                  : 'معلقة'
+                                              : orderModelData.status ==
+                                                      'waiting'
+                                                  ? "waiting"
+                                                  : "hanging",
                                           style: TextStyle(
                                               fontSize: getSize(context) / 28,
                                               fontFamily: 'Cairo',
@@ -106,7 +119,7 @@ class OrdersWidget extends StatelessWidget {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                          )
+                          ),
                         ],
                       ))
                 ],

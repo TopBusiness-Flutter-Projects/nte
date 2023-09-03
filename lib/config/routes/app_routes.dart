@@ -93,13 +93,13 @@ class AppRoutes {
       //     duration: const Duration(milliseconds: 1300),
       //     child:  OrderDetailsScreen(),
       //   );
-      case Routes.addNewTruck:
-        return PageTransition(
-          type: PageTransitionType.fade,
-          alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
-          child: const AddNewTruckScreen(),
-        );
+      // case Routes.addNewTruck:
+      //   return PageTransition(
+      //     type: PageTransitionType.fade,
+      //     alignment: Alignment.center,
+      //     duration: const Duration(milliseconds: 1300),
+      //     child: const AddNewTruckScreen(),
+      //   );
       //TruckDetailsScreen
       case Routes.truckDetailsScreen:
         return PageTransition(

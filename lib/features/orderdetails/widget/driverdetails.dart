@@ -33,7 +33,7 @@ class DriverInfo extends StatelessWidget {
                 style: TextStyle(
                   fontSize: getSize(context) / 22,
                   fontFamily: 'Cairo',
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.bold,
                 ),
               )),
           Flexible(
@@ -91,9 +91,9 @@ class DriverInfo extends StatelessWidget {
                                 Text(
                                   driverName,
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    color: AppColors.black,
+                                    fontSize: getSize(context) / 24,
                                     fontFamily: 'Cairo',
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -149,9 +149,9 @@ class DriverInfo extends StatelessWidget {
                                 Text(
                                   DateFormat('yyyy-MM-dd hh:mm').format(date),
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
+                                  style: TextStyle(
+                                    color: AppColors.black,
+                                    fontSize: getSize(context) / 24,
                                     fontFamily: 'Cairo',
                                     fontWeight: FontWeight.w400,
                                   ),

@@ -29,6 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
     // MyTrunckScreen(),
     ProfileScreen()
   ];
+
+  @override
+  void initState() {
+    context.read<HomeCubit>().getProfileInfo();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -68,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
             PersistentBottomNavBarItem(
               icon: MySvgWidget(
                   path: ImageAssets.profileIcon,
-                  imageColor: cubit.selectedIndex == 1
+                  imageColor: cubit.selectedIndex == 2
                       ? AppColors.primary
                       : AppColors.buttonColor,
                   size: getSize(context) / 18),
@@ -84,6 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
             //   label: 'profile',
             // ),
           ],
+          onItemSelected: (index) {
+            cubit.onSelectIgtem(index);
+          },
           confineInSafeArea: true,
           backgroundColor: Colors.white,
           handleAndroidBackButtonPress: true,
