@@ -1,3 +1,5 @@
+import 'package:nte/core/models/city_model.dart';
+
 class LoginModel {
   Data? data;
   String? message;
@@ -29,7 +31,7 @@ class Data {
   String email;
   dynamic phone;
   int nationalId;
-  City city;
+  CityData city;
   String type;
   String userType;
   String status;
@@ -60,7 +62,7 @@ class Data {
         email: json["email"],
         phone: json["phone"],
         nationalId: json["national_id"],
-        city: City.fromJson(json["city"]),
+        city: CityData.fromJson(json["city"]),
         type: json["type"],
         userType: json["user_type"],
         status: json["status"],
@@ -85,25 +87,5 @@ class Data {
             "${createdAt.year.toString().padLeft(4, '0')}-${createdAt.month.toString().padLeft(2, '0')}-${createdAt.day.toString().padLeft(2, '0')}",
         "updated_at":
             "${updatedAt.year.toString().padLeft(4, '0')}-${updatedAt.month.toString().padLeft(2, '0')}-${updatedAt.day.toString().padLeft(2, '0')}",
-      };
-}
-
-class City {
-  int id;
-  String name;
-
-  City({
-    required this.id,
-    required this.name,
-  });
-
-  factory City.fromJson(Map<String, dynamic> json) => City(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
       };
 }

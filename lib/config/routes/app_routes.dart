@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nte/features/editprofile/screen/edit_profile_screen.dart';
 import 'package:nte/features/forgetpassword/screen/forget_password.dart';
 import 'package:nte/features/forgetpassword/screen/otp.dart';
 import 'package:nte/features/forgetpassword/screen/reset_password.dart';
@@ -23,10 +24,13 @@ class Routes {
   static const String resetPassword = '/resetPassword';
   static const String otpScreen = '/otpScreen';
   static const String homeScreen = '/homeScreen';
-  // static const String orderDetailsScreen = '/orderDetailsScreeen';
+  static const String orderDetailsScreen = '/orderDetailsScreeen';
   static const String profileScreen = '/profileScreen';
   static const String addNewTruck = '/addNewTruckScreen';
   static const String truckDetailsScreen = '/truckDetailsScreen';
+  static const String editProfileScreen = '/EditProfileScreen';
+
+  //EditProfileScreen
 }
 
 class AppRoutes {
@@ -86,13 +90,16 @@ class AppRoutes {
           duration: const Duration(milliseconds: 1300),
           child: const ProfileScreen(),
         );
-      // case Routes.orderDetailsScreen:
-      //   return PageTransition(
-      //     type: PageTransitionType.fade,
-      //     alignment: Alignment.center,
-      //     duration: const Duration(milliseconds: 1300),
-      //     child:  OrderDetailsScreen(),
-      //   );
+      case Routes.orderDetailsScreen:
+        int id = settings.arguments as int;
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: OrderDetailsScreen(
+            orderid: id,
+          ),
+        );
       // case Routes.addNewTruck:
       //   return PageTransition(
       //     type: PageTransitionType.fade,
@@ -107,6 +114,13 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
           child: const TruckDetailsScreen(),
+        );
+      case Routes.editProfileScreen:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const EditProfileScreen(),
         );
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;

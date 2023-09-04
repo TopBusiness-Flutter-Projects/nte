@@ -186,12 +186,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               }
                             }),
                         SizedBox(height: getSize(context) / 22),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: getSize(context) / 22),
-                          child: Image.asset(ImageAssets.copyRight,
-                              width: getSize(context) / 2.5),
-                        ),
+                        // Padding(
+                        //   padding: EdgeInsets.symmetric(
+                        //       vertical: getSize(context) / 22),
+                        //   child: Image.asset(ImageAssets.copyRight,
+                        //       width: getSize(context) / 2.5),
+                        // ),
                       ],
                     ),
                   ),

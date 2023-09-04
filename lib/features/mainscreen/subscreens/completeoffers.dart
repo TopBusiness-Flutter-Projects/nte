@@ -57,14 +57,18 @@ class _CompletedOffersState extends State<CompletedOffers> {
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            OrderDetailsScreen(
-                                              orderid: controller
-                                                  .completedOrder[index].id,
-                                            )));
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamed(Routes.orderDetailsScreen,
+                                        arguments: controller
+                                            .completedOrder[index].id);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             OrderDetailsScreen(
+                                //               orderid: controller
+                                //                   .completedOrder[index].id,
+                                //             )));
                               },
                               child: OrdersWidget(
                                 orderModelData:

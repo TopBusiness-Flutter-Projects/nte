@@ -55,13 +55,10 @@ class _PendingOffersState extends State<PendingOffers> {
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            OrderDetailsScreen(
-                                                orderid: controller
-                                                    .pendingOrder[index].id)));
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamed(Routes.orderDetailsScreen,
+                                        arguments:
+                                            controller.pendingOrder[index].id);
                               },
                               child: OrdersWidget(
                                 orderModelData: controller.pendingOrder[index],

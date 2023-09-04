@@ -149,17 +149,17 @@ class OnBoarding2 extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 0),
-                                child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  child: Image.asset(
-                                    ImageAssets.copyRight2,
-                                    width: getSize(context) / 2.5,
-                                  ),
-                                )),
+                            // Padding(
+                            //     padding:
+                            //         const EdgeInsets.symmetric(horizontal: 0),
+                            //     child: Container(
+                            //       width: double.infinity,
+                            //       alignment: Alignment.center,
+                            //       child: Image.asset(
+                            //         ImageAssets.copyRight2,
+                            //         width: getSize(context) / 2.5,
+                            //       ),
+                            //     )),
                           ],
                         ),
                       ),

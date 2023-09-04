@@ -56,7 +56,7 @@
   "welcome": "مرحبا",
   "wait_payment": "فى انتظار الدفع",
   "pending": "معلقة",
-  "my_offers": "عروضى",
+  "my_offers": "طلبيه جديده",
   "pending_offers": "الطلبات الجديدة",
   "completed_offers": "العروض المكتملة",
   "enter_offer": "من فضلك ادخل عرض",
@@ -89,5 +89,7 @@
   "mail": "الايميل",
   "log_out": "تسجيل خروج",
   "edit_account": "تعديل الحساب",
-  "delete_account": "حذف الحساب"
+  "delete_account": "حذف الحساب",
+  "update_account":"تحديث الحساب "
+
 }

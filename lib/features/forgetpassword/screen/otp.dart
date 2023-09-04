@@ -144,11 +144,11 @@ class _OTPScreenState extends State<OTPScreen> {
                         //validate
                       }),
 
-                  Padding(
-                    padding: EdgeInsets.all(getSize(context) / 4),
-                    child: Image.asset(ImageAssets.copyRight,
-                        width: getSize(context) / 5),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.all(getSize(context) / 4),
+                  //   child: Image.asset(ImageAssets.copyRight,
+                  //       width: getSize(context) / 5),
+                  // ),
                   const SizedBox(height: 10),
                 ],
               ),

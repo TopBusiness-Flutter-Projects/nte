@@ -10,9 +10,14 @@ import 'package:nte/features/homescreen/cubit/state.dart';
 import '../../config/routes/app_routes.dart';
 
 class CustomAppBar extends StatelessWidget {
-  CustomAppBar({this.isHome = false, this.isProfile = false, super.key});
+  CustomAppBar(
+      {this.isHome = false,
+      this.isProfile = false,
+      this.isEditProfile = false,
+      super.key});
   bool isHome;
   bool isProfile;
+  bool isEditProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -146,8 +151,10 @@ class CustomAppBar extends StatelessWidget {
                           SizedBox(width: getSize(context) / 66),
                           InkWell(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, Routes.profileScreen);
+                              isEditProfile
+                                  ? Navigator.pop(context)
+                                  : Navigator.pushNamed(
+                                      context, Routes.profileScreen);
                             },
                             child: CircleAvatar(
                                 backgroundColor: AppColors.greyColor,

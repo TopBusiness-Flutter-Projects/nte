@@ -33,7 +33,6 @@ class SignUpScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var controller = BlocProvider.of<SignUpCubit>(context);
-        // controller.cities.isEmpty ? controller.getCities() : null;
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
@@ -166,7 +165,8 @@ class SignUpScreen extends StatelessWidget {
                     //   suffixIcon: const Icon(Icons.arrow_drop_down),
                     //   controller: controller.cityController,
                     // ),
-                    Padding(
+                    Container(
+                      height: getSize(context) / 6,
                       padding: EdgeInsets.symmetric(
                           horizontal: getSize(context) / 22),
                       child: DropdownButtonFormField2<CityData>(

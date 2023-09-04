@@ -11,6 +11,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 /*
+map key >>    AIzaSyCqeB0JnSmNrrtuICRJEG3ZJPxC1DLWSmU
+
         ///here after  edit save shared Preference and 
 */
 void main() async {

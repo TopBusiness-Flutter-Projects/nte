@@ -37,16 +37,16 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    ImageAssets.copyRight,
-                    width: getSize(context) / 2.5,
-                  ),
-                ),
-              )
+              // Positioned(
+              //   bottom: 0,
+              //   child: Container(
+              //     alignment: Alignment.center,
+              //     child: Image.asset(
+              //       ImageAssets.copyRight,
+              //       width: getSize(context) / 2.5,
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ],

@@ -13,3 +13,5 @@ class OnSelectNewitem extends HomeState {}
 class LoadingGetUserData extends HomeState {}
 
 class LoadedGetUserData extends HomeState {}
+
+class ErrorGetUserData extends HomeState {}

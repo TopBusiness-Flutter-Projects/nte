@@ -9,6 +9,7 @@ import 'core/api/app_interceptors.dart';
 import 'core/api/base_api_consumer.dart';
 import 'core/api/dio_consumer.dart';
 import 'features/addnewtruck/cubit/cubit.dart';
+import 'features/editprofile/cubit/cubit.dart';
 import 'features/forgetpassword/cubit/cubit.dart';
 import 'features/homescreen/cubit/cubit.dart';
 import 'features/login/cubit/cubit.dart';
@@ -82,12 +83,11 @@ Future<void> setup() async {
   serviceLocator.registerFactory(() => ProfileCubit(
         serviceLocator(),
       ));
-  // serviceLocator.registerFactory(
-  //       () => MyPostsCubit(
-  //     serviceLocator(),
-  //   ),
-  //
-  // );
+  serviceLocator.registerFactory(
+    () => EditProfileCubit(
+      serviceLocator(),
+    ),
+  );
   // serviceLocator.registerFactory(
   //       () => AddServiceCubit(
   //     serviceLocator(),

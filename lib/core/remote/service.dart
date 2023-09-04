@@ -1,5 +1,7 @@
 // import 'package:http/http.dart' as http;
 
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -210,6 +212,47 @@ class ServiceApi {
       );
       return Right(NullModel.fromJson(response));
       //
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, LoginModel>> updateProfile({
+    required String name,
+    required String email,
+    required int phone,
+    File? image,
+    required int cityId,
+  }) async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel user = await Preferences.instance.getUserModel();
+    try {
+      var fileName;
+      if (image != null) {
+        fileName = image.path.split('/').last;
+        var data = await MultipartFile.fromFile(image.path, filename: fileName);
+        fileName = data;
+      } else {
+        fileName = '';
+      }
+      var response = await dio.post(
+        EndPoints.updateProfile,
+        formDataIsEnabled: true,
+        body: {
+          "name": name,
+          "email": email,
+          "phone": phone,
+          "city_id": cityId,
+          "image": fileName,
+        },
+        options: Options(
+          headers: {
+            'Accept-Language': lan,
+            'Authorization': user.data!.token,
+          },
+        ),
+      );
+      return Right(LoginModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

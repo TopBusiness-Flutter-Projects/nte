@@ -7,7 +7,9 @@ import 'package:nte/features/homescreen/cubit/state.dart';
 import '../../../core/models/login_model.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this.api) : super(InitHomeState());
+  HomeCubit(this.api) : super(InitHomeState()) {
+    getProfileInfo();
+  }
   ServiceApi api;
 
   int selectedIndex = 0;

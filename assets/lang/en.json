@@ -71,7 +71,7 @@
   "pending_offers": "New orders",
   "completed_offers": "Completed Offers",
   "pending": "wating",
-  "my_offers": "offers",
+  "my_offers": "new order",
   "no_truck": "You don't have trucks",
   "truck_details": "Truck Details",
   "search": "search",
@@ -89,5 +89,6 @@
   "mail": "email",
   "log_out": "logout",
   "edit_account": "edit account",
-  "delete_account": "delete account"
+  "delete_account": "delete account",
+  "update_account":"update account"
 }
