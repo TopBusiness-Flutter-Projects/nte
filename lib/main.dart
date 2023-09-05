@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/app.dart';
 import 'package:nte/app_bloc_observer.dart';
+import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/restart_app_class.dart';
 import 'package:nte/injector.dart' as injector;
 import 'package:firebase_core/firebase_core.dart';
-
 import 'firebase_options.dart';
 
 /*
@@ -21,6 +21,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      // statusBarBrightness: Brightness.light,
+      // statusBarIconBrightness: Brightness.light,
+      systemStatusBarContrastEnforced: true));
   await injector.setup();
   Bloc.observer = AppBlocObserver();
   runApp(

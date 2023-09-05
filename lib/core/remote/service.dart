@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:nte/core/api/end_points.dart';
+import 'package:nte/core/models/allplaces.dart';
 import 'package:nte/core/models/city_model.dart';
 
 import '../../features/mainscreen/cubit/cubit.dart';
@@ -253,6 +254,25 @@ class ServiceApi {
         ),
       );
       return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, AllPlacesModel>> getAllPlaces() async {
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lan = await Preferences.instance.getSavedLang();
+
+    try {
+      var response = await dio.get(
+        EndPoints.allPlaces,
+        options: Options(headers: {
+          'Authorization': loginModel.data!.token,
+          "Accept-Language": lan
+        }),
+      );
+      return Right(AllPlacesModel.fromJson(response));
+      //
     } on ServerException {
       return Left(ServerFailure());
     }

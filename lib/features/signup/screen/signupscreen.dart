@@ -166,18 +166,19 @@ class SignUpScreen extends StatelessWidget {
                     //   controller: controller.cityController,
                     // ),
                     Container(
-                      height: getSize(context) / 6,
                       padding: EdgeInsets.symmetric(
                           horizontal: getSize(context) / 22),
                       child: DropdownButtonFormField2<CityData>(
                         isExpanded: true,
+                        autofocus: true,
                         style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Cairo',
                             color: AppColors.black),
                         decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 14, horizontal: 14),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: getSize(context) / 44,
+                              horizontal: getSize(context) / 44),
                           hintText: 'city'.tr(),
                           hintStyle: TextStyle(
                             fontWeight: FontWeight.w400,
@@ -191,19 +192,19 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           border: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.circular(getSize(context) / 8),
+                                BorderRadius.circular(getSize(context) / 22),
                             borderSide:
                                 BorderSide(color: AppColors.buttonColor),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.circular(getSize(context) / 8),
+                                BorderRadius.circular(getSize(context) / 22),
                             borderSide:
                                 BorderSide(color: AppColors.buttonColor),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.circular(getSize(context) / 8),
+                                BorderRadius.circular(getSize(context) / 22),
                             borderSide:
                                 BorderSide(color: AppColors.buttonColor),
                           ),
@@ -317,12 +318,12 @@ class SignUpScreen extends StatelessWidget {
                           ///
                         }),
                     SizedBox(height: getSize(context) / 22),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: getSize(context) / 22),
-                      child: Image.asset(ImageAssets.copyRight,
-                          width: getSize(context) / 2.5),
-                    ),
+                    // Padding(
+                    //   padding:
+                    //       EdgeInsets.symmetric(vertical: getSize(context) / 22),
+                    //   child: Image.asset(ImageAssets.copyRight,
+                    //       width: getSize(context) / 2.5),
+                    // ),
                   ],
                 ),
               ),

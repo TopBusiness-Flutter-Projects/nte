@@ -18,8 +18,10 @@ class DirectionsRepository {
       'destination': '${destination.latitude},${destination.longitude}',
       'key': googleMapKey
     });
-
+    print(response.statusCode);
+    print('..............................');
     if (response.statusCode == 200) {
+      print(response.data);
       return Directions.fromMap(response.data);
     } else {
       return Directions();

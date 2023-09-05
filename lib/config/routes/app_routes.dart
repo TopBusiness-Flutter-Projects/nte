@@ -10,6 +10,7 @@ import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../core/utils/app_strings.dart';
 import '../../features/addnewtruck/screen/addnewtruck.dart';
+import '../../features/addorders/screen/addorderscreen.dart';
 import '../../features/login/screen/loginscreen.dart';
 import '../../features/profile/screen/profilescreen.dart';
 import '../../features/signup/screen/signupscreen.dart';
@@ -29,7 +30,7 @@ class Routes {
   static const String addNewTruck = '/addNewTruckScreen';
   static const String truckDetailsScreen = '/truckDetailsScreen';
   static const String editProfileScreen = '/EditProfileScreen';
-
+  static const String addNewOrder = '/AddNewOrder';
   //EditProfileScreen
 }
 
@@ -108,12 +109,12 @@ class AppRoutes {
       //     child: const AddNewTruckScreen(),
       //   );
       //TruckDetailsScreen
-      case Routes.truckDetailsScreen:
+      case Routes.addNewOrder:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: const TruckDetailsScreen(),
+          child: const AddOrdersScreen(),
         );
       case Routes.editProfileScreen:
         return PageTransition(

@@ -7,6 +7,7 @@ class ChangeBottomNavHomeState extends HomeState {}
 class NavToOrdersHomeState extends HomeState {}
 
 class NavToHomeState extends HomeState {}
+class NavToHome2State extends HomeState {}
 
 class OnSelectNewitem extends HomeState {}
 

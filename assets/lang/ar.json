@@ -9,7 +9,9 @@
   "password": "كلمة المرور",
   "email_msg": "من فضلك ادخل البريد الالكتروني",
   "password_msg": "من فضلك أدخل كلمة المرور",
-  "identity": "الهوية",
+  "identity": "الهوية",  "truck_msg":"أدخل نوع الشاحنه",
+
+  "price_2_msg": "أدخل قيمة البضاعه",
   "identity_msg": "من فضلك أدخل الهوية",
   "forget_pass": "نسيت كلمة المرور",
   "dont_have_account": "ليس لديك حساب معنا ؟",
@@ -75,7 +77,9 @@
   "truck_details": "تفاصيل الشاحنه",
   "search": "بحث",
   "weight": "الوزن",
+  "weight_msg": "من فضلك أدخل الوزن",
   "qantity": "الكميه",
+  "qantity_msg": "من فضلك أدخل الكميه",
   "qantity_type": "نوع الحمولة",
   "driver_name": "اسم السائق",
   "trasfer_date": "موعد النقل",
@@ -90,6 +94,5 @@
   "log_out": "تسجيل خروج",
   "edit_account": "تعديل الحساب",
   "delete_account": "حذف الحساب",
-  "update_account":"تحديث الحساب "
-
+  "update_account": "تحديث الحساب "
 }

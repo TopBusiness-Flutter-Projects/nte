@@ -171,19 +171,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 SizedBox(height: getSize(context) / 30),
                                 Container(
-                                  height: getSize(context) / 6,
                                   padding: EdgeInsets.symmetric(
                                       horizontal: getSize(context) / 22),
                                   child: DropdownButtonFormField2<CityData>(
                                     isExpanded: true,
+                                    autofocus: false,
                                     style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Cairo',
                                         color: AppColors.black),
                                     decoration: InputDecoration(
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              vertical: 14, horizontal: 14),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: getSize(context) / 44,
+                                          horizontal: getSize(context) / 44),
                                       hintText: 'city'.tr(),
                                       hintStyle: TextStyle(
                                         fontWeight: FontWeight.w400,
@@ -197,19 +197,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                            getSize(context) / 8),
+                                            getSize(context) / 22),
                                         borderSide: BorderSide(
                                             color: AppColors.buttonColor),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                            getSize(context) / 8),
+                                            getSize(context) / 22),
                                         borderSide: BorderSide(
                                             color: AppColors.buttonColor),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(
-                                            getSize(context) / 8),
+                                            getSize(context) / 22),
                                         borderSide: BorderSide(
                                             color: AppColors.buttonColor),
                                       ),

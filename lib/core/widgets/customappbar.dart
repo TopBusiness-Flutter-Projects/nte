@@ -14,10 +14,12 @@ class CustomAppBar extends StatelessWidget {
       {this.isHome = false,
       this.isProfile = false,
       this.isEditProfile = false,
+      this.isAddOrder = false,
       super.key});
   bool isHome;
   bool isProfile;
   bool isEditProfile;
+  bool isAddOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +199,8 @@ class CustomAppBar extends StatelessWidget {
                                   icon: Icon(
                                     Icons.arrow_forward,
                                     color: AppColors.white,
-                                  ))
+                                  ),
+                                )
                         ],
                       ),
                     )

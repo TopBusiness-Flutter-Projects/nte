@@ -11,6 +11,8 @@ class CustomButton extends StatelessWidget {
       required this.onClick,
       this.paddingHorizontal = 0,
       this.borderRadius = 8,
+      this.width,
+      this.height,
       this.textcolor = Colors.white})
       : super(key: key);
   final String text;
@@ -19,6 +21,9 @@ class CustomButton extends StatelessWidget {
   bool isLoading;
   final double paddingHorizontal;
   final double? borderRadius;
+  double? width;
+  double? height;
+
   final VoidCallback onClick;
 
   @override
@@ -30,8 +35,8 @@ class CustomButton extends StatelessWidget {
       child: InkWell(
         onTap: onClick,
         child: Container(
-          width: getSize(context) / 1.5,
-          height: getSize(context) / 8.5,
+          width: width ?? getSize(context) / 1.5,
+          height: height ?? getSize(context) / 8.5,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: color,

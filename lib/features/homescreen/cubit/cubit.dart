@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/remote/service.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
@@ -40,8 +41,14 @@ class HomeCubit extends Cubit<HomeState> {
     emit(NavToHomeState());
   }
 
-  onSelectIgtem(int index) {
+  onSelectIgtem(int index, BuildContext context) {
     selectedIndex = index;
+
     emit(OnSelectNewitem());
+  }
+
+  ontapFloatingActionButton(BuildContext context) {
+    Navigator.pushNamed(context, Routes.addNewOrder);
+    emit(NavToHome2State());
   }
 }

@@ -15,12 +15,12 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     this.validatorMessage = '',
     this.controller,
+    this.horizontalPadding = 20,
     this.imageColor = Colors.grey,
     required this.backgroundColor,
+    this.isAdd = false,
     this.isEnable = true,
     this.onchange,
-    this.contentPadding =
-        const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
   }) : super(key: key);
   final Widget? prefixWidget;
   final Widget? suffixIcon;
@@ -34,13 +34,15 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onchange;
   final TextInputType textInputType;
   final TextEditingController? controller;
-  final EdgeInsetsGeometry contentPadding;
+  final double horizontalPadding;
+  final bool isAdd;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getSize(context) / 6,
-      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+      // height: getSize(context) / 7,
+      padding: EdgeInsets.symmetric(vertical: 0, horizontal: horizontalPadding),
       child: TextFormField(
+        textAlignVertical: TextAlignVertical.center,
         controller: controller,
         keyboardType: textInputType,
         obscureText: isPassword,
@@ -50,24 +52,29 @@ class CustomTextField extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontFamily: 'Cairo',
         ),
+        autofocus: true,
         decoration: InputDecoration(
-          contentPadding: contentPadding,
+          contentPadding: const EdgeInsets.all(0),
           hintStyle: TextStyle(
             color: AppColors.gray6,
             fontWeight: FontWeight.w400,
           ),
           hintText: title,
+          isDense: true,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(getSize(context) / 8),
-            borderSide: BorderSide(color: AppColors.buttonColor),
+            borderRadius: BorderRadius.circular(getSize(context) / 22),
+            borderSide: BorderSide(
+                color: isAdd ? AppColors.white : AppColors.buttonColor),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(getSize(context) / 8),
-            borderSide: BorderSide(color: AppColors.buttonColor),
+            borderRadius: BorderRadius.circular(getSize(context) / 22),
+            borderSide: BorderSide(
+                color: isAdd ? AppColors.white : AppColors.buttonColor),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(getSize(context) / 8),
-            borderSide: BorderSide(color: AppColors.buttonColor),
+            borderRadius: BorderRadius.circular(getSize(context) / 22),
+            borderSide: BorderSide(
+                color: isAdd ? AppColors.white : AppColors.buttonColor),
           ),
           prefixIcon: prefixWidget,
           suffixIcon: suffixIcon,
@@ -97,7 +104,7 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     // Short-circuit if the new value is empty
-    if (newValue.text.length == 0) {
+    if (newValue.text.isEmpty) {
       return newValue.copyWith(text: '');
     }
 
@@ -118,8 +125,9 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
 
       String newString = '';
       for (int i = chars.length - 1; i >= 0; i--) {
-        if ((chars.length - 1 - i) % 4 == 0 && i != chars.length - 1)
+        if ((chars.length - 1 - i) % 4 == 0 && i != chars.length - 1) {
           newString = separator + newString;
+        }
         newString = chars[i] + newString;
       }
 

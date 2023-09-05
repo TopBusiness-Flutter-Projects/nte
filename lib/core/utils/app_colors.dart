@@ -23,7 +23,7 @@ class AppColors {
   static Color scaffoldColor = HexColor('#F5F5F5');
   static Color avatarColor = HexColor('#96B2B5');
   static Color redColor = HexColor('#E80000');
-
+  static Color sheetColor = HexColor('#F5F4F4');
   static Color hint = Colors.grey;
   static Color blackLite = Colors.black54;
   static Color error = Colors.red;
