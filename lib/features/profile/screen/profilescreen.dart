@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/config/routes/app_routes.dart';
+import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/core/widgets/my_svg_widget.dart';
-import 'package:nte/features/editprofile/screen/edit_profile_screen.dart';
 import 'package:nte/features/profile/cubit/cubit.dart';
 import 'package:nte/features/profile/cubit/state.dart';
 
@@ -44,23 +44,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
         return SafeArea(
           child: Scaffold(
               backgroundColor: AppColors.secondPrimary2,
-              body: Column(children: [
-                Container(
-                  height: getSize(context) / 3.2,
-                  width: double.infinity,
-                  color: AppColors.blue1,
-                  child: CustomAppBar(isHome: true, isProfile: true),
-                ),
-                SizedBox(height: getSize(context) / 66),
-                isLoading
-                    ? CircularProgressIndicator(
+              body: isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
                         color: AppColors.primary,
-                      )
-                    : Stack(
+                      ),
+                    )
+                  : ListView(children: [
+                      Container(
+                        height: getSize(context) / 3.2,
+                        width: double.infinity,
+                        color: AppColors.blue1,
+                        child: CustomAppBar(isHome: true, isProfile: true),
+                      ),
+                      SizedBox(height: getSize(context) / 66),
+                      Stack(
                         alignment: Alignment.center,
                         children: [
                           Container(
-                            height: getSize(context) / 7,
+                            height: getSize(context) / 7.5,
                             margin: EdgeInsets.only(top: getSize(context) / 9),
                             decoration: BoxDecoration(
                                 color: AppColors.white,
@@ -74,9 +76,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Positioned(
                             top: -getSize(context) / 300,
                             child: Padding(
-                              padding: EdgeInsets.all(getSize(context) / 66),
+                              padding: EdgeInsets.all(getSize(context) / 100),
                               child: Material(
-                                elevation: 10,
+                                elevation: 5,
                                 borderRadius:
                                     BorderRadius.circular(getSize(context)),
                                 child: CircleAvatar(
@@ -95,83 +97,190 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                isLoading
-                    ? Container()
-                    : Flexible(
-                        child: Container(
-                          color: AppColors.white,
-                          child: ListView(
-                            shrinkWrap: true,
-                            physics: const BouncingScrollPhysics(),
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: getSize(context) / 22),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  cubit.profileData!.name,
-                                  textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Color(0xFF1E1E1E),
-                                    fontSize: 16,
-                                    fontFamily: 'Cairo',
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                      Container(
+                        color: AppColors.white,
+                        child: ListView(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: getSize(context) / 22),
+                              alignment: Alignment.center,
+                              child: Text(
+                                cubit.profileData!.name,
+                                textAlign: TextAlign.right,
+                                style: const TextStyle(
+                                  color: Color(0xFF1E1E1E),
+                                  fontSize: 16,
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              ClientProfileItem(
-                                desc: cubit.profileData!.phone,
-                                title: 'phone_num'.tr(),
+                            ),
+                            ClientProfileItem(
+                              desc: cubit.profileData!.phone,
+                              title: 'phone_num'.tr(),
+                            ),
+                            ClientProfileItem(
+                              desc: cubit.profileData!.email,
+                              title: 'mail'.tr(),
+                            ),
+                            ClientProfileItem(
+                              desc: cubit.profileData!.city.name,
+                              title: 'city'.tr(),
+                            ),
+                            ClientProfileItem(
+                              isString: false,
+                              icon: Icon(
+                                Icons.logout_outlined,
+                                color: AppColors.primary,
+                                size: getSize(context) / 16,
                               ),
-                              ClientProfileItem(
-                                desc: cubit.profileData!.email,
-                                title: 'mail'.tr(),
-                              ),
-                              ClientProfileItem(
-                                desc: cubit.profileData!.city.name,
-                                title: 'city'.tr(),
-                              ),
-                              ClientProfileItem(
+                              title: 'log_out'.tr(),
+                              onPressed: () {
+                                Navigator.pushReplacementNamed(
+                                    context, Routes.loginRoute);
+                                Preferences.instance.clearAllData();
+                              },
+                            ),
+                            ClientProfileItem(
+                              isString: false,
+                              icon: MySvgWidget(
+                                  path: ImageAssets.editIcon,
+                                  imageColor: AppColors.primary,
+                                  size: getSize(context) / 18),
+                              onPressed: () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pushNamed(Routes.editProfileScreen);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             EditProfileScreen()));
+                              },
+                              title: 'edit_account'.tr(),
+                            ),
+                            ClientProfileItem(
                                 isString: false,
                                 icon: Icon(
-                                  Icons.logout_outlined,
-                                  color: AppColors.primary,
+                                  CupertinoIcons.delete,
                                   size: getSize(context) / 16,
+                                  color: AppColors.redColor,
                                 ),
-                                title: 'log_out'.tr(),
-                                onPressed: () {},
-                              ),
-                              ClientProfileItem(
-                                isString: false,
-                                icon: MySvgWidget(
-                                    path: ImageAssets.editIcon,
-                                    imageColor: AppColors.primary,
-                                    size: getSize(context) / 18),
                                 onPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .pushNamed(Routes.editProfileScreen);
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             EditProfileScreen()));
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Container(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            'حذف الحساب!',
+                                            style: TextStyle(
+                                              color: AppColors.primary,
+                                              fontSize: getSize(context) / 22,
+                                              fontFamily: 'Cairo',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: <Widget>[
+                                              Container(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  'هل انت متأكد من رغبتك بحذف الحساب',
+                                                  style: TextStyle(
+                                                    color: AppColors.primary,
+                                                    fontSize:
+                                                        getSize(context) / 24,
+                                                    fontFamily: 'Cairo',
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        actionsAlignment:
+                                            MainAxisAlignment.center,
+                                        actions: <Widget>[
+                                          InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        getSize(context) / 22),
+                                                alignment: Alignment.center,
+                                                width: getSize(context) / 4,
+                                                height: getSize(context) / 10,
+                                                decoration: ShapeDecoration(
+                                                  color: AppColors.primary,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            getSize(context) /
+                                                                32),
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'لا',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize:
+                                                        getSize(context) / 22,
+                                                    fontFamily: 'Cairo',
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                          InkWell(
+                                              onTap: () {
+                                                cubit.deleteAccount(context);
+                                              },
+                                              child: Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        getSize(context) / 22),
+                                                alignment: Alignment.center,
+                                                width: getSize(context) / 4,
+                                                height: getSize(context) / 10,
+                                                decoration: ShapeDecoration(
+                                                  color:
+                                                      AppColors.secondPrimary2,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            getSize(context) /
+                                                                32),
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  'نعم',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize:
+                                                        getSize(context) / 22,
+                                                    fontFamily: 'Cairo',
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              )),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  //deleteAccount
                                 },
-                                title: 'edit_account'.tr(),
-                              ),
-                              ClientProfileItem(
-                                  isString: false,
-                                  icon: Icon(
-                                    CupertinoIcons.delete,
-                                    size: getSize(context) / 16,
-                                    color: AppColors.redColor,
-                                  ),
-                                  onPressed: () {},
-                                  title: 'delete_account'.tr()),
-                            ],
-                          ),
+                                title: 'delete_account'.tr()),
+                          ],
                         ),
                       )
-              ])),
+                    ])),
         );
       },
     );

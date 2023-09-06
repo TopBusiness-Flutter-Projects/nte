@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 import 'package:nte/core/utils/getsize.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -68,6 +71,28 @@ class _SplashScreenState extends State<SplashScreen> {
     debugPrint('ready in 1...');
     await Future.delayed(const Duration(seconds: 1));
     debugPrint('go!');
-    Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+    _getStoreUser();
+  }
+
+  Future<void> _getStoreUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('onBoarding') == true) {
+      if (prefs.getString('user') != null) {
+        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          Routes.loginRoute,
+          ModalRoute.withName(
+            Routes.initialRoute,
+          ),
+        );
+      }
+    } else {
+      Navigator.pushReplacementNamed(
+        context,
+        Routes.onBoardingRoute,
+      );
+    }
   }
 }

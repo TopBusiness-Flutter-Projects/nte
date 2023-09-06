@@ -7,8 +7,6 @@ import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/getsize.dart';
 
-import '../../orderdetails/cubit/cubit.dart';
-import '../../orderdetails/screen/orderdetails.dart';
 import '../widgets/customitemwidget.dart';
 
 class CompletedOffers extends StatefulWidget {

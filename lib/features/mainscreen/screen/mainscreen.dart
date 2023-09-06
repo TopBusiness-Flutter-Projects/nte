@@ -31,7 +31,6 @@ class _MainScreenState extends State<MainScreen> {
     return BlocBuilder<MainCubit, MainState>(
       builder: (context, state) {
         var controller = context.read<MainCubit>();
-
         return SafeArea(
           child: Scaffold(
               backgroundColor: AppColors.secondPrimary2,
@@ -47,55 +46,52 @@ class _MainScreenState extends State<MainScreen> {
                     child: Stack(
                       alignment: Alignment.topCenter,
                       children: [
-                        Flexible(
-                          child: Container(
-                              margin:
-                                  EdgeInsets.only(top: getSize(context) / 12),
-                              alignment: Alignment.center,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  color: AppColors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(
-                                          getSize(context) / 22),
-                                      topRight: Radius.circular(
-                                          getSize(context) / 22))),
-                              child: Column(
-                                children: [
-                                  Flexible(
-                                    child: Container(
-                                        margin: EdgeInsets.only(
-                                            top: getSize(context) / 32),
-                                        alignment: Alignment.center,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: AppColors.white,
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(
-                                                  getSize(context) / 22),
-                                              topRight: Radius.circular(
-                                                  getSize(context) / 22)),
+                        Container(
+                            margin: EdgeInsets.only(top: getSize(context) / 12),
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft:
+                                        Radius.circular(getSize(context) / 22),
+                                    topRight: Radius.circular(
+                                        getSize(context) / 22))),
+                            child: Column(
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                      margin: EdgeInsets.only(
+                                          top: getSize(context) / 32),
+                                      alignment: Alignment.center,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(
+                                                getSize(context) / 22),
+                                            topRight: Radius.circular(
+                                                getSize(context) / 22)),
+                                      ),
+                                      child: RefreshIndicator(
+                                        onRefresh: () async {
+                                          controller.ordersCompleted();
+                                          controller.ordersNotCompleted();
+                                        },
+                                        child: TabScreen(
+                                          titles: [
+                                            'completed_offers'.tr(),
+                                            'pending_offers'.tr()
+                                          ],
+                                          Screens: const [
+                                            CompletedOffers(),
+                                            PendingOffers()
+                                          ],
                                         ),
-                                        child: RefreshIndicator(
-                                          onRefresh: () async {
-                                            controller.ordersCompleted();
-                                            controller.ordersNotCompleted();
-                                          },
-                                          child: TabScreen(
-                                            titles: [
-                                              'completed_offers'.tr(),
-                                              'pending_offers'.tr()
-                                            ],
-                                            Screens: const [
-                                              CompletedOffers(),
-                                              PendingOffers()
-                                            ],
-                                          ),
-                                        )),
-                                  ),
-                                ],
-                              )),
-                        ),
+                                      )),
+                                ),
+                              ],
+                            )),
                         Positioned(
                           top: -10,
                           child: Container(

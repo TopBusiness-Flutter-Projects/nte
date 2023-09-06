@@ -180,6 +180,25 @@ class ServiceApi {
     }
   }
 
+  Future<Either<Failure, NullModel>> deleteOrder(int id) async {
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    String lan = await Preferences.instance.getSavedLang();
+
+    try {
+      var response = await dio.delete(
+        EndPoints.deleteOrder + id.toString(),
+        options: Options(headers: {
+          'Authorization': loginModel.data!.token,
+          "Accept-Language": lan
+        }),
+      );
+      return Right(NullModel.fromJson(response));
+      //
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
   Future<Either<Failure, LoginModel>> getProfile() async {
     LoginModel loginModel = await Preferences.instance.getUserModel();
     String lan = await Preferences.instance.getSavedLang();
@@ -199,13 +218,13 @@ class ServiceApi {
     }
   }
 
-  Future<Either<Failure, NullModel>> deleteOrder(int id) async {
+  Future<Either<Failure, NullModel>> deleteAccount() async {
     LoginModel loginModel = await Preferences.instance.getUserModel();
     String lan = await Preferences.instance.getSavedLang();
 
     try {
-      var response = await dio.delete(
-        EndPoints.deleteOrder + id.toString(),
+      var response = await dio.post(
+        EndPoints.deleteAccount,
         options: Options(headers: {
           'Authorization': loginModel.data!.token,
           "Accept-Language": lan
@@ -273,6 +292,47 @@ class ServiceApi {
       );
       return Right(AllPlacesModel.fromJson(response));
       //
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, NullModel>> addNewOrder({
+    required File image,
+    required int from_warehouse,
+    required int to_warehouse,
+    required double weight,
+    required double qty,
+    required double value,
+    required String type,
+    required String description,
+  }) async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      var fileName;
+      fileName = image.path.split('/').last;
+      var data = await MultipartFile.fromFile(image.path, filename: fileName);
+      fileName = data;
+      final response = await dio.post(EndPoints.addOrder,
+          options: Options(
+            headers: {
+              'Authorization': loginModel.data!.token,
+              "Accept-Language": lan
+            },
+          ),
+          formDataIsEnabled: true,
+          body: {
+            "image": fileName ?? '',
+            "from_warehouse": from_warehouse,
+            "to_warehouse": to_warehouse,
+            "weight": weight,
+            "qty": qty,
+            "value": value,
+            "type": type,
+            "description": description
+          });
+      return Right(NullModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

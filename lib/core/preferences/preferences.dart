@@ -12,16 +12,16 @@ class Preferences {
 
   factory Preferences() => instance;
 
-  // Future<void> setFirstInstall() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('onBoarding', 'Done');
-  // }
+  Future<void> setFirstInstall() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('onBoarding', false);
+  }
 
-  // Future<String?> getFirstInstall() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? jsonData = prefs.getString('onBoarding');
-  //   return jsonData;
-  // }
+  Future<bool?> getFirstInstall() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? jsonData = prefs.getBool('onBoarding');
+    return jsonData;
+  }
 
   Future<void> setUser(LoginModel loginModel) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

@@ -49,9 +49,10 @@
   "transfer_day": "transfer day",
   "trasfer_date": "Transfer date",
   "transfer_type": "Payload type",
-  "souurce": "source",
+  "souurce": "source",  "add_new_order":"add new order",
   "destination": "destination",
-  "truck_info": "Truck info",
+  "truck_info": "Truck info",  "desc_msg":"please enter description",  "desc_des":"Please enter full shipment details",
+
   "truck_msg":"please enter truck type",
   "description": "description",
   "send_offer": "Submit your offer now",
@@ -94,5 +95,8 @@
   "log_out": "logout",
   "edit_account": "edit account",
   "delete_account": "delete account",
-  "update_account": "update account"
+  "update_account": "update account",
+  "accept_on":"I agree to  ", "add_image": "Enter the image of the shipment",
+  "accept_on_2":" company's terms",
+  "accept_on_3":" and conditions'"
 }

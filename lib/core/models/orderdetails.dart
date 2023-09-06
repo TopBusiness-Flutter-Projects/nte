@@ -31,11 +31,11 @@ class OrderDetailsModelData {
   String image;
   Warehouse fromWarehouse;
   Warehouse toWarehouse;
-  int weight;
-  int quantity;
-  int value;
+  dynamic weight;
+  dynamic quantity;
+  dynamic value;
   String type;
-  int? price;
+  dynamic price;
   Driver? driver;
   String description;
   DateTime createdAt;

@@ -8,6 +8,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 import 'package:nte/core/utils/getsize.dart';
+import 'package:nte/core/widgets/dialogs.dart';
 import 'package:nte/features/forgetpassword/cubit/cubit.dart';
 import 'package:nte/features/forgetpassword/cubit/state.dart';
 
@@ -62,141 +63,129 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               )
             ],
           ),
-          body: Form(
-            key: key,
-            child: Column(
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: getSize(context) / 8),
-                        Container(
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: getSize(context) / 22),
+            child: Form(
+              key: key,
+              child: Column(
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SizedBox(height: getSize(context) / 8),
+                          Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: getSize(context) / 16),
+                              child: Image.asset(ImageAssets.resetPass)),
+                          Container(
                             alignment: Alignment.center,
+                            padding: EdgeInsets.all(getSize(context) / 22),
+                            child: Text(
+                              'forget_msg'.tr(),
+                              style: TextStyle(
+                                  fontFamily: 'Cairo',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: getSize(context) / 22,
+                                  color: AppColors.buttonColor),
+                            ),
+                          ),
+                          SizedBox(height: getSize(context) / 8),
+                          Container(
+                            // dec
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius:
+                                  BorderRadius.circular(getSize(context) / 22),
+                              border: Border.all(color: AppColors.buttonColor),
+                            ),
                             padding: EdgeInsets.symmetric(
-                                horizontal: getSize(context) / 16),
-                            child: Image.asset(ImageAssets.resetPass)),
-                        Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.all(getSize(context) / 22),
-                          child: Text(
-                            'forget_msg'.tr(),
-                            style: TextStyle(
-                                fontFamily: 'Cairo',
-                                fontWeight: FontWeight.w400,
+                                horizontal: getSize(context) / 22),
+                            child: InternationalPhoneNumberInput(
+                              countries: const ['SA', 'EG'],
+                              inputDecoration: InputDecoration(
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                fillColor: AppColors.white,
+                                filled: true,
+                              ),
+                              searchBoxDecoration: InputDecoration(
+                                labelText: 'search'.tr(),
+                              ),
+                              errorMessage: null,
+                              isEnabled: true,
+                              onInputChanged: (PhoneNumber number) {
+                                controller.phoneCode = number.dialCode!;
+                              },
+                              autoFocusSearch: true,
+                              initialValue: PhoneNumber(
+                                isoCode: controller.phoneCode == '+966'
+                                    ? "SA"
+                                    : 'EG',
+                              ),
+                              selectorConfig: const SelectorConfig(
+                                selectorType:
+                                    PhoneInputSelectorType.BOTTOM_SHEET,
+                                showFlags: true,
+                                setSelectorButtonAsPrefixIcon: false,
+                                useEmoji: true,
+                                trailingSpace: false,
+                                leadingPadding: 0,
+                              ),
+                              ignoreBlank: true,
+                              selectorTextStyle: TextStyle(
+                                color: AppColors.black,
                                 fontSize: getSize(context) / 22,
-                                color: AppColors.buttonColor),
-                          ),
-                        ),
-                        SizedBox(height: getSize(context) / 8),
-                        // CustomTextField(
-                        //   title: 'phone'.tr(),
-                        //   textInputType: TextInputType.phone,
-                        //   backgroundColor: AppColors.white,
-                        //   prefixWidget: const Icon(CupertinoIcons.phone),
-                        //   validatorMessage: 'phone_msg'.tr(),
-                        //   controller: controller.phoneController,
-                        // ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getSize(context) / 22),
-                          child: InternationalPhoneNumberInput(
-                            countries: const ['SA', 'EG'],
-                            inputDecoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppColors.black, strokeAlign: 2),
                               ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppColors.black, strokeAlign: 2),
+                              hintText: 'search'.tr(),
+                              textStyle: TextStyle(
+                                color: AppColors.black,
+                                fontSize: getSize(context) / 22,
                               ),
-                              focusedBorder: UnderlineInputBorder(
+                              textAlign: TextAlign.end,
+                              formatInput: false,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return null;
+                                }
+                                return null;
+                              },
+                              textFieldController: controller.phoneController,
+                              keyboardType: TextInputType.phone,
+                              keyboardAction: TextInputAction.go,
+                              inputBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: AppColors.black, strokeAlign: 2),
+                                    color: AppColors.black,
+                                    width: 1,
+                                    strokeAlign: 1),
                               ),
-                              errorBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: AppColors.black, strokeAlign: 2),
-                              ),
-                              fillColor: AppColors.white,
-                              filled: true,
-                            ),
-                            searchBoxDecoration: InputDecoration(
-                              labelText: 'search'.tr(),
-                            ),
-                            errorMessage: null,
-                            isEnabled: true,
-                            onInputChanged: (PhoneNumber number) {
-                              controller.phoneCode = number.dialCode!;
-                            },
-                            autoFocusSearch: true,
-                            initialValue: PhoneNumber(
-                              isoCode:
-                                  controller.phoneCode == '+966' ? "SA" : 'EG',
-                            ),
-                            selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                              showFlags: false,
-                              setSelectorButtonAsPrefixIcon: false,
-                              useEmoji: true,
-                              trailingSpace: false,
-                              leadingPadding: 0,
-                            ),
-                            ignoreBlank: true,
-                            selectorTextStyle: TextStyle(
-                              color: AppColors.black,
-                              fontSize: getSize(context) / 22,
-                            ),
-                            hintText: 'search'.tr(),
-                            textStyle: TextStyle(
-                              color: AppColors.black,
-                              fontSize: getSize(context) / 22,
-                            ),
-                            textAlign: TextAlign.end,
-                            formatInput: false,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'phone_msg'.tr();
-                              }
-                              return null;
-                            },
-                            textFieldController: controller.phoneController,
-                            keyboardType: TextInputType.phone,
-                            keyboardAction: TextInputAction.go,
-                            inputBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: AppColors.black,
-                                  width: 1,
-                                  strokeAlign: 1),
                             ),
                           ),
-                        ),
-                        SizedBox(height: getSize(context) / 8),
-                        CustomButton(
-                            isLoading: isLoading,
-                            paddingHorizontal: getSize(context) / 8,
-                            borderRadius: getSize(context) / 22,
-                            text: 'send'.tr(),
-                            color: AppColors.primary,
-                            onClick: () {
-                              if (key.currentState!.validate()) {
-                                controller.phoneCheck(context);
-                              }
-                            }),
-                        SizedBox(height: getSize(context) / 22),
-                        // Padding(
-                        //   padding: EdgeInsets.symmetric(
-                        //       vertical: getSize(context) / 22),
-                        //   child: Image.asset(ImageAssets.copyRight,
-                        //       width: getSize(context) / 2.5),
-                        // ),
-                      ],
+                          SizedBox(height: getSize(context) / 8),
+                          CustomButton(
+                              isLoading: isLoading,
+                              paddingHorizontal: getSize(context) / 8,
+                              borderRadius: getSize(context) / 22,
+                              text: 'send'.tr(),
+                              color: AppColors.primary,
+                              onClick: () {
+                                if (key.currentState!.validate()) {
+                                  controller.phoneCheck(context);
+                                } else {
+                                  errorGetBar('phone_msg'.tr());
+                                }
+                              }),
+                          SizedBox(height: getSize(context) / 22),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

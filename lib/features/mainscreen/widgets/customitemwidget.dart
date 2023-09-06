@@ -62,6 +62,8 @@ class OrdersWidget extends StatelessWidget {
                                 ),
                                 Text(
                                   'transfer_type'.tr(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
                                     color: AppColors.primary,
@@ -97,6 +99,8 @@ class OrdersWidget extends StatelessWidget {
                                                       'waiting'
                                                   ? "waiting"
                                                   : "hanging",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               fontSize: getSize(context) / 28,
                                               fontFamily: 'Cairo',
@@ -111,6 +115,8 @@ class OrdersWidget extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
                               orderModelData.type,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.right,
                               style: TextStyle(
                                 color: AppColors.black,
@@ -149,6 +155,8 @@ class OrdersWidget extends StatelessWidget {
                           ),
                           Text(
                             'souurce'.tr(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               color: AppColors.primary,
@@ -162,6 +170,8 @@ class OrdersWidget extends StatelessWidget {
                     ),
                     Text(
                       orderModelData.fromWarehouse.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: AppColors.black,
@@ -196,6 +206,8 @@ class OrdersWidget extends StatelessWidget {
                           ),
                           Text(
                             'destination'.tr(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.right,
                             style: TextStyle(
                               color: AppColors.primary,
@@ -209,6 +221,8 @@ class OrdersWidget extends StatelessWidget {
                     ),
                     Text(
                       orderModelData.toWarehouse.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: AppColors.black,

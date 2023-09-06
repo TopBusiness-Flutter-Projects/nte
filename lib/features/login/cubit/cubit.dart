@@ -4,6 +4,7 @@ import 'package:nte/core/models/login_model.dart';
 import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/remote/service.dart';
 import 'package:nte/features/login/cubit/state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../config/routes/app_routes.dart';
 import '../../../core/widgets/dialogs.dart';
@@ -37,6 +38,7 @@ class LoginCubit extends Cubit<LoginState> {
   var formKey = GlobalKey<FormState>();
   LoginModel? userModel;
   loginAuth(BuildContext context) async {
+    var pref = await SharedPreferences.getInstance();
     emit(LoadingLoginAuth());
     final response = await api.loginAuth(
         email: emailController.text,
@@ -46,12 +48,12 @@ class LoginCubit extends Cubit<LoginState> {
       if (r.code == 200) {
         Preferences.instance.setUser(r).then((value) {
           userModel = r;
-
           Navigator.pushNamed(context, Routes.homeScreen);
           successGetBar(r.message);
         });
         emailController.clear();
         passwprdController.clear();
+        pref.setBool('onBoarding', true);
         emit(LoadedLoginAuth());
       } else {
         errorGetBar(r.message);

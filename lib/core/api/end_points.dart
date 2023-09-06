@@ -16,4 +16,6 @@ class EndPoints {
 
   static const String updateProfile = '${baseUrl}auth/updateProfile';
   static const String allPlaces = '${baseUrl}orders/getAllPlaces';
+  static const String addOrder = '${baseUrl}orders/addNewOrder';
+  static const String deleteAccount = '${baseUrl}auth/deleteAccount';
 }

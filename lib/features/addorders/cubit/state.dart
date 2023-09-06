@@ -17,3 +17,15 @@ class ErrorGetAllPlaces extends AddNewOrderState {}
 class ChangePlacesSource extends AddNewOrderState {}
 
 class ChangePlacesDestination extends AddNewOrderState {}
+
+class ChangeCheckBoxValue extends AddNewOrderState {}
+
+class LoadingAddNewImage extends AddNewOrderState {}
+
+class LoadedAddNewImage extends AddNewOrderState {}
+
+class LoadingAddNewOrder extends AddNewOrderState {}
+
+class LoadedAddNewOrder extends AddNewOrderState {}
+
+class ErrorAddNewOrder extends AddNewOrderState {}

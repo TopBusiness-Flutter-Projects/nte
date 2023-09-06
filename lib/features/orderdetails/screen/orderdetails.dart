@@ -150,194 +150,186 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     color: AppColors.blue1,
                     child: CustomAppBar(),
                   ),
-                  Flexible(
+                  Expanded(
                     child: Stack(
                       alignment: Alignment.topCenter,
                       children: [
-                        Flexible(
-                          child: isLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(
-                                      color: AppColors.primary),
-                                )
-                              : Container(
-                                  margin: EdgeInsets.only(
-                                      top: getSize(context) / 12),
-                                  alignment: Alignment.center,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(
-                                              getSize(context) / 22),
-                                          topRight: Radius.circular(
-                                              getSize(context) / 22))),
-                                  child: cubit.orderdetails == null
-                                      ? CircularProgressIndicator(
-                                          color: AppColors.primary,
-                                        )
-                                      : ListView(
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          children: [
-                                            Stack(
-                                              alignment: Alignment.center,
-                                              children: [
-                                                Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal:
-                                                          getSize(context) / 6,
-                                                      vertical:
-                                                          getSize(context) /
-                                                              12),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              getSize(context) /
-                                                                  22)),
-                                                  child: ClipRRect(
+                        isLoading
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                    color: AppColors.primary),
+                              )
+                            : Container(
+                                margin:
+                                    EdgeInsets.only(top: getSize(context) / 12),
+                                alignment: Alignment.center,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    color: AppColors.white,
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(
+                                            getSize(context) / 22),
+                                        topRight: Radius.circular(
+                                            getSize(context) / 22))),
+                                child: cubit.orderdetails == null
+                                    ? CircularProgressIndicator(
+                                        color: AppColors.primary,
+                                      )
+                                    : ListView(
+                                        physics: const BouncingScrollPhysics(),
+                                        children: [
+                                          Stack(
+                                            alignment: Alignment.center,
+                                            children: [
+                                              Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        getSize(context) / 6,
+                                                    vertical:
+                                                        getSize(context) / 12),
+                                                decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             getSize(context) /
-                                                                22),
-                                                    child: Image.network(
-                                                      cubit.orderdetails!.image,
-                                                      fit: BoxFit.fitWidth,
-                                                      height: getSize(context) /
-                                                          1.8,
-                                                      width: getSize(context) /
-                                                          1.2,
-                                                    ),
+                                                                22)),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          getSize(context) /
+                                                              22),
+                                                  child: Image.network(
+                                                    cubit.orderdetails!.image,
+                                                    fit: BoxFit.fitWidth,
+                                                    height:
+                                                        getSize(context) / 1.8,
+                                                    width:
+                                                        getSize(context) / 1.2,
                                                   ),
                                                 ),
-                                                cubit.orderdetails!.status ==
-                                                        'hanging'
-                                                    ? Positioned(
-                                                        right:
-                                                            getSize(context) /
-                                                                24,
-                                                        top: getSize(context) /
-                                                            12,
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              cubit.deleteOrder(
-                                                                  context,
-                                                                  cubit
-                                                                      .orderdetails!
-                                                                      .id);
+                                              ),
+                                              cubit.orderdetails!.status ==
+                                                      'hanging'
+                                                  ? Positioned(
+                                                      right:
+                                                          getSize(context) / 24,
+                                                      top:
+                                                          getSize(context) / 12,
+                                                      child: IconButton(
+                                                          onPressed: () {
+                                                            cubit.deleteOrder(
+                                                                context,
+                                                                cubit
+                                                                    .orderdetails!
+                                                                    .id);
 
-                                                              ///delete
-                                                              ///Navigator.pop(context);
-                                                            },
-                                                            icon: Icon(
-                                                              CupertinoIcons
-                                                                  .delete,
-                                                              color: AppColors
-                                                                  .primary,
-                                                            )))
-                                                    : Container(),
-                                                cubit.orderdetails!.status ==
-                                                        'hanging'
-                                                    ? Positioned(
-                                                        right:
-                                                            getSize(context) /
-                                                                24,
-                                                        top: getSize(context) /
-                                                            5,
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              ///Navigator.Edit screen;
-                                                            },
-                                                            icon: MySvgWidget(
-                                                                path: ImageAssets
-                                                                    .editIcon,
-                                                                imageColor:
-                                                                    AppColors
-                                                                        .primary,
-                                                                size: getSize(
-                                                                        context) /
-                                                                    16)))
-                                                    : Container()
-                                              ],
-                                            ),
-                                            // CustomButton(
-                                            //     paddingHorizontal: getSize(context) / 8,
-                                            //     borderRadius: getSize(context) / 16,
-                                            //     text: 'submit_offer'.tr(),
-                                            //     color: AppColors.buttonColor,
-                                            //     onClick: () {
-                                            //       _showBottomSheet(
-                                            //         context,
-                                            //       );
-                                            //       //show botton sheet
-                                            //     }),
+                                                            ///delete
+                                                            ///Navigator.pop(context);
+                                                          },
+                                                          icon: Icon(
+                                                            CupertinoIcons
+                                                                .delete,
+                                                            color: AppColors
+                                                                .primary,
+                                                          )))
+                                                  : Container(),
+                                              cubit.orderdetails!.status ==
+                                                      'hanging'
+                                                  ? Positioned(
+                                                      right:
+                                                          getSize(context) / 24,
+                                                      top: getSize(context) / 5,
+                                                      child: IconButton(
+                                                          onPressed: () {
+                                                            ///Navigator.Edit screen;
+                                                          },
+                                                          icon: MySvgWidget(
+                                                              path: ImageAssets
+                                                                  .editIcon,
+                                                              imageColor:
+                                                                  AppColors
+                                                                      .primary,
+                                                              size: getSize(
+                                                                      context) /
+                                                                  16)))
+                                                  : Container()
+                                            ],
+                                          ),
+                                          // CustomButton(
+                                          //     paddingHorizontal: getSize(context) / 8,
+                                          //     borderRadius: getSize(context) / 16,
+                                          //     text: 'submit_offer'.tr(),
+                                          //     color: AppColors.buttonColor,
+                                          //     onClick: () {
+                                          //       _showBottomSheet(
+                                          //         context,
+                                          //       );
+                                          //       //show botton sheet
+                                          //     }),
 
-                                            ///
-                                            ///
-                                            OrdersDetailsWidgetInfo(
-                                              qantity: cubit
-                                                  .orderdetails!.quantity
-                                                  .toString(),
-                                              weight: cubit.orderdetails!.weight
-                                                  .toString(),
-                                              title: 'truck_info'.tr(),
-                                              destination: cubit.orderdetails!
-                                                  .toWarehouse.name,
-                                              source: cubit.orderdetails!
-                                                  .fromWarehouse.name,
-                                            ),
-                                            OrdersDetailsWidget(
-                                              pathImage: ImageAssets.moneyIcon,
-                                              title: 'price'.tr(),
-                                              price: cubit.orderdetails!.value
-                                                  .toString(),
-                                            ),
+                                          ///
+                                          ///
+                                          OrdersDetailsWidgetInfo(
+                                            qantity: cubit
+                                                .orderdetails!.quantity
+                                                .toString(),
+                                            weight: cubit.orderdetails!.weight
+                                                .toString(),
+                                            title: 'truck_info'.tr(),
+                                            destination: cubit
+                                                .orderdetails!.toWarehouse.name,
+                                            source: cubit.orderdetails!
+                                                .fromWarehouse.name,
+                                          ),
+                                          OrdersDetailsWidget(
+                                            pathImage: ImageAssets.moneyIcon,
+                                            title: 'price'.tr(),
+                                            price: cubit.orderdetails!.value
+                                                .toString(),
+                                          ),
 
-                                            OrdersDetailsWidget(
-                                              pathImage: ImageAssets.trunckIcon,
-                                              title: 'qantity_type'.tr(),
-                                              price: cubit.orderdetails!.type
-                                                  .toString(),
-                                            ),
-                                            OrdersDetailsWidgetDesc(
-                                                title: 'description'.tr(),
-                                                description: cubit
-                                                    .orderdetails!.description),
-                                            cubit.orderdetails!.price == null
-                                                ? Container()
-                                                : OrdersDetailsWidget(
-                                                    pathImage:
-                                                        ImageAssets.dateIcon,
-                                                    title: 'price_2'.tr(),
-                                                    price: cubit
-                                                        .orderdetails!.price
-                                                        .toString(),
-                                                  ),
-                                            cubit.orderdetails!.status ==
-                                                    'complete'
-                                                ? DriverInfo(
-                                                    title: 'driver_info'.tr(),
-                                                    driverName: cubit
-                                                        .orderdetails!
-                                                        .driver!
-                                                        .name,
-                                                    date: cubit.orderdetails!
-                                                        .driver!.dateArrival)
-                                                : cubit.orderdetails!.status ==
-                                                        'hanging'
-                                                    ? DriverInfoHanging(
-                                                        title:
-                                                            'driver_info'.tr())
-                                                    : DriverInfoWaiting(
-                                                        title:
-                                                            'driver_info'.tr()),
+                                          OrdersDetailsWidget(
+                                            pathImage: ImageAssets.trunckIcon,
+                                            title: 'qantity_type'.tr(),
+                                            price: cubit.orderdetails!.type
+                                                .toString(),
+                                          ),
+                                          OrdersDetailsWidgetDesc(
+                                              title: 'description'.tr(),
+                                              description: cubit
+                                                  .orderdetails!.description),
+                                          cubit.orderdetails!.price == null
+                                              ? Container()
+                                              : OrdersDetailsWidget(
+                                                  pathImage:
+                                                      ImageAssets.dateIcon,
+                                                  title: 'price_2'.tr(),
+                                                  price: cubit
+                                                      .orderdetails!.price
+                                                      .toString(),
+                                                ),
+                                          cubit.orderdetails!.status ==
+                                                  'complete'
+                                              ? DriverInfo(
+                                                  title: 'driver_info'.tr(),
+                                                  driverName: cubit
+                                                      .orderdetails!
+                                                      .driver!
+                                                      .name,
+                                                  date: cubit.orderdetails!
+                                                      .driver!.dateArrival)
+                                              : cubit.orderdetails!.status ==
+                                                      'hanging'
+                                                  ? DriverInfoHanging(
+                                                      title: 'driver_info'.tr())
+                                                  : DriverInfoWaiting(
+                                                      title:
+                                                          'driver_info'.tr()),
 
-                                            SizedBox(
-                                              height: getSize(context) / 8,
-                                            )
-                                          ],
-                                        )),
-                        ),
+                                          SizedBox(
+                                            height: getSize(context) / 8,
+                                          )
+                                        ],
+                                      )),
                         Positioned(
                           top: -10,
                           child: Container(

@@ -62,101 +62,88 @@ class OnBoarding1 extends StatelessWidget {
                 ),
               ),
               const Flexible(fit: FlexFit.tight, child: SizedBox()),
-              Positioned(
-                bottom: 0,
-                child: Stack(
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Image.asset(
-                      ImageAssets.vector1,
-                      width: double.infinity,
-                    ),
-                    Image.asset(
-                      ImageAssets.vector2,
-                      width: double.infinity,
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(height: getSize(context) / 4),
-                        Container(
-                          padding: EdgeInsets.all(getSize(context) / 22),
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            'our_app'.tr(),
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: getSize(context) / 18,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
+              Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Image.asset(
+                    ImageAssets.vector1,
+                    width: double.infinity,
+                  ),
+                  Image.asset(
+                    ImageAssets.vector2,
+                    width: double.infinity,
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(height: getSize(context) / 4),
+                      Container(
+                        padding: EdgeInsets.all(getSize(context) / 22),
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          'our_app'.tr(),
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: getSize(context) / 18,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getSize(context) / 22),
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          'only_app_connect'.tr(),
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: getSize(context) / 22,
+                            fontFamily: 'Cairo',
+                            fontWeight: FontWeight.w600,
+                            height: 1.52,
+                          ),
+                        ),
+                        //only_app_connect
+                      ),
+                      SizedBox(height: getSize(context) / 12),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: getSize(context) / 22),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                cubit.pageController.animateToPage(2,
+                                    duration:
+                                        const Duration(milliseconds: 1000),
+                                    curve: Curves.slowMiddle);
+                              },
+                              child: CircleAvatar(
+                                  backgroundColor: AppColors.white,
+                                  radius: getSize(context) / 12,
+                                  child: MySvgWidget(
+                                      path: ImageAssets.arrowIcon,
+                                      imageColor: AppColors.primary,
+                                      size: getSize(context) / 12)),
                             ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getSize(context) / 22),
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            'only_app_connect'.tr(),
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: getSize(context) / 22,
-                              fontFamily: 'Cairo',
-                              fontWeight: FontWeight.w600,
-                              height: 1.52,
+                            const Spacer(),
+                            SmoothPageIndicator(
+                              controller: cubit.pageController,
+                              count: cubit.numPages,
+                              effect: WormEffect(
+                                activeDotColor: AppColors.gray,
+                                dotColor: AppColors.white,
+                                dotHeight: getSize(context) / 44,
+                                dotWidth: getSize(context) / 44,
+                                type: WormType.underground,
+                              ),
                             ),
-                          ),
-                          //only_app_connect
+                          ],
                         ),
-                        SizedBox(height: getSize(context) / 12),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: getSize(context) / 22),
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  cubit.pageController.animateToPage(2,
-                                      duration:
-                                          const Duration(milliseconds: 1000),
-                                      curve: Curves.slowMiddle);
-                                },
-                                child: CircleAvatar(
-                                    backgroundColor: AppColors.white,
-                                    radius: getSize(context) / 12,
-                                    child: MySvgWidget(
-                                        path: ImageAssets.arrowIcon,
-                                        imageColor: AppColors.primary,
-                                        size: getSize(context) / 12)),
-                              ),
-                              const Spacer(),
-                              SmoothPageIndicator(
-                                controller: cubit.pageController,
-                                count: cubit.numPages,
-                                effect: WormEffect(
-                                  activeDotColor: AppColors.gray,
-                                  dotColor: AppColors.white,
-                                  dotHeight: getSize(context) / 44,
-                                  dotWidth: getSize(context) / 44,
-                                  type: WormType.underground,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Padding(
-                        //     padding: const EdgeInsets.symmetric(horizontal: 0),
-                        //     child: Container(
-                        //       width: double.infinity,
-                        //       alignment: Alignment.center,
-                        //       child: Image.asset(
-                        //         ImageAssets.copyRight2,
-                        //         width: getSize(context) / 2.5,
-                        //       ),
-                        //     )),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                    ],
+                  )
+                ],
               )
             ],
           ),
