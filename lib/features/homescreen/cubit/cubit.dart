@@ -36,7 +36,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   navToProfile(BuildContext context) {
-    selectedIndex = 2;
+    selectedIndex = 1;
 
     emit(NavToHomeState());
   }

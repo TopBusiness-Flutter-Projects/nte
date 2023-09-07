@@ -1,12 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nte/core/models/login_model.dart';
-import 'package:nte/core/preferences/preferences.dart';
+
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
+import 'package:nte/features/profile/screen/profilescreen.dart';
 import '../../config/routes/app_routes.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -155,8 +155,7 @@ class CustomAppBar extends StatelessWidget {
                             onTap: () {
                               isEditProfile
                                   ? Navigator.pop(context)
-                                  : Navigator.pushNamed(
-                                      context, Routes.profileScreen);
+                                  : cubit.navToProfile(context);
                             },
                             child: CircleAvatar(
                                 backgroundColor: AppColors.greyColor,
