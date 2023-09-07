@@ -4,12 +4,10 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:nte/core/api/end_points.dart';
 import 'package:nte/core/models/allplaces.dart';
 import 'package:nte/core/models/city_model.dart';
 
-import '../../features/mainscreen/cubit/cubit.dart';
 import '../api/base_api_consumer.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
@@ -315,6 +313,50 @@ class ServiceApi {
       var data = await MultipartFile.fromFile(image.path, filename: fileName);
       fileName = data;
       final response = await dio.post(EndPoints.addOrder,
+          options: Options(
+            headers: {
+              'Authorization': loginModel.data!.token,
+              "Accept-Language": lan
+            },
+          ),
+          formDataIsEnabled: true,
+          body: {
+            "image": fileName ?? '',
+            "from_warehouse": from_warehouse,
+            "to_warehouse": to_warehouse,
+            "weight": weight,
+            "qty": qty,
+            "value": value,
+            "type": type,
+            "description": description
+          });
+      return Right(NullModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, NullModel>> editOrder({
+    required File? image,
+    required String orderId,
+    required int from_warehouse,
+    required int to_warehouse,
+    required double weight,
+    required double qty,
+    required double value,
+    required String type,
+    required String description,
+  }) async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      var fileName;
+      if (image != null) {
+        fileName = image.path.split('/').last;
+        var data = await MultipartFile.fromFile(image.path, filename: fileName);
+        fileName = data;
+      }
+      final response = await dio.post(EndPoints.updateOrder + orderId,
           options: Options(
             headers: {
               'Authorization': loginModel.data!.token,

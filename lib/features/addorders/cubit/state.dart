@@ -29,3 +29,15 @@ class LoadingAddNewOrder extends AddNewOrderState {}
 class LoadedAddNewOrder extends AddNewOrderState {}
 
 class ErrorAddNewOrder extends AddNewOrderState {}
+
+class LoadingEditOrder extends AddNewOrderState {}
+
+class LoadedEditOrder extends AddNewOrderState {}
+
+class ErrorEditOrder extends AddNewOrderState {}
+
+class LoadingTapToEditOrder extends AddNewOrderState {}
+
+class LoadingTapToEditAndChangeDesOrder extends AddNewOrderState {}
+
+class LoadedTapToEditOrder extends AddNewOrderState {}

@@ -13,7 +13,8 @@ import '../widget/screen_one.dart';
 import '../widget/screen_second.dart';
 
 class AddOrdersScreen extends StatefulWidget {
-  const AddOrdersScreen({super.key});
+  AddOrdersScreen({this.isEdit = false, super.key});
+  bool isEdit;
   @override
   State<AddOrdersScreen> createState() => _AddOrdersScreenState();
 }
@@ -157,9 +158,11 @@ class _AddOrdersScreenState extends State<AddOrdersScreen>
                               physics: const NeverScrollableScrollPhysics(),
                               controller: cubit.tabController,
                               dragStartBehavior: DragStartBehavior.start,
-                              children: const [
-                                AddPageOne(),
-                                AddPageSecond(),
+                              children: [
+                                const AddPageOne(),
+                                AddPageSecond(
+                                  isEdit: widget.isEdit,
+                                ),
                               ],
                             ),
                           ),

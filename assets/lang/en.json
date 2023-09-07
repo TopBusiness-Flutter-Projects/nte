@@ -94,6 +94,7 @@
   "mail": "email",
   "log_out": "logout",
   "edit_account": "edit account",
+  "save_edit":"save edit",
   "delete_account": "delete account",
   "update_account": "update account",
   "accept_on":"I agree to  ", "add_image": "Enter the image of the shipment",

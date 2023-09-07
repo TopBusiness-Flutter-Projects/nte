@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -5,15 +7,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nte/config/routes/app_routes.dart';
 import 'package:nte/core/remote/service.dart';
 import 'package:nte/core/widgets/dialogs.dart';
 import 'package:nte/features/addorders/cubit/direction_repository.dart';
 import 'package:nte/features/addorders/cubit/state.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/mainscreen/cubit/cubit.dart';
+import 'package:nte/features/orderdetails/cubit/cubit.dart';
 
 import '../../../core/models/allplaces.dart';
 import '../../../core/models/directions_model.dart';
+import '../../../core/models/orderdetails.dart';
 
 class AddNewOrderCubit extends Cubit<AddNewOrderState> {
   AddNewOrderCubit(this.api) : super(AddNewOrderInitial()) {
@@ -65,10 +70,12 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
   TabController? tabController;
   void navigateToSecondTab() {
     tabController!.animateTo(1);
+    emit(LoadingTapToEditAndChangeDesOrder());
   }
 
   void navigateToFirstTab() {
     tabController!.animateTo(0);
+    emit(LoadingTapToEditAndChangeDesOrder());
   }
 
   List<AllPlacesModelData> cities = [];
@@ -133,6 +140,7 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
       if (image == null) return;
       final imageTemporary = File(image.path);
       imageFile = imageTemporary;
+      imageEdit = null;
       emit(LoadedAddNewImage());
     } on PlatformException catch (e) {
       print('error $e');
@@ -174,6 +182,78 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
       } else {
         errorGetBar(r.message);
         emit(ErrorAddNewOrder());
+      }
+    });
+  }
+
+  String? imageEdit;
+  OrderDetailsModelData? orderdetail;
+  onTapToEditOrder(BuildContext context, OrderDetailsModelData orderdetails) {
+    // context.read<OrderDetailsCubit>().orderDetails(orderdetails.id.toString());
+    emit(LoadingTapToEditOrder());
+    for (int i = 0; i < cities.length; i++) {
+      if (orderdetails.fromWarehouse.id == cities.elementAt(i).id) {
+        selectedValueSource = cities[i];
+      }
+    }
+    for (int i = 0; i < cities.length; i++) {
+      if (orderdetails.toWarehouse.id == cities.elementAt(i).id) {
+        selectedValueDestination = cities[i];
+        onChangeDestination(cities[i]);
+        emit(LoadingTapToEditAndChangeDesOrder());
+      }
+    }
+    orderdetail = orderdetails;
+    ////
+    weightController.text = orderdetails.weight.toString();
+    qantityController.text = orderdetails.quantity.toString();
+    valueOfGoodsController.text = orderdetails.value.toString();
+    typeOfTuckController.text = orderdetails.type.toString();
+    descOfTuckController.text = orderdetails.description.toString();
+    imageEdit = orderdetails.image;
+    Navigator.pushNamed(context, Routes.addNewOrder, arguments: true);
+    emit(LoadedTapToEditOrder());
+  }
+
+  editOrder({required BuildContext context}) async {
+    emit(LoadingEditOrder());
+    final response = await api.editOrder(
+      orderId: orderdetail!.id.toString(),
+      description: descOfTuckController.text,
+      from_warehouse: selectedValueSource!.id,
+      image: imageFile,
+      qty: double.parse(qantityController.text),
+      to_warehouse: selectedValueDestination!.id,
+      type: typeOfTuckController.text,
+      value: double.parse(valueOfGoodsController.text),
+      weight: double.parse(weightController.text),
+    );
+    response.fold((l) => emit(ErrorEditOrder()), (r) {
+      if (r.code == 200) {
+        context.read<MainCubit>().ordersNotCompleted();
+        successGetBar(r.message);
+        typeOfTuckController.clear();
+        weightController.clear();
+        qantityController.clear();
+        valueOfGoodsController.clear();
+        descOfTuckController.clear();
+        imageFile = null;
+        checkBox = false;
+        selectedValueSource = null;
+        source = null;
+        destination = null;
+        info = null;
+        imageEdit = null;
+        selectedValueDestination = null;
+        context
+            .read<OrderDetailsCubit>()
+            .orderDetails(orderdetail!.id.toString());
+        context.read<HomeCubit>().selectedIndex = 0;
+        Navigator.pop(context);
+        emit(LoadedEditOrder());
+      } else {
+        errorGetBar(r.message);
+        emit(ErrorEditOrder());
       }
     });
   }

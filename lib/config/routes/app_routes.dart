@@ -110,11 +110,15 @@ class AppRoutes {
       //   );
       //TruckDetailsScreen
       case Routes.addNewOrder:
+        bool? isEdit = settings.arguments as bool?;
+
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
-          child: const AddOrdersScreen(),
+          child: AddOrdersScreen(
+            isEdit: isEdit ?? false,
+          ),
         );
       case Routes.editProfileScreen:
         return PageTransition(
