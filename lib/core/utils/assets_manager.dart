@@ -55,6 +55,9 @@ class ImageAssets {
   static const String lockIcon = '$iconsPath/lock.svg';
   static const String uploadImage = '$iconsPath/upload_image.svg';
   static const String desc = '$iconsPath/desc.svg';
+  static const String password = '$iconsPath/password.svg';
+  static const String completed = '$iconsPath/completed.svg';
+  static const String sureIcon = '$iconsPath/sure.svg';
 
   //wallet
   //Lottie

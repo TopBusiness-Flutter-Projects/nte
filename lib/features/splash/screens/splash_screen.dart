@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:nte/config/routes/app_routes.dart';
+import 'package:nte/core/models/login_model.dart';
+import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/utils/assets_manager.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,9 +78,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _getStoreUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     if (prefs.getBool('onBoarding') == true) {
       if (prefs.getString('user') != null) {
-        Navigator.pushReplacementNamed(context, Routes.homeScreen);
+        Preferences.instance.getUserModel().then((value) {
+          if (value.data!.type == 'user' && value.data!.userType != null) {
+            Navigator.pushReplacementNamed(context, Routes.homeScreen);
+          } else {
+            Navigator.pushReplacementNamed(context, Routes.homeScreenDriver);
+          }
+        });
       } else {
         Navigator.pushNamedAndRemoveUntil(
           context,

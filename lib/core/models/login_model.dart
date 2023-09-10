@@ -33,7 +33,7 @@ class Data {
   int nationalId;
   CityData city;
   String type;
-  String userType;
+  String? userType;
   String status;
   String token;
   DateTime createdAt;

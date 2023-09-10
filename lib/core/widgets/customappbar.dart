@@ -1,13 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
-import 'package:nte/features/profile/screen/profilescreen.dart';
-import '../../config/routes/app_routes.dart';
 
 class CustomAppBar extends StatelessWidget {
   CustomAppBar(
@@ -15,12 +12,13 @@ class CustomAppBar extends StatelessWidget {
       this.isProfile = false,
       this.isEditProfile = false,
       this.isAddOrder = false,
+      this.isDriver = false,
       super.key});
   bool isHome;
   bool isProfile;
   bool isEditProfile;
   bool isAddOrder;
-
+  bool isDriver;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -155,7 +153,7 @@ class CustomAppBar extends StatelessWidget {
                             onTap: () {
                               isEditProfile
                                   ? Navigator.pop(context)
-                                  : cubit.navToProfile(context);
+                                  : cubit.navToProfile(context, isDriver);
                             },
                             child: CircleAvatar(
                                 backgroundColor: AppColors.greyColor,
@@ -169,7 +167,7 @@ class CustomAppBar extends StatelessWidget {
                             fit: FlexFit.tight,
                             child: InkWell(
                               onTap: () {
-                                cubit.navToProfile(context);
+                                cubit.navToProfile(context, isDriver);
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(

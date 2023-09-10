@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:nte/features/changepassword/screen/changepass.dart';
+import 'package:nte/features/driver_order_details/screens/orderdetailsdriver.dart';
 import 'package:nte/features/editprofile/screen/edit_profile_screen.dart';
 import 'package:nte/features/forgetpassword/screen/forget_password.dart';
 import 'package:nte/features/forgetpassword/screen/otp.dart';
 import 'package:nte/features/forgetpassword/screen/reset_password.dart';
 import 'package:nte/features/homescreen/screen/homescreen.dart';
+import 'package:nte/features/homescreen_driver/screen/homescreen_driver.dart';
 import 'package:nte/features/orderdetails/screen/orderdetails.dart';
 import 'package:nte/features/splash/screens/splash_screen.dart';
 import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
@@ -31,7 +34,11 @@ class Routes {
   static const String truckDetailsScreen = '/truckDetailsScreen';
   static const String editProfileScreen = '/EditProfileScreen';
   static const String addNewOrder = '/AddNewOrder';
-  //EditProfileScreen
+  static const String homeScreenDriver = '/homeScreenDriver';
+  static const String changePasswordDriver = '/ChangePasswordDriver';
+  static const String orderDetailsDriver = '/OrderDetailsDriver';
+
+  //OrderDetailsDriver
 }
 
 class AppRoutes {
@@ -126,6 +133,29 @@ class AppRoutes {
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 1300),
           child: const EditProfileScreen(),
+        );
+      case Routes.homeScreenDriver:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const HomeScreenDriver(),
+        );
+      case Routes.changePasswordDriver:
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: const ChangePasswordDriver(),
+        );
+      case Routes.orderDetailsDriver:
+        String? orderId = settings.arguments as String?;
+
+        return PageTransition(
+          type: PageTransitionType.fade,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 1300),
+          child: OrderDetailsDriver(orderId: orderId!),
         );
       // case Routes.detailsRoute:
       //   final service = settings.arguments as ServicesModel;

@@ -4,29 +4,31 @@ import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
+import 'package:nte/features/homescreen_driver/cubit/homecubit.dart';
+import 'package:nte/features/homescreen_driver/cubit/homestate.dart';
 import 'package:nte/features/profile/screen/profilescreen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../../core/utils/assets_manager.dart';
 import '../../../core/widgets/my_svg_widget.dart';
-import '../../mainscreen/screen/mainscreen.dart';
+import '../../completedorderdriver/screen/completedorderdriver.dart';
+import '../../mainscreen_driver/mainscreen/mainscreendriver.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreenDriver extends StatefulWidget {
+  const HomeScreenDriver({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenDriver> createState() => _HomeScreenDriverState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  final PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
-
-  List<Widget> screens = const [MainScreen(), ProfileScreen()];
+class _HomeScreenDriverState extends State<HomeScreenDriver> {
+  List<Widget> screens = const [
+    MainScreenDriver(),
+    CompletedOrdersDriver(),
+    ProfileScreen()
+  ];
 
   @override
   void initState() {
-    context.read<HomeCubit>().getProfileInfo();
+    context.read<HomeDriverCubit>().getProfileInfo();
     super.initState();
   }
 
@@ -36,15 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         var cubit = context.read<HomeCubit>();
         return Scaffold(
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColors.primary,
-            onPressed: () {
-              cubit.ontapFloatingActionButton(context);
-            },
-            child: const Icon(Icons.add),
-          ),
           body: screens[cubit.selectedIndex],
           bottomNavigationBar: BottomNavigationBar(
             elevation: 10,
@@ -63,8 +56,17 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               BottomNavigationBarItem(
                 icon: MySvgWidget(
-                    path: ImageAssets.profileIcon,
+                    path: ImageAssets.completed,
                     imageColor: cubit.selectedIndex == 1
+                        ? AppColors.primary
+                        : AppColors.buttonColor,
+                    size: getSize(context) / 18),
+                label: 'completed',
+              ),
+              BottomNavigationBarItem(
+                icon: MySvgWidget(
+                    path: ImageAssets.profileIcon,
+                    imageColor: cubit.selectedIndex == 2
                         ? AppColors.primary
                         : AppColors.buttonColor,
                     size: getSize(context) / 18),

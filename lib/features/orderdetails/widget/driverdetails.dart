@@ -11,12 +11,15 @@ class DriverInfo extends StatelessWidget {
   DriverInfo(
       {required this.driverName,
       required this.title,
+      this.path1,
       required this.date,
+      this.title2,
       super.key});
   String driverName;
   DateTime date;
   String title;
-
+  String? path1;
+  String? title2;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -69,14 +72,15 @@ class DriverInfo extends StatelessWidget {
                                   child: Row(
                                     children: [
                                       MySvgWidget(
-                                          path: ImageAssets.identityIcon,
+                                          path:
+                                              path1 ?? ImageAssets.identityIcon,
                                           imageColor: AppColors.primary,
                                           size: getSize(context) / 22),
                                       SizedBox(
                                         width: getSize(context) / 66,
                                       ),
                                       Text(
-                                        'driver_name'.tr(),
+                                        title2 ?? 'driver_name'.tr(),
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,

@@ -16,6 +16,8 @@ class AppColors {
   static Color blueLiteColor = HexColor('#00B3DC');
   static Color buttonColor = HexColor('#4C4C6D');
   static Color greyColor = HexColor('#E9EAEB');
+  static Color greenColor = HexColor('#01A601');
+  static Color greenColorLight = HexColor('#A9FEAB');
   static Color blueTextColor = HexColor('#5663FF');
   static Color grayTextColor = HexColor('#6E7FAA');
   static Color goldStarColor = HexColor('#FFCC00');
@@ -28,6 +30,7 @@ class AppColors {
   static Color blackLite = Colors.black54;
   static Color error = Colors.red;
   static Color success = Colors.green;
+
   static Color white = Colors.white;
   static Color black = Colors.black;
   static Color gray = Colors.grey;

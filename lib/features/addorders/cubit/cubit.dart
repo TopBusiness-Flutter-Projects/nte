@@ -191,6 +191,7 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
   onTapToEditOrder(BuildContext context, OrderDetailsModelData orderdetails) {
     // context.read<OrderDetailsCubit>().orderDetails(orderdetails.id.toString());
     emit(LoadingTapToEditOrder());
+    getAllPlaces();
     for (int i = 0; i < cities.length; i++) {
       if (orderdetails.fromWarehouse.id == cities.elementAt(i).id) {
         selectedValueSource = cities[i];

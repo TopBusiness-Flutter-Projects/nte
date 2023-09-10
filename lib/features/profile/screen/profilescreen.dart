@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:nte/config/routes/app_routes.dart';
+import 'package:nte/core/models/login_model.dart';
 import 'package:nte/core/preferences/preferences.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/assets_manager.dart';
@@ -22,8 +24,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  LoginModel? user;
   @override
   void initState() {
+    Preferences.instance.getUserModel().then((value) {
+      user = value;
+    });
     context.read<ProfileCubit>().getProfile();
     super.initState();
   }
@@ -50,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         color: AppColors.primary,
                       ),
                     )
-                  : ListView(children: [
+                  : ListView(shrinkWrap: true, children: [
                       Container(
                         height: getSize(context) / 3.2,
                         width: double.infinity,
@@ -99,6 +105,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Container(
                         color: AppColors.white,
+                        height: (user!.data!.type == 'user' &&
+                                user!.data!.userType != null)
+                            ? MediaQuery.of(context).size.height / 1.2
+                            : MediaQuery.of(context).size.height / 1.5,
                         child: ListView(
                           shrinkWrap: true,
                           physics: const BouncingScrollPhysics(),
@@ -130,6 +140,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               desc: cubit.profileData!.city.name,
                               title: 'city'.tr(),
                             ),
+                            (user!.data!.type == 'user' &&
+                                    user!.data!.userType != null)
+                                ? Container()
+                                : ClientProfileItem(
+                                    isString: false,
+                                    icon: MySvgWidget(
+                                        path: ImageAssets.password,
+                                        imageColor: AppColors.primary,
+                                        size: getSize(context) / 18),
+                                    title: 'change_pass'.tr(),
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, Routes.changePasswordDriver);
+
+                                      ///
+                                    },
+                                  ),
                             ClientProfileItem(
                               isString: false,
                               icon: Icon(
@@ -144,139 +171,162 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Preferences.instance.clearAllData();
                               },
                             ),
-                            ClientProfileItem(
-                              isString: false,
-                              icon: MySvgWidget(
-                                  path: ImageAssets.editIcon,
-                                  imageColor: AppColors.primary,
-                                  size: getSize(context) / 18),
-                              onPressed: () {
-                                Navigator.of(context, rootNavigator: true)
-                                    .pushNamed(Routes.editProfileScreen);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             EditProfileScreen()));
-                              },
-                              title: 'edit_account'.tr(),
-                            ),
-                            ClientProfileItem(
-                                isString: false,
-                                icon: Icon(
-                                  CupertinoIcons.delete,
-                                  size: getSize(context) / 16,
-                                  color: AppColors.redColor,
-                                ),
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Container(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            'حذف الحساب!',
-                                            style: TextStyle(
-                                              color: AppColors.primary,
-                                              fontSize: getSize(context) / 22,
-                                              fontFamily: 'Cairo',
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        content: SingleChildScrollView(
-                                          child: ListBody(
-                                            children: <Widget>[
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  'هل انت متأكد من رغبتك بحذف الحساب',
-                                                  style: TextStyle(
-                                                    color: AppColors.primary,
-                                                    fontSize:
-                                                        getSize(context) / 24,
-                                                    fontFamily: 'Cairo',
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        actionsAlignment:
-                                            MainAxisAlignment.center,
-                                        actions: <Widget>[
-                                          InkWell(
-                                              onTap: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal:
-                                                        getSize(context) / 22),
-                                                alignment: Alignment.center,
-                                                width: getSize(context) / 4,
-                                                height: getSize(context) / 10,
-                                                decoration: ShapeDecoration(
-                                                  color: AppColors.primary,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            getSize(context) /
-                                                                32),
-                                                  ),
-                                                ),
-                                                child: Text(
-                                                  'لا',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize:
-                                                        getSize(context) / 22,
-                                                    fontFamily: 'Cairo',
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              )),
-                                          InkWell(
-                                              onTap: () {
-                                                cubit.deleteAccount(context);
-                                              },
-                                              child: Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal:
-                                                        getSize(context) / 22),
-                                                alignment: Alignment.center,
-                                                width: getSize(context) / 4,
-                                                height: getSize(context) / 10,
-                                                decoration: ShapeDecoration(
-                                                  color:
-                                                      AppColors.secondPrimary2,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            getSize(context) /
-                                                                32),
-                                                  ),
-                                                ),
-                                                child: Text(
-                                                  'نعم',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize:
-                                                        getSize(context) / 22,
-                                                    fontFamily: 'Cairo',
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                              )),
-                                        ],
-                                      );
+                            (user!.data!.type == 'user' &&
+                                    user!.data!.userType != null)
+                                ? ClientProfileItem(
+                                    isString: false,
+                                    icon: MySvgWidget(
+                                        path: ImageAssets.editIcon,
+                                        imageColor: AppColors.primary,
+                                        size: getSize(context) / 18),
+                                    onPressed: () {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .pushNamed(Routes.editProfileScreen);
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             EditProfileScreen()));
                                     },
-                                  );
-                                  //deleteAccount
-                                },
-                                title: 'delete_account'.tr()),
+                                    title: 'edit_account'.tr(),
+                                  )
+                                : Container(),
+                            (user!.data!.type == 'user' &&
+                                    user!.data!.userType != null)
+                                ? ClientProfileItem(
+                                    isString: false,
+                                    icon: Icon(
+                                      CupertinoIcons.delete,
+                                      size: getSize(context) / 16,
+                                      color: AppColors.redColor,
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Container(
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                'delete_account'.tr(),
+                                                style: TextStyle(
+                                                  color: AppColors.primary,
+                                                  fontSize:
+                                                      getSize(context) / 22,
+                                                  fontFamily: 'Cairo',
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                            content: SingleChildScrollView(
+                                              child: ListBody(
+                                                children: <Widget>[
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    child: Text(
+                                                      'sure_delete'.tr(),
+                                                      style: TextStyle(
+                                                        color:
+                                                            AppColors.primary,
+                                                        fontSize:
+                                                            getSize(context) /
+                                                                24,
+                                                        fontFamily: 'Cairo',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            actionsAlignment:
+                                                MainAxisAlignment.center,
+                                            actions: <Widget>[
+                                              InkWell(
+                                                  onTap: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: getSize(
+                                                                    context) /
+                                                                22),
+                                                    alignment: Alignment.center,
+                                                    width: getSize(context) / 4,
+                                                    height:
+                                                        getSize(context) / 10,
+                                                    decoration: ShapeDecoration(
+                                                      color: AppColors.primary,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius
+                                                            .circular(getSize(
+                                                                    context) /
+                                                                32),
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      'no'.tr(),
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize:
+                                                            getSize(context) /
+                                                                22,
+                                                        fontFamily: 'Cairo',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  )),
+                                              InkWell(
+                                                  onTap: () {
+                                                    cubit
+                                                        .deleteAccount(context);
+                                                  },
+                                                  child: Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: getSize(
+                                                                    context) /
+                                                                22),
+                                                    alignment: Alignment.center,
+                                                    width: getSize(context) / 4,
+                                                    height:
+                                                        getSize(context) / 10,
+                                                    decoration: ShapeDecoration(
+                                                      color: AppColors
+                                                          .secondPrimary2,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius
+                                                            .circular(getSize(
+                                                                    context) /
+                                                                32),
+                                                      ),
+                                                    ),
+                                                    child: Text(
+                                                      'yes'.tr(),
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize:
+                                                            getSize(context) /
+                                                                22,
+                                                        fontFamily: 'Cairo',
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  )),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      //deleteAccount
+                                    },
+                                    title: 'delete_account'.tr())
+                                : Container(),
                           ],
                         ),
                       )

@@ -35,9 +35,8 @@ class HomeCubit extends Cubit<HomeState> {
     emit(NavToOrdersHomeState());
   }
 
-  navToProfile(BuildContext context) {
-    selectedIndex = 1;
-
+  navToProfile(BuildContext context, bool isDriver) {
+    isDriver ? selectedIndex = 2 : selectedIndex = 1;
     emit(NavToHomeState());
   }
 

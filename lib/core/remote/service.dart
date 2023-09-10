@@ -11,8 +11,11 @@ import 'package:nte/core/models/city_model.dart';
 import '../api/base_api_consumer.dart';
 import '../error/exceptions.dart';
 import '../error/failures.dart';
+import '../models/allorder_driver.dart';
+import '../models/completed_order_driver.dart';
 import '../models/login_model.dart';
 import '../models/nullmodel.dart';
+import '../models/order_details_driver.dart';
 import '../models/orderdetails.dart';
 import '../models/ordersmodel.dart';
 import '../preferences/preferences.dart';
@@ -276,6 +279,34 @@ class ServiceApi {
     }
   }
 
+  Future<Either<Failure, LoginModel>> changePassword({
+    required String currentPass,
+    required String newPass,
+    required String confirmPass,
+  }) async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel user = await Preferences.instance.getUserModel();
+    try {
+      var response = await dio.post(
+        EndPoints.changePass,
+        body: {
+          "current_password": currentPass,
+          "new_password": newPass,
+          "new_password_confirmation": confirmPass
+        },
+        options: Options(
+          headers: {
+            'Accept-Language': lan,
+            'Authorization': user.data!.token,
+          },
+        ),
+      );
+      return Right(LoginModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
   Future<Either<Failure, AllPlacesModel>> getAllPlaces() async {
     LoginModel loginModel = await Preferences.instance.getUserModel();
     String lan = await Preferences.instance.getSavedLang();
@@ -375,6 +406,66 @@ class ServiceApi {
             "description": description
           });
       return Right(NullModel.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, CompletedOrderDriver>> ordersCompletedDriver() async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.completedOrderDriver,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(CompletedOrderDriver.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, DriverOrderDetails>> orderDetailsDriver(
+      String orderId) async {
+    String lan = await Preferences.instance.getSavedLang();
+
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.orderDriverDetails + orderId,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(DriverOrderDetails.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  Future<Either<Failure, AllOrdersDriversModel>> allOrdersDriver(
+      {String? search}) async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.allOrdersDriver + (search ?? ''),
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(AllOrdersDriversModel.fromJson(response));
     } on ServerException {
       return Left(ServerFailure());
     }

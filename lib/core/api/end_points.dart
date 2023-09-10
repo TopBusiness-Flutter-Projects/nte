@@ -19,4 +19,11 @@ class EndPoints {
   static const String allPlaces = '${baseUrl}orders/getAllPlaces';
   static const String addOrder = '${baseUrl}orders/addNewOrder';
   static const String deleteAccount = '${baseUrl}auth/deleteAccount';
+  static const String changePass = '${baseUrl}auth/changePassword';
+  static const String completedOrderDriver =
+      '${baseUrl}driver/orders/allOrdersCompletedPayment';
+  static const String orderDriverDetails =
+      '${baseUrl}driver/orders/orderDetail/';
+  static const String allOrdersDriver =
+      '${baseUrl}driver/orders/allOrdersOfDriver?search=';
 }
