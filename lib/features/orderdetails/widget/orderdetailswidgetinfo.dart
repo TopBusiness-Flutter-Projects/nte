@@ -24,7 +24,7 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: getSize(context) / 2,
+      height: getSize(context) / 1.8,
       child: Column(
         children: [
           Container(
@@ -81,6 +81,8 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                       ),
                                       Text(
                                         'souurce'.tr(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,
@@ -95,8 +97,10 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                 Text(
                                   source,
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Colors.black,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: AppColors.black,
                                     fontSize: 14,
                                     fontFamily: 'Cairo',
                                     fontWeight: FontWeight.w400,
@@ -123,6 +127,8 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                       ),
                                       Text(
                                         'destination'.tr(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,
@@ -137,8 +143,10 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                 Text(
                                   destination,
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    color: Colors.black,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: AppColors.black,
                                     fontSize: 14,
                                     fontFamily: 'Cairo',
                                     fontWeight: FontWeight.w400,
@@ -181,6 +189,8 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                       ),
                                       Text(
                                         'weight'.tr(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,
@@ -195,6 +205,8 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                 Text(
                                   weight,
                                   textAlign: TextAlign.right,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
@@ -223,6 +235,8 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                       ),
                                       Text(
                                         'qantity'.tr(),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         textAlign: TextAlign.right,
                                         style: TextStyle(
                                           color: AppColors.primary,
@@ -236,6 +250,8 @@ class OrdersDetailsWidgetInfo extends StatelessWidget {
                                 ),
                                 Text(
                                   qantity,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.right,
                                   style: const TextStyle(
                                     color: Colors.black,

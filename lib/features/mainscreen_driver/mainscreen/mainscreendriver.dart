@@ -80,21 +80,24 @@ class _MainScreenDriverState extends State<MainScreenDriver> {
                                   margin: EdgeInsets.all(getSize(context) / 44),
                                   height: getSize(context) / 12,
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    // mainAxisAlignment:
+                                    //     MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        'order_lists'.tr(),
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                            color: AppColors.black,
-                                            fontFamily: 'Cairo',
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: getSize(context) / 20),
+                                      Flexible(
+                                        child: Text(
+                                          'order_lists'.tr(),
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                              color: AppColors.black,
+                                              fontFamily: 'Cairo',
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: getSize(context) / 20),
+                                        ),
                                       ),
                                       const Spacer(),
-                                      Flexible(
-                                        fit: FlexFit.tight,
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        width: getSize(context) / 4,
                                         child: InkWell(
                                           onTap: () {
                                             showModalBottomSheet(

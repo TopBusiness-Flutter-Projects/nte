@@ -471,7 +471,27 @@ class ServiceApi {
     }
   }
 
-  ///orderDetails
+  Future<Either<Failure, DriverOrderDetails>> changeStatusOfOrderDriver(
+      String orderId) async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.post(
+        EndPoints.changeStatusOrdersDriver + orderId,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(DriverOrderDetails.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  ///changeStatusOrdersDriver
   //
 //   Future<Either<Failure, LoginModel>> postRegister(
 //       String phone, String phoneCode,String name) async {

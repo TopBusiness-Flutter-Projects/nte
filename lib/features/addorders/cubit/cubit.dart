@@ -29,6 +29,7 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
   ///https://maps.googleapis.com/maps/api/directions/json?
   Marker? source;
   Marker? destination;
+  late GoogleMapController googleMapController;
 
   Directions? info;
   void addMarker(LatLng pos) async {
@@ -83,13 +84,14 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
   AllPlacesModelData? selectedValueSource;
   AllPlacesModelData? selectedValueDestination;
 
-  getAllPlaces() async {
+  Future<List<AllPlacesModelData>> getAllPlaces() async {
     emit(LoadingGetAllPlaces());
     final response = await api.getAllPlaces();
     response.fold((l) => emit(ErrorGetAllPlaces()), (r) {
       cities = r.data;
       emit(LoadedGetAllPlaces());
     });
+    return [];
   }
 
   onChangeSource(AllPlacesModelData? value) {
@@ -101,6 +103,10 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
         position: LatLng(double.parse(value!.lat), double.parse(value.lang)));
     destination = null;
     info = null;
+    googleMapController.animateCamera(CameraUpdate.newLatLngZoom(
+        LatLng(double.parse(selectedValueSource!.lat),
+            double.parse(selectedValueSource!.lang)),
+        14));
     emit(ChangePlacesSource());
   }
 
@@ -116,6 +122,11 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
         source: source!.position,
         destination: LatLng(double.parse(value.lat), double.parse(value.lang)));
     info = directions;
+    googleMapController.animateCamera(CameraUpdate.newLatLngZoom(
+        LatLng(double.parse(selectedValueDestination!.lat),
+            double.parse(selectedValueDestination!.lang)),
+        14));
+
     emit(ChangePlacesDestination());
   }
 
@@ -189,19 +200,19 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
   String? imageEdit;
   OrderDetailsModelData? orderdetail;
   onTapToEditOrder(BuildContext context, OrderDetailsModelData orderdetails) {
-    // context.read<OrderDetailsCubit>().orderDetails(orderdetails.id.toString());
     emit(LoadingTapToEditOrder());
-    getAllPlaces();
+
     for (int i = 0; i < cities.length; i++) {
       if (orderdetails.fromWarehouse.id == cities.elementAt(i).id) {
         selectedValueSource = cities[i];
+        emit(LoadingTapToEditAndChangeDesOrder());
       }
     }
     for (int i = 0; i < cities.length; i++) {
       if (orderdetails.toWarehouse.id == cities.elementAt(i).id) {
         selectedValueDestination = cities[i];
         onChangeDestination(cities[i]);
-        emit(LoadingTapToEditAndChangeDesOrder());
+        emit(LoadingTapToEditAndChangeDesOrder2());
       }
     }
     orderdetail = orderdetails;

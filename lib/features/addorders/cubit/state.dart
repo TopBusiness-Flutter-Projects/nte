@@ -40,4 +40,6 @@ class LoadingTapToEditOrder extends AddNewOrderState {}
 
 class LoadingTapToEditAndChangeDesOrder extends AddNewOrderState {}
 
+class LoadingTapToEditAndChangeDesOrder2 extends AddNewOrderState {}
+
 class LoadedTapToEditOrder extends AddNewOrderState {}

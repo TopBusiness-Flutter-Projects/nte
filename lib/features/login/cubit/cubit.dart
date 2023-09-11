@@ -48,7 +48,17 @@ class LoginCubit extends Cubit<LoginState> {
       if (r.code == 200) {
         Preferences.instance.setUser(r).then((value) {
           userModel = r;
-          Navigator.pushNamed(context, Routes.homeScreen);
+          (userModel!.data!.type == 'user' && userModel!.data!.userType != null)
+              ? Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.homeScreen,
+                  (route) => false,
+                )
+              : Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.homeScreenDriver,
+                  (route) => false,
+                );
           successGetBar(r.message);
         });
         emailController.clear();

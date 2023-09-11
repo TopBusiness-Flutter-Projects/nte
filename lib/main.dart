@@ -10,12 +10,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 /*
-test
-map key >>    AIzaSyCqeB0JnSmNrrtuICRJEG3ZJPxC1DLWSmU
+api key of map
 
-//////to do
-move camera
-        ///here after  edit save shared Preference and 
 */
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

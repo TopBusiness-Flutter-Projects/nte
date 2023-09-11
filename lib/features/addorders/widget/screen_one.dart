@@ -23,6 +23,13 @@ class AddPageOne extends StatefulWidget {
 
 class _AddPageOneState extends State<AddPageOne> {
   final _formKey = GlobalKey<FormState>();
+  // @override
+  // void initState() {
+  //   context.read<AddNewOrderCubit>().getAllPlaces().then((value) {
+
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +89,10 @@ class _AddPageOneState extends State<AddPageOne> {
                             }
                             return null;
                           },
-                          value: cubit.selectedValueSource,
+                          value:
+                              cubit.cities.contains(cubit.selectedValueSource)
+                                  ? cubit.selectedValueSource
+                                  : null,
                           onChanged: (value) {
                             cubit.onChangeSource(value);
                           },
@@ -156,7 +166,10 @@ class _AddPageOneState extends State<AddPageOne> {
                             }
                             return null;
                           },
-                          value: cubit.selectedValueDestination,
+                          value: cubit.cities
+                                  .contains(cubit.selectedValueDestination)
+                              ? cubit.selectedValueDestination
+                              : null,
                           onChanged: (value) {
                             cubit.onChangeDestination(value);
                           },
@@ -190,6 +203,7 @@ class _AddPageOneState extends State<AddPageOne> {
                 Row(
                   children: [
                     Addorderwidget(
+                      maxLengthOfCharacter: 16,
                       title: 'weight'.tr(),
                       prefixWidget: Padding(
                         padding: EdgeInsets.symmetric(
@@ -203,6 +217,7 @@ class _AddPageOneState extends State<AddPageOne> {
                       validatorMessage: 'weight_msg'.tr(),
                     ),
                     Addorderwidget(
+                      maxLengthOfCharacter: 16,
                       title: 'qantity'.tr(),
                       prefixWidget: Padding(
                         padding: EdgeInsets.symmetric(
@@ -221,6 +236,7 @@ class _AddPageOneState extends State<AddPageOne> {
                 Row(
                   children: [
                     Addorderwidget(
+                      maxLengthOfCharacter: 16,
                       title: 'price'.tr(),
                       prefixWidget: Padding(
                         padding: EdgeInsets.symmetric(

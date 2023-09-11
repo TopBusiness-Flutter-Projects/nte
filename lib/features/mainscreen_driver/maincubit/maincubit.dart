@@ -43,9 +43,9 @@ class MainOrderDriverCubit extends Cubit<MainOrdersDriverState> {
   }
 
   onCancel(BuildContext context) async {
+    Navigator.pop(context);
     currentFilter = null;
     currentFilterNum = -1;
     await getMainOrders();
-    Navigator.pop(context);
   }
 }

@@ -9,6 +9,7 @@ class Addorderwidget extends StatelessWidget {
       required this.prefixWidget,
       required this.controller,
       required this.title,
+      this.maxLengthOfCharacter,
       this.textInputType = TextInputType.number,
       required this.validatorMessage});
   Widget prefixWidget;
@@ -16,10 +17,12 @@ class Addorderwidget extends StatelessWidget {
   String validatorMessage;
   TextEditingController controller;
   TextInputType textInputType;
+  int? maxLengthOfCharacter;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: CustomTextField(
+          maxLengthOfCharacter: maxLengthOfCharacter,
           prefixWidget: prefixWidget,
           isAdd: true,
           horizontalPadding: 10,

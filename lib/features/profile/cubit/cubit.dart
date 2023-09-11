@@ -31,7 +31,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       if (r.code == 200) {
         Preferences.instance.clearAllData().then((value) {
           successGetBar(r.message);
-          Navigator.pushReplacementNamed(context, Routes.loginRoute);
+          Navigator.pushNamedAndRemoveUntil(
+              context, Routes.loginRoute, (Route<dynamic> route) => false);
           emit(LoadedDeleteProfile());
         });
       } else {

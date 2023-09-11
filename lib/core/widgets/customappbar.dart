@@ -5,6 +5,7 @@ import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/homescreen/cubit/state.dart';
+import 'package:nte/features/homescreen_driver/cubit/homecubit.dart';
 
 class CustomAppBar extends StatelessWidget {
   CustomAppBar(
@@ -33,27 +34,27 @@ class CustomAppBar extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Positioned(
-                left: -56,
-                top: -100,
+                left: -getSize(context) / 6,
+                top: -getSize(context) / 3.5,
                 child: SizedBox(
-                  width: 496,
-                  height: 366,
+                  width: getSize(context) * 2,
+                  height: getSize(context),
                   child: Stack(
                     children: [
                       Positioned(
                         left: 0,
                         top: 0,
                         child: SizedBox(
-                          width: 496,
-                          height: 290,
+                          width: getSize(context) * 2,
+                          height: getSize(context),
                           child: Stack(
                             children: [
                               Positioned(
-                                left: 56,
-                                top: 100,
+                                left: getSize(context) / 4,
+                                top: getSize(context) / 2.5,
                                 child: Container(
-                                  width: 430,
-                                  height: 190,
+                                  width: getSize(context),
+                                  height: getSize(context) / 3,
                                   decoration: BoxDecoration(
                                       color: AppColors.secondPrimary2),
                                 ),
@@ -61,10 +62,10 @@ class CustomAppBar extends StatelessWidget {
                               //the left yellow oval
                               Positioned(
                                 left: 0,
-                                top: 52,
+                                top: getSize(context) / 7,
                                 child: Container(
-                                  width: 150,
-                                  height: 150,
+                                  width: getSize(context) / 2.5,
+                                  height: getSize(context) / 2.5,
                                   decoration: ShapeDecoration(
                                     color: AppColors.primary,
                                     shape: const OvalBorder(),
@@ -72,19 +73,19 @@ class CustomAppBar extends StatelessWidget {
                                 ),
                               ),
                               Positioned(
-                                left: 296,
+                                left: getSize(context) / 1.5,
                                 top: 0,
                                 child: SizedBox(
-                                  width: 200,
-                                  height: 188,
+                                  width: getSize(context) / 1.5,
+                                  height: getSize(context) / 2,
                                   child: Stack(
                                     children: [
                                       Positioned(
                                         left: 0,
                                         top: 0,
                                         child: Container(
-                                          width: 200,
-                                          height: 188,
+                                          width: getSize(context) / 2,
+                                          height: getSize(context) / 2,
                                           decoration: const ShapeDecoration(
                                             color: Color(0x19E8B100),
                                             shape: OvalBorder(),
@@ -92,11 +93,11 @@ class CustomAppBar extends StatelessWidget {
                                         ),
                                       ),
                                       Positioned(
-                                        left: 40,
-                                        top: 34,
+                                        left: getSize(context) / 9,
+                                        top: getSize(context) / 9.9,
                                         child: Container(
-                                          width: 120,
-                                          height: 120,
+                                          width: getSize(context) / 3,
+                                          height: getSize(context) / 3,
                                           decoration: const ShapeDecoration(
                                             color: Color(0x33E8B100),
                                             shape: OvalBorder(),
@@ -104,11 +105,11 @@ class CustomAppBar extends StatelessWidget {
                                         ),
                                       ),
                                       Positioned(
-                                        left: 88,
-                                        top: 65,
+                                        left: getSize(context) / 4.1,
+                                        top: getSize(context) / 5.4,
                                         child: Container(
-                                          width: 70,
-                                          height: 70,
+                                          width: getSize(context) / 5.1,
+                                          height: getSize(context) / 5.1,
                                           decoration: ShapeDecoration(
                                             color: AppColors.primary,
                                             shape: const OvalBorder(),
@@ -124,11 +125,11 @@ class CustomAppBar extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        left: 56,
-                        top: 265,
+                        left: getSize(context) / 6,
+                        top: getSize(context) / 1.5,
                         child: Container(
-                          width: 430,
-                          height: 101,
+                          width: getSize(context) * 2,
+                          height: getSize(context) / 3,
                           decoration: ShapeDecoration(
                             color: AppColors.secondPrimary2,
                             shape: RoundedRectangleBorder(
@@ -153,7 +154,11 @@ class CustomAppBar extends StatelessWidget {
                             onTap: () {
                               isEditProfile
                                   ? Navigator.pop(context)
-                                  : cubit.navToProfile(context, isDriver);
+                                  : isDriver
+                                      ? context
+                                          .read<HomeDriverCubit>()
+                                          .navToProfile(context)
+                                      : cubit.navToProfile(context);
                             },
                             child: CircleAvatar(
                                 backgroundColor: AppColors.greyColor,
@@ -167,7 +172,11 @@ class CustomAppBar extends StatelessWidget {
                             fit: FlexFit.tight,
                             child: InkWell(
                               onTap: () {
-                                cubit.navToProfile(context, isDriver);
+                                isDriver
+                                    ? context
+                                        .read<HomeDriverCubit>()
+                                        .navToProfile(context)
+                                    : cubit.navToProfile(context);
                               },
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
@@ -175,7 +184,7 @@ class CustomAppBar extends StatelessWidget {
                                 child: Text(
                                   '${'welcome'.tr()} , ${cubit.profile == null ? '' : cubit.profile!.data!.name}',
                                   maxLines: 1,
-                                  overflow: TextOverflow.fade,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: AppColors.white,
                                     fontSize: getSize(context) / 22,

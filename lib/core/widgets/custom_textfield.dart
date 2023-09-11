@@ -18,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     this.horizontalPadding = 20,
     this.imageColor = Colors.grey,
     required this.backgroundColor,
+    this.maxLengthOfCharacter,
     this.isAdd = false,
     this.isEnable = true,
     this.onchange,
@@ -36,12 +37,18 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final double horizontalPadding;
   final bool isAdd;
+  final int? maxLengthOfCharacter;
   @override
   Widget build(BuildContext context) {
     return Container(
       // height: getSize(context) / 7,
       padding: EdgeInsets.symmetric(vertical: 0, horizontal: horizontalPadding),
       child: TextFormField(
+        inputFormatters: [
+          new LengthLimitingTextInputFormatter(maxLengthOfCharacter),
+
+          /// here char limit is 5
+        ],
         textAlignVertical: TextAlignVertical.center,
         controller: controller,
         keyboardType: textInputType,

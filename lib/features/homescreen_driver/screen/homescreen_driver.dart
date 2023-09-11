@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
-import 'package:nte/features/homescreen/cubit/state.dart';
 import 'package:nte/features/homescreen_driver/cubit/homecubit.dart';
 import 'package:nte/features/homescreen_driver/cubit/homestate.dart';
 import 'package:nte/features/profile/screen/profilescreen.dart';
@@ -28,15 +27,15 @@ class _HomeScreenDriverState extends State<HomeScreenDriver> {
 
   @override
   void initState() {
-    context.read<HomeDriverCubit>().getProfileInfo();
+    context.read<HomeCubit>().getProfileInfo();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<HomeDriverCubit, HomeDriverState>(
       builder: (context, state) {
-        var cubit = context.read<HomeCubit>();
+        var cubit = context.read<HomeDriverCubit>();
         return Scaffold(
           body: screens[cubit.selectedIndex],
           bottomNavigationBar: BottomNavigationBar(

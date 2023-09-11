@@ -27,7 +27,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         .read<EditProfileCubit>()
         .getCities()
         .then((value) => context.read<EditProfileCubit>().getProfile());
-    ;
 
     super.initState();
   }

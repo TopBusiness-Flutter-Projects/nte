@@ -42,7 +42,17 @@ class OrdersWidget extends StatelessWidget {
               padding: EdgeInsets.all(getSize(context) / 44),
               child: Row(
                 children: [
-                  Expanded(child: Image.network(orderModelData.image)),
+                  Expanded(
+                      child: Image.network(
+                    orderModelData.image,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return MySvgWidget(
+                          imageColor: AppColors.primary,
+                          path: ImageAssets.trunckIcon,
+                          size: getSize(context) / 4);
+                    },
+                  )),
                   SizedBox(width: getSize(context) / 44),
                   Expanded(
                       flex: 3,

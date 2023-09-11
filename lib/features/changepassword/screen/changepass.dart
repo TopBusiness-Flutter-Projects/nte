@@ -121,7 +121,7 @@ class _ChangePasswordDriverState extends State<ChangePasswordDriver> {
                             SizedBox(height: getSize(context) / 12),
                             CustomButton(
                                 paddingHorizontal: getSize(context) / 8,
-                                text: 'confirm_pass',
+                                text: 'confirm_pass'.tr(),
                                 color: AppColors.primary,
                                 borderRadius: getSize(context) / 22,
                                 isLoading: isLoading,

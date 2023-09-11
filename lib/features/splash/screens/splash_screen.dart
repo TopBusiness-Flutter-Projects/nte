@@ -83,9 +83,17 @@ class _SplashScreenState extends State<SplashScreen> {
       if (prefs.getString('user') != null) {
         Preferences.instance.getUserModel().then((value) {
           if (value.data!.type == 'user' && value.data!.userType != null) {
-            Navigator.pushReplacementNamed(context, Routes.homeScreen);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.homeScreen,
+              (route) => false,
+            );
           } else {
-            Navigator.pushReplacementNamed(context, Routes.homeScreenDriver);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              Routes.homeScreenDriver,
+              (route) => false,
+            );
           }
         });
       } else {

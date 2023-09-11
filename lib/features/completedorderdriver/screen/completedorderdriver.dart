@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/models/ordersmodel.dart';
 import 'package:nte/features/driver_order_details/screens/orderdetailsdriver.dart';
-import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/getsize.dart';
 import '../../../core/widgets/customappbar.dart';

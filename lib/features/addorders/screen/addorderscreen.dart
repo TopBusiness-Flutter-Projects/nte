@@ -35,15 +35,13 @@ class _AddOrdersScreenState extends State<AddOrdersScreen>
     zoom: 14.4746,
   );
 
-  late GoogleMapController _googleMapController;
-
   // Marker? source;
   // Marker? destination;
 
   // Directions? info;
   @override
   void dispose() {
-    _googleMapController.dispose();
+    context.read<AddNewOrderCubit>().googleMapController.dispose();
     super.dispose();
   }
 
@@ -86,7 +84,9 @@ class _AddOrdersScreenState extends State<AddOrdersScreen>
                                   initialCameraPosition: _kGooglePlex,
                                   onMapCreated:
                                       (GoogleMapController controller) {
-                                    _googleMapController = controller;
+                                    context
+                                        .read<AddNewOrderCubit>()
+                                        .googleMapController = controller;
                                     _controller.complete(controller);
                                   },
                                   markers: {

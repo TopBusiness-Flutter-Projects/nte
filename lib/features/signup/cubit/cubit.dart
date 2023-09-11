@@ -67,7 +67,17 @@ class SignUpCubit extends Cubit<SignUpState> {
       if (r.code == 200) {
         userModel = r;
         Preferences.instance.setUser(r).then((value) {
-          Navigator.pushReplacementNamed(context, Routes.homeScreen);
+          (userModel!.data!.type == 'user' && userModel!.data!.userType != null)
+              ? Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.homeScreen,
+                  (route) => false,
+                )
+              : Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.homeScreenDriver,
+                  (route) => false,
+                );
           successGetBar(r.message);
         });
       } else {
