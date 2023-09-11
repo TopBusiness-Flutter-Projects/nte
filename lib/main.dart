@@ -11,6 +11,7 @@ import 'firebase_options.dart';
 
 /*
 api key of map
+الشروط و الاحكام
 
 */
 void main() async {
