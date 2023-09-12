@@ -13,3 +13,5 @@ class SubmitFilterGetMainOrders extends MainOrdersDriverState {}
 class ChangeFilterGetMainOrders extends MainOrdersDriverState {}
 
 class ChangeFilter2GetMainOrders extends MainOrdersDriverState {}
+
+class ChangeFilter3GetMainOrders extends MainOrdersDriverState {}

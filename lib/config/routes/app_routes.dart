@@ -12,12 +12,10 @@ import 'package:nte/features/splash/screens/splash_screen.dart';
 import 'package:nte/features/onboarding/screens/onboarding_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import '../../core/utils/app_strings.dart';
-import '../../features/addnewtruck/screen/addnewtruck.dart';
 import '../../features/addorders/screen/addorderscreen.dart';
 import '../../features/login/screen/loginscreen.dart';
 import '../../features/profile/screen/profilescreen.dart';
 import '../../features/signup/screen/signupscreen.dart';
-import '../../features/truckdetails/screen/truckdetails.dart';
 
 class Routes {
   static const String initialRoute = '/';
@@ -54,21 +52,21 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: LoginScreen(),
         );
       case Routes.forgetPassword:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const ForgetPassword(),
         );
       case Routes.resetPassword:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const ResetPassword(),
         );
 
@@ -76,7 +74,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: OTPScreen(),
         );
       case Routes.onBoardingRoute:
@@ -87,7 +85,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const HomeScreen(),
         );
 
@@ -95,7 +93,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const ProfileScreen(),
         );
       case Routes.orderDetailsScreen:
@@ -103,7 +101,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: OrderDetailsScreen(
             orderid: id,
           ),
@@ -122,7 +120,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: AddOrdersScreen(
             isEdit: isEdit ?? false,
           ),
@@ -131,21 +129,21 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const EditProfileScreen(),
         );
       case Routes.homeScreenDriver:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const HomeScreenDriver(),
         );
       case Routes.changePasswordDriver:
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: const ChangePasswordDriver(),
         );
       case Routes.orderDetailsDriver:
@@ -154,7 +152,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: OrderDetailsDriver(orderId: orderId!),
         );
       // case Routes.detailsRoute:
@@ -170,7 +168,7 @@ class AppRoutes {
         return PageTransition(
           type: PageTransitionType.fade,
           alignment: Alignment.center,
-          duration: const Duration(milliseconds: 1300),
+          duration: const Duration(milliseconds: 800),
           child: SignUpScreen(),
         );
       default:

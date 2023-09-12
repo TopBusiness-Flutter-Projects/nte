@@ -1,17 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/core/remote/service.dart';
-import 'package:nte/core/utils/app_colors.dart';
 import 'package:nte/features/mainscreen_driver/maincubit/mainstate.dart';
-
 import '../../../core/models/allorder_driver.dart';
 
 class MainOrderDriverCubit extends Cubit<MainOrdersDriverState> {
   MainOrderDriverCubit(this.api) : super(MainOrderDriverInitial());
   ServiceApi api;
-
   List<Order> orders = [];
   getMainOrders() async {
     emit(LoadingGetMainOrders());
@@ -36,6 +31,11 @@ class MainOrderDriverCubit extends Cubit<MainOrdersDriverState> {
     emit(ChangeFilter2GetMainOrders());
   }
 
+  toggleToAll() {
+    currentFilterNum = 3;
+    emit(ChangeFilter3GetMainOrders());
+  }
+
   onTapSubmit(BuildContext context) async {
     Navigator.pop(context);
     await getMainOrders();
@@ -46,6 +46,10 @@ class MainOrderDriverCubit extends Cubit<MainOrdersDriverState> {
     Navigator.pop(context);
     currentFilter = null;
     currentFilterNum = -1;
-    await getMainOrders();
+  }
+
+  onAll(BuildContext context) async {
+    currentFilter = null;
+    currentFilterNum = -1;
   }
 }

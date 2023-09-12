@@ -38,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isLoading = true;
   @override
   Widget build(BuildContext context) {
+    String lang = EasyLocalization.of(context)!.currentLocale!.languageCode;
     return BlocConsumer<ProfileCubit, ProfileState>(
       listener: (context, state) {
         if (state is LoadingGetProfile) {
@@ -105,7 +106,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         errorBuilder: (BuildContext context,
                                             Object exception,
                                             StackTrace? stackTrace) {
-                                          return const Text('😢');
+                                          return Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: MySvgWidget(
+                                                imageColor: AppColors.primary,
+                                                path: ImageAssets.trunckIcon,
+                                                size: getSize(context) / 1),
+                                          );
                                         },
                                         fit: BoxFit.cover,
                                         width: getSize(context) / 5,
@@ -174,40 +181,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           },
                                         ),
                                       ),
-                                InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        Routes.loginRoute,
-                                        (Route<dynamic> route) => false);
-                                    context.read<HomeCubit>().selectedIndex = 0;
-                                    context
-                                        .read<HomeDriverCubit>()
-                                        .selectedIndex = 0;
-                                    Preferences.instance.clearAllData();
-                                  },
-                                  child: ClientProfileItem(
-                                    isString: false,
-                                    icon: Icon(
-                                      Icons.logout_outlined,
-                                      color: AppColors.primary,
-                                      size: getSize(context) / 16,
-                                    ),
-                                    title: 'log_out'.tr(),
-                                    onPressed: () {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                          context,
-                                          Routes.loginRoute,
-                                          (Route<dynamic> route) => false);
-                                      context.read<HomeCubit>().selectedIndex =
-                                          0;
-                                      context
-                                          .read<HomeDriverCubit>()
-                                          .selectedIndex = 0;
-                                      Preferences.instance.clearAllData();
-                                    },
-                                  ),
-                                ),
                                 (user!.data!.type == 'user' &&
                                         user!.data!.userType != null)
                                     ? InkWell(
@@ -241,6 +214,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius
+                                                        .all(Radius.circular(
+                                                            getSize(context) /
+                                                                32))),
                                                 title: Container(
                                                   alignment: Alignment.center,
                                                   child: Text(
@@ -373,7 +351,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               );
                                             },
                                           );
-                                          //deleteAccount
                                         },
                                         child: ClientProfileItem(
                                             isString: false,
@@ -386,6 +363,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             title: 'delete_account'.tr()),
                                       )
                                     : Container(),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        Routes.loginRoute,
+                                        (Route<dynamic> route) => false);
+                                    context.read<HomeCubit>().selectedIndex = 0;
+                                    context
+                                        .read<HomeDriverCubit>()
+                                        .selectedIndex = 0;
+                                    Preferences.instance.clearAllData();
+                                  },
+                                  child: ClientProfileItem(
+                                    isString: false,
+                                    icon: Transform.flip(
+                                      flipX: lang == 'ar' ? true : false,
+                                      child: Icon(
+                                        Icons.logout_outlined,
+                                        color: AppColors.primary,
+                                        size: getSize(context) / 16,
+                                      ),
+                                    ),
+                                    title: 'log_out'.tr(),
+                                    onPressed: () {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context,
+                                          Routes.loginRoute,
+                                          (Route<dynamic> route) => false);
+                                      context.read<HomeCubit>().selectedIndex =
+                                          0;
+                                      context
+                                          .read<HomeDriverCubit>()
+                                          .selectedIndex = 0;
+                                      Preferences.instance.clearAllData();
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
                           )

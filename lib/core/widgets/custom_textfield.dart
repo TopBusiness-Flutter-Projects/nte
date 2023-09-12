@@ -21,6 +21,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLengthOfCharacter,
     this.isAdd = false,
     this.isEnable = true,
+    this.fontSize,
     this.onchange,
   }) : super(key: key);
   final Widget? prefixWidget;
@@ -37,6 +38,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final double horizontalPadding;
   final bool isAdd;
+  final double? fontSize;
   final int? maxLengthOfCharacter;
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,8 @@ class CustomTextField extends StatelessWidget {
         obscureText: isPassword,
         enabled: isEnable,
         textAlign: TextAlign.start,
-        style: const TextStyle(
+        style: TextStyle(
+          fontSize: fontSize,
           fontWeight: FontWeight.w400,
           fontFamily: 'Cairo',
         ),

@@ -17,6 +17,7 @@ import 'package:nte/features/mainscreen/cubit/cubit.dart';
 import 'package:nte/features/orderdetails/cubit/cubit.dart';
 
 import '../../../core/models/allplaces.dart';
+import '../../../core/models/conditions.dart';
 import '../../../core/models/directions_model.dart';
 import '../../../core/models/orderdetails.dart';
 
@@ -270,13 +271,14 @@ class AddNewOrderCubit extends Cubit<AddNewOrderState> {
     });
   }
 
-  // Future<void> moveMapCamera({required GoogleMapController controllers}) async {
-  //   CameraPosition nepPos = CameraPosition(
-  //     target: LatLng(lat, lng),
-  //     zoom: 14,
-  //   );
+  ConditionsAndTermsData? conditions;
+  getSetting() async {
+    emit(LoadingSettingsOrder());
+    final response = await api.getSetting();
 
-  //   final GoogleMapController controller = await controllers.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(nepPos));
-  // }
+    response.fold((l) => emit(ErrorSettingsOrder()), (r) {
+      conditions = r.data;
+      emit(LoadedSettingsOrder());
+    });
+  }
 }

@@ -128,7 +128,7 @@ class _MainScreenDriverState extends State<MainScreenDriver> {
                                                                     22)),
                                                       ),
                                                       height: getSize(context) /
-                                                          1.5,
+                                                          1.2,
                                                       width: double.infinity,
                                                       child:
                                                           SingleChildScrollView(
@@ -152,6 +152,32 @@ class _MainScreenDriverState extends State<MainScreenDriver> {
                                                                       size: getSize(
                                                                               context) /
                                                                           22)),
+                                                            ),
+                                                            SizedBox(
+                                                              height: getSize(
+                                                                      context) /
+                                                                  22,
+                                                            ),
+                                                            CustomButton(
+                                                                borderRadius:
+                                                                    getSize(context) /
+                                                                        22,
+                                                                text:
+                                                                    'all'.tr(),
+                                                                color: cubit.currentFilterNum ==
+                                                                        3
+                                                                    ? AppColors
+                                                                        .primary
+                                                                    : AppColors
+                                                                        .gray,
+                                                                onClick: () {
+                                                                  cubit
+                                                                      .toggleToAll();
+                                                                }),
+                                                            SizedBox(
+                                                              height: getSize(
+                                                                      context) /
+                                                                  22,
                                                             ),
                                                             CustomButton(
                                                                 borderRadius:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nte/core/utils/getsize.dart';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/widgets/custom_textfield.dart';
@@ -22,6 +23,7 @@ class Addorderwidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: CustomTextField(
+          fontSize: getSize(context) / 28,
           maxLengthOfCharacter: maxLengthOfCharacter,
           prefixWidget: prefixWidget,
           isAdd: true,

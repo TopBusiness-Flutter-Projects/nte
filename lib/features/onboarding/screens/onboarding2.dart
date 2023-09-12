@@ -43,14 +43,14 @@ class OnBoarding2 extends StatelessWidget {
                         vertical: getSize(context) / 100,
                         horizontal: getSize(context) / 32),
                     decoration: BoxDecoration(
-                        color: AppColors.primary,
+                        // color: AppColors.primary,
                         borderRadius:
                             BorderRadius.circular(getSize(context) / 44)),
                     child: Text(
                       'finish'.tr(),
                       style: TextStyle(
                           fontFamily: 'Cairo',
-                          color: AppColors.white,
+                          color: AppColors.secondPrimary2,
                           fontSize: getSize(context) / 22),
                     ),
                   ))

@@ -25,6 +25,7 @@ class _AddOrdersScreenState extends State<AddOrdersScreen>
   void initState() {
     context.read<AddNewOrderCubit>().tabController =
         TabController(length: 2, vsync: this, initialIndex: 0);
+    context.read<AddNewOrderCubit>().getSetting();
     super.initState();
   }
 
@@ -56,137 +57,140 @@ class _AddOrdersScreenState extends State<AddOrdersScreen>
           initialIndex: 0,
           child: SafeArea(
             child: Scaffold(
-                backgroundColor: AppColors.secondPrimary2,
+                // backgroundColor: AppColors.secondPrimary2,
                 body: Column(
-                  children: [
-                    Container(
-                      height: getSize(context) / 3.2,
-                      width: double.infinity,
-                      color: AppColors.blue1,
-                      child: CustomAppBar(),
-                    ),
-                    Flexible(
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: getSize(context) / 12),
-                            alignment: Alignment.center,
-                            width: double.infinity,
-                            color: AppColors.white,
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                GoogleMap(
-                                  myLocationButtonEnabled: false,
-                                  zoomControlsEnabled: false,
-                                  mapType: MapType.normal,
-                                  initialCameraPosition: _kGooglePlex,
-                                  onMapCreated:
-                                      (GoogleMapController controller) {
-                                    context
-                                        .read<AddNewOrderCubit>()
-                                        .googleMapController = controller;
-                                    _controller.complete(controller);
-                                  },
-                                  markers: {
-                                    if (cubit.source != null) cubit.source!,
-                                    if (cubit.destination != null)
-                                      cubit.destination!,
-                                  },
-                                  polylines: {
-                                    if (cubit.info != null)
-                                      Polyline(
-                                        polylineId: const PolylineId(
-                                            'overview_polyline'),
-                                        color: Colors.red,
-                                        width: 5,
-                                        points: cubit.info!.polyLinePoints!
-                                            .map((e) =>
-                                                LatLng(e.latitude, e.longitude))
-                                            .toList(),
-                                      ),
-                                  },
-
-                                  // onTap: (argument) {
-                                  //   cubit.addMarker(argument);
-                                  // },
-                                ),
+              children: [
+                Container(
+                  height: getSize(context) / 3.2,
+                  width: double.infinity,
+                  color: AppColors.blue1,
+                  child: CustomAppBar(isAddOrder: true),
+                ),
+                Flexible(
+                  child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: getSize(context) / 44),
+                        alignment: Alignment.center,
+                        width: double.infinity,
+//                        color: AppColors.white,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            GoogleMap(
+                              myLocationButtonEnabled: false,
+                              zoomControlsEnabled: false,
+                              mapType: MapType.normal,
+                              initialCameraPosition: _kGooglePlex,
+                              onMapCreated: (GoogleMapController controller) {
+                                context
+                                    .read<AddNewOrderCubit>()
+                                    .googleMapController = controller;
+                                _controller.complete(controller);
+                              },
+                              markers: {
+                                if (cubit.source != null) cubit.source!,
+                                if (cubit.destination != null)
+                                  cubit.destination!,
+                              },
+                              polylines: {
                                 if (cubit.info != null)
-                                  Positioned(
-                                    top: 20.0,
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 6.0,
-                                        horizontal: 12.0,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: Colors.yellowAccent,
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        boxShadow: const [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: Offset(0, 2),
-                                            blurRadius: 6.0,
-                                          )
-                                        ],
-                                      ),
-                                      child: Text(
-                                        '${cubit.info!.totalDistance}, ${cubit.info!.totalDuration}',
-                                        style: const TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w600,
+                                  Polyline(
+                                    polylineId:
+                                        const PolylineId('overview_polyline'),
+                                    color: Colors.red,
+                                    width: 5,
+                                    points: cubit.info!.polyLinePoints!
+                                        .map((e) =>
+                                            LatLng(e.latitude, e.longitude))
+                                        .toList(),
+                                  ),
+                              },
+
+                              // onTap: (argument) {
+                              //   cubit.addMarker(argument);
+                              // },
+                            ),
+                            if (cubit.info != null)
+                              Positioned(
+                                top: 20.0,
+                                child: cubit.info == null
+                                    ? Container()
+                                    : Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 6.0,
+                                          horizontal: 12.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.yellowAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(0, 2),
+                                              blurRadius: 6.0,
+                                            )
+                                          ],
+                                        ),
+                                        child: Text(
+                                          '${cubit.info!.totalDistance}, ${cubit.info!.totalDuration}',
+                                          style: const TextStyle(
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-
-                          Container(
-                            margin: EdgeInsets.all(getSize(context) / 66),
-                            padding: EdgeInsets.all(getSize(context) / 66),
-                            height: MediaQuery.of(context).size.height / 3,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: AppColors.sheetColor,
-                                borderRadius: BorderRadius.circular(
-                                    getSize(context) / 22)),
-                            child: TabBarView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              controller: cubit.tabController,
-                              dragStartBehavior: DragStartBehavior.start,
-                              children: [
-                                const AddPageOne(),
-                                AddPageSecond(
-                                  isEdit: widget.isEdit,
-                                ),
-                              ],
-                            ),
-                          ),
-                          //title
-                          Positioned(
-                            top: -10,
-                            child: Container(
-                                padding: EdgeInsets.all(getSize(context) / 66),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'my_offers'.tr(),
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: getSize(context) / 24,
-                                    fontFamily: 'Cairo',
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                )),
-                          )
-                        ],
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                )),
+
+                      Container(
+                        margin: EdgeInsets.all(getSize(context) / 66),
+                        padding: EdgeInsets.all(getSize(context) / 66),
+                        height: MediaQuery.of(context).size.height / 3,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: AppColors.sheetColor,
+                            borderRadius:
+                                BorderRadius.circular(getSize(context) / 22)),
+                        child: TabBarView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: cubit.tabController,
+                          dragStartBehavior: DragStartBehavior.start,
+                          children: [
+                            const AddPageOne(),
+                            AddPageSecond(
+                              isEdit: widget.isEdit,
+                            ),
+                          ],
+                        ),
+                      ),
+                      //title
+                      Positioned(
+                        top: -10,
+                        child: Container(
+                            width: getSize(context),
+                            color: AppColors.secondPrimary2,
+                            padding: EdgeInsets.all(getSize(context) / 66),
+                            alignment: Alignment.center,
+                            child: Text(
+                              'my_offers'.tr(),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: getSize(context) / 24,
+                                fontFamily: 'Cairo',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            )),
           ),
         );
       },

@@ -74,9 +74,11 @@ class _CompletedOffersState extends State<CompletedOffers> {
                               ));
                         },
                       ),
-                      Container(
-                        height: getSize(context) / 2,
-                      )
+                      controller.completedOrder.length > 2
+                          ? Container()
+                          : Container(
+                              height: getSize(context) / 1.5,
+                            )
                     ],
                   )),
         );

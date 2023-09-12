@@ -117,6 +117,11 @@ class _OrderDetailsDriverState extends State<OrderDetailsDriver> {
                                                 context: context,
                                                 builder: (context) {
                                                   return AlertDialog(
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius
+                                                            .all(Radius.circular(
+                                                                getSize(context) /
+                                                                    32))),
                                                     title: Container(
                                                       alignment:
                                                           Alignment.centerRight,

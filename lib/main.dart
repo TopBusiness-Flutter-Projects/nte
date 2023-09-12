@@ -11,7 +11,7 @@ import 'firebase_options.dart';
 
 /*
 api key of map
-الشروط و الاحكام
+payment
 */
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

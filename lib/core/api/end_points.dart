@@ -28,5 +28,7 @@ class EndPoints {
       '${baseUrl}driver/orders/allOrdersOfDriver?search=';
   static const String changeStatusOrdersDriver =
       '${baseUrl}driver/orders/changeOrderStatus/';
-  //
+  static const String setting = '${baseUrl}setting';
+
+  ///setting
 }

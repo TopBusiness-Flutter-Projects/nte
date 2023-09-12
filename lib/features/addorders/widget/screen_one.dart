@@ -23,13 +23,6 @@ class AddPageOne extends StatefulWidget {
 
 class _AddPageOneState extends State<AddPageOne> {
   final _formKey = GlobalKey<FormState>();
-  // @override
-  // void initState() {
-  //   context.read<AddNewOrderCubit>().getAllPlaces().then((value) {
-
-  //   });
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +32,7 @@ class _AddPageOneState extends State<AddPageOne> {
         return Form(
           key: _formKey,
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 Row(
@@ -54,7 +48,6 @@ class _AddPageOneState extends State<AddPageOne> {
                           alignment: Alignment.center,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: getSize(context) / 44,
                                 horizontal: getSize(context) / 44),
                             filled: true,
                             fillColor: AppColors.white,
@@ -69,7 +62,10 @@ class _AddPageOneState extends State<AddPageOne> {
                           ),
                           hint: Text(
                             'souurce'.tr(),
-                            style: TextStyle(fontSize: getSize(context) / 22),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: getSize(context) / 28,
+                                fontFamily: 'Cairo'),
                           ),
                           items: cubit.cities
                               .map((item) =>
@@ -77,9 +73,9 @@ class _AddPageOneState extends State<AddPageOne> {
                                     value: item,
                                     child: Text(
                                       item.name,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                      ),
+                                      style: TextStyle(
+                                          fontSize: getSize(context) / 28,
+                                          fontFamily: 'Cairo'),
                                     ),
                                   ))
                               .toList(),
@@ -123,7 +119,7 @@ class _AddPageOneState extends State<AddPageOne> {
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: getSize(context) / 32),
+                            horizontal: getSize(context) / 36),
                         child: DropdownButtonFormField2<AllPlacesModelData>(
                           autofocus: true,
                           isExpanded: true,
@@ -131,8 +127,7 @@ class _AddPageOneState extends State<AddPageOne> {
                           alignment: Alignment.center,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: getSize(context) / 44,
-                                horizontal: getSize(context) / 44),
+                                vertical: 0, horizontal: getSize(context) / 44),
                             filled: true,
                             fillColor: AppColors.white,
                             border: OutlineInputBorder(
@@ -146,7 +141,10 @@ class _AddPageOneState extends State<AddPageOne> {
                           ),
                           hint: Text(
                             'destination'.tr(),
-                            style: TextStyle(fontSize: getSize(context) / 22),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: getSize(context) / 28,
+                                fontFamily: 'Cairo'),
                           ),
                           items: cubit.cities
                               .map((item) =>
@@ -155,8 +153,8 @@ class _AddPageOneState extends State<AddPageOne> {
                                     child: Text(
                                       item.name,
                                       style: TextStyle(
-                                        fontSize: getSize(context) / 22,
-                                      ),
+                                          fontSize: getSize(context) / 28,
+                                          fontFamily: 'Cairo'),
                                     ),
                                   ))
                               .toList(),

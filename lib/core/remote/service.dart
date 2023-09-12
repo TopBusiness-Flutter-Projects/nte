@@ -13,6 +13,7 @@ import '../error/exceptions.dart';
 import '../error/failures.dart';
 import '../models/allorder_driver.dart';
 import '../models/completed_order_driver.dart';
+import '../models/conditions.dart';
 import '../models/login_model.dart';
 import '../models/nullmodel.dart';
 import '../models/order_details_driver.dart';
@@ -491,7 +492,26 @@ class ServiceApi {
     }
   }
 
-  ///changeStatusOrdersDriver
+  Future<Either<Failure, ConditionsAndTerms>> getSetting() async {
+    String lan = await Preferences.instance.getSavedLang();
+    LoginModel loginModel = await Preferences.instance.getUserModel();
+    try {
+      final response = await dio.get(
+        EndPoints.setting,
+        options: Options(
+          headers: {
+            'Authorization': loginModel.data!.token,
+            "Accept-Language": lan
+          },
+        ),
+      );
+      return Right(ConditionsAndTerms.fromJson(response));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  ///setting
   //
 //   Future<Either<Failure, LoginModel>> postRegister(
 //       String phone, String phoneCode,String name) async {

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:nte/core/utils/getsize.dart';
 import 'package:nte/features/orderdetails/cubit/cubit.dart';
 import 'package:nte/features/orderdetails/cubit/state.dart';
@@ -22,6 +23,51 @@ class AddPageSecond extends StatefulWidget {
 }
 
 class _AddPageSecondState extends State<AddPageSecond> {
+  void showBottomSheet() {
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(getSize(context) / 22),
+          topRight: Radius.circular(getSize(context) / 22),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Column(
+          children: [
+            Container(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: MySvgWidget(
+                      path: ImageAssets.closeIcon,
+                      imageColor: AppColors.red,
+                      size: getSize(context) / 22)),
+            ),
+            Flexible(
+              child: ListView(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    Container(
+                        padding: EdgeInsets.all(getSize(context) / 22),
+                        child: Html(
+                          shrinkWrap: true,
+                          data: context
+                              .read<AddNewOrderCubit>()
+                              .conditions!
+                              .conditions,
+                        )),
+                  ]),
+            )
+          ],
+        );
+      },
+    );
+  }
+
   final formKey = GlobalKey<FormState>();
   bool isLoading = false;
   bool isLoadingEdit = false;
@@ -51,6 +97,7 @@ class _AddPageSecondState extends State<AddPageSecond> {
               ),
               color: AppColors.sheetColor,
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -163,7 +210,7 @@ class _AddPageSecondState extends State<AddPageSecond> {
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
                                             color: AppColors.black,
-                                            fontSize: getSize(context) / 22,
+                                            fontSize: getSize(context) / 24,
                                             fontFamily: 'Cairo',
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -172,6 +219,9 @@ class _AddPageSecondState extends State<AddPageSecond> {
                                     ],
                                   ),
                                   TextFormField(
+                                    style: TextStyle(
+                                        fontSize: getSize(context) / 28,
+                                        fontFamily: 'Cairo'),
                                     controller: cubit.descOfTuckController,
                                     maxLines: 3,
                                     minLines: 2,
@@ -186,7 +236,7 @@ class _AddPageSecondState extends State<AddPageSecond> {
                                       hintText: 'desc_des'.tr(),
                                       hintStyle: TextStyle(
                                         color: AppColors.primary,
-                                        fontSize: getSize(context) / 22,
+                                        fontSize: getSize(context) / 28,
                                         fontFamily: 'Cairo',
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -213,8 +263,7 @@ class _AddPageSecondState extends State<AddPageSecond> {
                           Flexible(
                             child: InkWell(
                               onTap: () {
-                                print(
-                                    'أوافق على الشروط والأحكام الخاصة بالشركة');
+                                showBottomSheet();
                               },
                               child: SizedBox(
                                 child: Text.rich(
@@ -297,11 +346,10 @@ class _AddPageSecondState extends State<AddPageSecond> {
                                         if (cubit.checkBox) {
                                           cubit.addNewOrder(context);
                                         } else {
-                                          errorGetBar(
-                                              'please accept condition');
+                                          errorGetBar('accept_terms'.tr());
                                         }
                                       } else {
-                                        errorGetBar('please select image');
+                                        errorGetBar('please_add_images'.tr());
                                       }
                                     } else {}
 

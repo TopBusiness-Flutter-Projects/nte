@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nte/features/mainscreen/cubit/state.dart';
-import 'package:nte/features/orderdetails/screen/orderdetails.dart';
 
 import '../../../config/routes/app_routes.dart';
 import '../../../core/utils/app_colors.dart';
@@ -65,11 +64,9 @@ class _PendingOffersState extends State<PendingOffers> {
                               ));
                         },
                       ),
-                      Container(
-                        height: controller.pendingOrder.length < 2
-                            ? getSize(context)
-                            : getSize(context) / 2,
-                      )
+                      controller.pendingOrder.length > 2
+                          ? Container()
+                          : Container(height: getSize(context) / 1.5)
                     ],
                   )),
         );

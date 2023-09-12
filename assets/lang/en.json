@@ -68,7 +68,7 @@
   "cabin_type": "Cabin type",
   "truck_image": "Truck Image",
   "truck_gray_card": "Truck gray card",
-  "please_add_images": "Please upload two photos, front and back",
+  "please_add_images": "Please upload photo",
   "add_new_truck": "Add New Truck",
   "cabin_gray_card": "Cabin gray card",
   "wait_payment": "Awaiting payment",
@@ -118,5 +118,7 @@
   "yes": "yes",  "sure":"sure",
 
   "no": "no",
-  "sure_submit": "Are you sure the order has been completed?"
+  "sure_submit": "Are you sure the order has been completed?",
+  "all":"All",
+  "accept_terms":"please accept terms and conditions"
 }
