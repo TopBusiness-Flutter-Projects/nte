@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,6 @@ import 'package:nte/features/addorders/cubit/state.dart';
 import 'package:nte/features/homescreen/cubit/cubit.dart';
 import 'package:nte/features/mainscreen/cubit/cubit.dart';
 import 'package:nte/features/orderdetails/cubit/cubit.dart';
-
 import '../../../core/models/allplaces.dart';
 import '../../../core/models/conditions.dart';
 import '../../../core/models/directions_model.dart';

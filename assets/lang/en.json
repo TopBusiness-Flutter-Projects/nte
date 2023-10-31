@@ -115,10 +115,10 @@
   "goods_info": "Transportation information",
   "order_lists": "Order list",
   "sure_delete": "Are you sure you need to delete the account",
-  "yes": "yes",  "sure":"sure",
-
+  "yes": "yes",
+  "sure": "sure",
   "no": "no",
   "sure_submit": "Are you sure the order has been completed?",
-  "all":"All",
-  "accept_terms":"please accept terms and conditions"
+  "all": "All",
+  "accept_terms": "please accept terms and conditions"
 }
